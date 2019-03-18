@@ -10,11 +10,12 @@ import { LoginPage } from './login.page';
 const routes: Routes = [
   {
     path: '',
-    component: LoginPage
+    component: LoginPage,
+    pathMatch: 'full'
   },
   {
     path: 'signup',
-    loadChildren: './login/signup/signup.module#SignupPageModule'
+    loadChildren: './signup/signup.module#SignupPageModule'
   }
 ];
 
