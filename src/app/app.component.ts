@@ -5,7 +5,6 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Router, RouterEvent, NavigationEnd } from '@angular/router';
 
-
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html'
@@ -17,15 +16,40 @@ export class AppComponent implements OnInit {
       url: '/home',
       icon: 'home'
     },
-    {
+    /* {
       title: 'List',
       url: '/list',
       icon: 'list'
-    },
-    {
+    }, */
+    /* {
       title: 'Login',
       url: '/login',
       icon: 'log-in'
+    }, */
+    {
+      title: 'My Vehicles',
+      url: '/my-vehicles',
+      icon: 'car'
+    },
+    {
+      title: 'Past Payments',
+      url: '/past-payments',
+      icon: 'pricetags'
+    },
+    {
+      title: 'Payment Options',
+      url: '/payment-options',
+      icon: 'wallet'
+    },
+    {
+      title: 'My Profile',
+      url: '/my-profile',
+      icon: 'Person'
+    },
+    {
+      title: 'Sign Out',
+      url: '',
+      icon: 'power'
     }
   ];
 
@@ -42,7 +66,6 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-
     /* this.router.events.subscribe((event: RouterEvent) => {
       if (
         event instanceof NavigationEnd &&
@@ -52,13 +75,13 @@ export class AppComponent implements OnInit {
       }
     }); */
 
-    this.router.events.subscribe((event: RouterEvent) => {
+    /* this.router.events.subscribe((event: RouterEvent) => {
       if (event instanceof NavigationEnd) {
         this.appPages.map(p => {
           return (p['active'] = event.url === p.url);
         });
       }
-    });
+    }); */
   }
 
   initializeApp() {

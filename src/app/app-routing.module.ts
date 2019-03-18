@@ -16,7 +16,11 @@ const routes: Routes = [
     loadChildren: './list/list.module#ListPageModule'
   },
   { path: 'login', loadChildren: './login/login.module#LoginPageModule' },
-  { path: 'menu-item', loadChildren: './menu-item/menu-item.module#MenuItemPageModule' }
+  { path: 'menu-item', loadChildren: './menu-item/menu-item.module#MenuItemPageModule' },
+  { path: 'my-vehicles', loadChildren: './my-vehicles/my-vehicles.module#MyVehiclesPageModule' },
+  { path: 'past-payments', loadChildren: './past-payments/past-payments.module#PastPaymentsPageModule' },
+  { path: 'payment-options', loadChildren: './payment-options/payment-options.module#PaymentOptionsPageModule' },
+  { path: 'my-profile', loadChildren: './my-profile/my-profile.module#MyProfilePageModule' }
 ];
 
 @NgModule({
