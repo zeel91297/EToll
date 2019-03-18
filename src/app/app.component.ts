@@ -1,14 +1,16 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
-import { Platform } from '@ionic/angular';
+import { Platform, MenuController } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { Router, RouterEvent, NavigationEnd } from '@angular/router';
+
 
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html'
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   public appPages = [
     {
       title: 'Home',
@@ -19,15 +21,44 @@ export class AppComponent {
       title: 'List',
       url: '/list',
       icon: 'list'
+    },
+    {
+      title: 'Login',
+      url: '/login',
+      icon: 'log-in'
     }
   ];
 
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
-    private statusBar: StatusBar
+    private statusBar: StatusBar,
+    private router: Router,
+    private menuController: MenuController
   ) {
     this.initializeApp();
+
+    /* this.router.navigate([""]); */
+  }
+
+  ngOnInit() {
+
+    /* this.router.events.subscribe((event: RouterEvent) => {
+      if (
+        event instanceof NavigationEnd &&
+        (event.url === `/login` || event.url === `/signup`)
+      ) {
+        this.menuController.enable(false);
+      }
+    }); */
+
+    this.router.events.subscribe((event: RouterEvent) => {
+      if (event instanceof NavigationEnd) {
+        this.appPages.map(p => {
+          return (p['active'] = event.url === p.url);
+        });
+      }
+    });
   }
 
   initializeApp() {

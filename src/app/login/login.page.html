@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title text-wrap>Login</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <!-- <ion-text color="primary" class="ion-text-center">
+    <h2>GPS Based Toll Collection System</h2>
+  </ion-text> -->
+  <br><br>
+  <ion-item>
+    <ion-label position="floating">Email ID</ion-label>
+    <ion-input type="text"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">Password</ion-label>
+    <ion-input type="password"></ion-input>
+  </ion-item>
+  <br>
+  <a style="float:right;font-size:12px;">Forget Password??</a>
+  <br>
+  <ion-button (click)="onLoginClick()" expand="full">
+    Login
+    <ion-icon slot="end" name="log-in"></ion-icon>
+  </ion-button>
+  <a style="float:right;font-size:15px;" [routerLink]="['/login/signup']" routerLinkActive="router-link-active" >Don't have an account??</a>
+  <br>
+</ion-content>
