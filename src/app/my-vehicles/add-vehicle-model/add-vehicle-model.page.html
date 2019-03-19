@@ -1,15 +1,11 @@
-<ion-header>
+<ion-header color="light">
   <ion-toolbar>
     <ion-buttons slot="start">
-      <button ion-button (click)="cancel()">
-        <ion-icon name="close" size="large" color="danger"></ion-icon>
-      </button>
+      <ion-text (click)="cancel()" color="danger">Cancel</ion-text>
     </ion-buttons>
     <ion-title>Add Vehicle</ion-title>
     <ion-buttons slot="end">
-      <button ion-button (click)="done()">
-        <ion-icon name="checkmark" size="large" color="success"></ion-icon>
-      </button>
+      <ion-text (click)="done()" color="success">Done</ion-text>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>

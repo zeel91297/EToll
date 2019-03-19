@@ -4,15 +4,20 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>My Vehicles</ion-title>
-    <ion-buttons slot="end">
-      <button ion-button icon-only size="large" (click)="openModel()">
+    <!-- <ion-buttons slot="end">
+      <button ion-button icon-only size="large" color="white" (click)="openModel()">
         <ion-icon name="add-circle-outline" size="large" color="primary"></ion-icon>
       </button>
-    </ion-buttons>
+    </ion-buttons> -->
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="openModel()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
   <ion-searchbar showCancelButton placeholder="Search Vehicle"></ion-searchbar>
   <ion-list>
     <ion-list-header>
