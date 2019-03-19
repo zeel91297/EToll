@@ -5,24 +5,22 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { MyVehiclesPage } from './my-vehicles.page';
-import { AddVehicleModelPage } from './add-vehicle-model/add-vehicle-model.page';
+import { AddVehicleModelPage } from './add-vehicle-model.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: MyVehiclesPage
+    component: AddVehicleModelPage
   }
 ];
 
 @NgModule({
-  entryComponents: [AddVehicleModelPage],
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [MyVehiclesPage, AddVehicleModelPage]
+  declarations: [AddVehicleModelPage]
 })
-export class MyVehiclesPageModule {}
+export class AddVehicleModelPageModule {}

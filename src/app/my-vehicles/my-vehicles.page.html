@@ -3,10 +3,42 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>my-vehicles</ion-title>
+    <ion-title>My Vehicles</ion-title>
+    <ion-buttons slot="end">
+      <button ion-button icon-only size="large" (click)="openModel()">
+        <ion-icon name="add-circle-outline" size="large" color="primary"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
-
+  <ion-searchbar showCancelButton placeholder="Search Vehicle"></ion-searchbar>
+  <ion-list>
+    <ion-list-header>
+      List of Vehicles
+    </ion-list-header>
+    <ion-item-sliding>
+      <ion-item>
+        <ion-avatar item-start>
+          <ion-icon name="car"></ion-icon>
+        </ion-avatar>
+        <p>
+          Vehicle No: GJ01-EF3708
+          <br />
+          Vehicle Type: 2 Wheeler
+        </p>
+      </ion-item>
+      <ion-item-options>
+        <button ion-button color="secondary" icon-start>
+          <ion-icon name="edit"></ion-icon>
+          Update
+        </button>
+        <button ion-button color="danger" icon-start>
+          <ion-icon name="trash"></ion-icon>
+          Delete
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
 </ion-content>

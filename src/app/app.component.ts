@@ -75,13 +75,13 @@ export class AppComponent implements OnInit {
       }
     }); */
 
-    /* this.router.events.subscribe((event: RouterEvent) => {
+    this.router.events.subscribe((event: RouterEvent) => {
       if (event instanceof NavigationEnd) {
         this.appPages.map(p => {
           return (p['active'] = event.url === p.url);
         });
       }
-    }); */
+    });
   }
 
   initializeApp() {
