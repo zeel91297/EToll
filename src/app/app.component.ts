@@ -76,7 +76,7 @@ export class AppComponent implements OnInit {
   ) {
     this.initializeApp();
     this.backButtonEnable();
-    this.router.navigate(['']);
+    /* this.router.navigate(['']); */
    
   }
 
