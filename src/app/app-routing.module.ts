@@ -21,7 +21,8 @@ const routes: Routes = [
   { path: 'past-payments', loadChildren: './past-payments/past-payments.module#PastPaymentsPageModule' },
   { path: 'payment-options', loadChildren: './payment-options/payment-options.module#PaymentOptionsPageModule' },
   { path: 'my-profile', loadChildren: './my-profile/my-profile.module#MyProfilePageModule' },
-  { path: 'select-toll-plaza', loadChildren: './pages/select-toll-plaza/select-toll-plaza.module#SelectTollPlazaPageModule' },
+  { path: 'select-toll-plaza', loadChildren: './pages/select-toll-plaza/select-toll-plaza.module#SelectTollPlazaPageModule' },  { path: 'payment-method', loadChildren: './pages/payment-method/payment-method.module#PaymentMethodPageModule' },
+
 ];
 
 @NgModule({
