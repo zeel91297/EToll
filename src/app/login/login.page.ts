@@ -12,7 +12,7 @@ export class LoginPage implements OnInit, OnDestroy {
     private router: Router) {}
 
   ngOnInit() {
-    this.menuCtrl.enable(false);
+  this.menuCtrl.enable(false);
   }
 
   onLoginClick() {

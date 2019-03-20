@@ -23,23 +23,41 @@
     <ion-list-header>
       List of Vehicles
     </ion-list-header>
-    <ion-item-sliding>
+    <ion-item-sliding *ngFor="let item of vehicles">
       <ion-item>
         <ion-avatar item-start>
-          <ion-icon name="car"></ion-icon>
+          <span style="font-size: 24px;" *ngIf="item.vehicle_type_id=='2'">
+            <i class="fas fa-car"></i>
+          </span>
+          <ion-icon name="bus" size="large" *ngIf="item.vehicle_type_id=='1'"></ion-icon>
+          <span style="font-size: 24px;" *ngIf="item.vehicle_type_id=='3'">
+            <i class="fas fa-truck" size="large"></i>
+          </span>
+          <span style="font-size: 24px;" *ngIf="item.vehicle_type_id=='4'">
+            <i class="fas fa-motorcycle"></i>
+          </span>
+          <span style="font-size: 24px;" *ngIf="item.vehicle_type_id=='5'">
+            <i class="fas fa-truck-monster"></i>
+          </span>
         </ion-avatar>
         <p>
-          Vehicle No: GJ01-EF3708
+          Vehicle No: {{item.vehicle_no}}
           <br />
-          Vehicle Type: 2 Wheeler
+          <!-- Vehicle Type: {{item.vehicle_type_name}} -->
+          <ion-label>{{item.vehicle_type_name}}</ion-label>
+          <ion-select placeholder="Select Your Vehicle Type">
+            <!-- <ion-select-option value="{{item.vehicle_type_id}}">{{item.vehicle_type_name}}</ion-select-option> -->
+            <ion-select-option value="{{i.vehicle_type_id}}" *ngFor="let i of vehicle_type">{{i.vehicle_type_name}}</ion-select-option>
+          </ion-select>
+        <!-- </ion-label> -->
         </p>
       </ion-item>
       <ion-item-options>
-        <button ion-button color="secondary" icon-start>
-          <ion-icon name="edit"></ion-icon>
-          Update
+        <button ion-button color="secondary" icon-start (click)="updateVehicle(item.vehicle_no)">
+          <ion-icon name="edit" color="secondary"></ion-icon>
+          Save
         </button>
-        <button ion-button color="danger" icon-start>
+        <button ion-button color="danger" icon-start (click)="deleteVehicle(item.vehicle_no)">
           <ion-icon name="trash"></ion-icon>
           Delete
         </button>
