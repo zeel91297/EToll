@@ -8,6 +8,8 @@ import { MenuController } from '@ionic/angular';
 })
 export class PastPaymentsPage implements OnInit {
 
+  today: Date = new Date();
+
   constructor(private menuController: MenuController) {
 
   }

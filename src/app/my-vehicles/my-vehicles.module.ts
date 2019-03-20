@@ -6,6 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { MyVehiclesPage } from './my-vehicles.page';
+import { AddVehicleModelPage } from './add-vehicle-model/add-vehicle-model.page';
 
 const routes: Routes = [
   {
@@ -15,12 +16,13 @@ const routes: Routes = [
 ];
 
 @NgModule({
+  entryComponents: [AddVehicleModelPage],
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [MyVehiclesPage]
+  declarations: [MyVehiclesPage, AddVehicleModelPage]
 })
 export class MyVehiclesPageModule {}

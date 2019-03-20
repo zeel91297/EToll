@@ -20,7 +20,8 @@ const routes: Routes = [
   { path: 'my-vehicles', loadChildren: './my-vehicles/my-vehicles.module#MyVehiclesPageModule' },
   { path: 'past-payments', loadChildren: './past-payments/past-payments.module#PastPaymentsPageModule' },
   { path: 'payment-options', loadChildren: './payment-options/payment-options.module#PaymentOptionsPageModule' },
-  { path: 'my-profile', loadChildren: './my-profile/my-profile.module#MyProfilePageModule' }
+  { path: 'my-profile', loadChildren: './my-profile/my-profile.module#MyProfilePageModule' },
+  { path: 'select-toll-plaza', loadChildren: './pages/select-toll-plaza/select-toll-plaza.module#SelectTollPlazaPageModule' },
 ];
 
 @NgModule({
