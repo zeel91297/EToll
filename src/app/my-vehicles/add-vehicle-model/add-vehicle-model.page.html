@@ -1,28 +1,46 @@
 <ion-header color="light">
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-text (click)="cancel()" color="danger">Cancel</ion-text>
+      <ion-text (click)="cancel()" aria-disabled="!add_vehicle_form.vaid" color="danger">Cancel</ion-text>
     </ion-buttons>
     <ion-title>Add Vehicle</ion-title>
-    <ion-buttons slot="end">
-      <ion-text (click)="done()" color="success">Done</ion-text>
+    <ion-buttons slot="end" type="submit">
+      <button color="success" type="submit" (click)="done()" ><span style="color: green; font-size:20px">Done</span></button>
+      <!-- <ion-text (click)="done()" color="success">Done</ion-text> -->
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
+
   <ion-list>
-    <ion-item>
-      <ion-input placeholder="Enter Vehicle No" clearInput></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label>Vehicle Type</ion-label>
-      <ion-select placeholder="Vehicle Type">
-        <ion-select-option value="2">2 Wheeler</ion-select-option>
-        <ion-select-option value="3">3 Wheeler</ion-select-option>
-        <ion-select-option value="4">4 Wheeler</ion-select-option>
-        <ion-select-option value="6">6 Wheeler</ion-select-option>
-      </ion-select>
-    </ion-item>
+    <form [formGroup]="add_vehicle_form" (ngSubmit)="done()">
+      <ion-item>
+        <ion-input type="text" [(ngModel)]="vehicle_no" formControlName="vehicle_no" placeholder="Enter Vehicle No" clearInput></ion-input>
+      </ion-item>
+      <div class="validation-errors">
+        <ng-container *ngFor="let validation of validation_messages.vehicle_no">
+          <div class="error-message" *ngIf="add_vehicle_form.get('vehicle_no').hasError(validation.type) && (add_vehicle_form.get('vehicle_no').dirty || add_vehicle_form.get('vehicle_no').touched)">
+            <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+          </div>
+        </ng-container>
+      </div>
+
+      <ion-item>
+        <ion-label>Vehicle Type</ion-label>
+        <ion-select placeholder="Vehicle Type" formControlName="vehicle_type_name" [(ngModel)]="vehicle_type_id">
+          <ion-select-option value="{{item.vehicle_type_id}}" *ngFor="let item of vehicle_type">{{item.vehicle_type_name}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <div class="validation-errors">
+        <ng-container *ngFor="let validation of validation_messages.vehicle_no">
+          <div class="error-message" *ngIf="add_vehicle_form.get('vehicle_type_name').hasError(validation.type) && (add_vehicle_form.get('vehicle_type_name').dirty || add_vehicle_form.get('vehicle_type_name').touched)">
+            <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+          </div>
+        </ng-container>
+      </div>
+
+    </form>
   </ion-list>
+
 </ion-content>

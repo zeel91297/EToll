@@ -1,0 +1,34 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref="select-toll-plaza"></ion-back-button>
+        </ion-buttons>
+        <ion-title>Payment Method</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+    <ion-radio-group>
+
+        <ion-item>
+            <ion-label><i class="far fa-credit-card"></i> Credit Card </ion-label>
+            <ion-radio slot="start" value="biff" checked></ion-radio>
+        </ion-item>
+        <br>
+        <ion-item>
+            <ion-label><i class="fas fa-credit-card"></i> Debit Card</ion-label>
+            <ion-radio slot="start" value="griff"></ion-radio>
+        </ion-item>
+        <br>
+
+        <ion-item>
+            <ion-label><i class="fas fa-wallet"></i> Paytm</ion-label>
+            <ion-radio slot="start" value="giff"></ion-radio>
+        </ion-item>
+
+    </ion-radio-group>
+
+    <ion-button [routerLink]="['/payment-details']" style="position:fixed;width:100%;bottom:0;left:0" routerLinkActive="router-link-active">Next</ion-button>
+
+</ion-content>

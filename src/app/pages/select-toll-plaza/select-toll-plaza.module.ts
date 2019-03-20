@@ -1,16 +1,17 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { AddVehicleModelPage } from './add-vehicle-model.page';
+import { SelectTollPlazaPage } from './select-toll-plaza.page';
+import { IonicSelectableModule } from 'ionic-selectable';
 
 const routes: Routes = [
   {
     path: '',
-    component: AddVehicleModelPage
+    component: SelectTollPlazaPage
   }
 ];
 
@@ -19,9 +20,9 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
-    ReactiveFormsModule,
+    IonicSelectableModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [AddVehicleModelPage]
+  declarations: [SelectTollPlazaPage]
 })
-export class AddVehicleModelPageModule {}
+export class SelectTollPlazaPageModule {}

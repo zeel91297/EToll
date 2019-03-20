@@ -1,0 +1,106 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref="home"></ion-back-button>
+        </ion-buttons>
+        <ion-title>Select Toll Plaza</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+    <ion-item>
+        <ion-input value="Amount" disabled></ion-input>
+    </ion-item>
+
+    <ion-radio-group>
+
+        <ion-item>
+            <ion-label>Single Journey</ion-label>
+            <ion-radio slot="start" value="biff" checked></ion-radio>
+        </ion-item>
+
+        <ion-item>
+            <ion-label>Return journey</ion-label>
+            <ion-radio slot="start" value="griff"></ion-radio>
+        </ion-item>
+
+
+    </ion-radio-group>
+    <ion-item>
+        <ion-label position="floating">Select Vehicle Type</ion-label>
+
+    </ion-item>
+    <br>
+    <table>
+        <ion-radio-group>
+            <tr>
+                <td>
+                    <ion-item>
+                        <i class="fas fa-motorcycle" style="font-size: 24px;"></i>
+
+
+                        <!-- <img src="../assets/icon/motorbike.png" alt=""> -->
+                        <ion-radio slot="start" value="biff" checked></ion-radio>
+                    </ion-item>
+                </td>
+                <td>
+                    <ion-item>
+                        <i class="fas fa-car" style="font-size: 24px;"></i>
+
+                        <!-- <img src="../assets/icon/car.png" alt="" style="height:50px;"> -->
+                        <ion-radio slot="start" value="griff"></ion-radio>
+                    </ion-item>
+
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <ion-item>
+                        <ion-icon name="bus" size="large" style="font-size:24px;color:black"></ion-icon>
+
+                        <!-- <img src="../assets/icon/delivery-truck.png" alt="" style="height:50px;"> -->
+                        <ion-radio slot="start" value="giff" checked></ion-radio>
+                    </ion-item>
+                </td>
+
+                <td>
+                    <ion-item>
+                        <i class="fas fa-truck" size="large" style="font-size:24px;"></i>
+                        <!-- <img src="../assets/icon/bus.png" alt="" style="height:50px;"> -->
+                        <ion-radio slot="start" value="sniff" checked></ion-radio>
+                    </ion-item>
+                </td>
+            </tr>
+            <tr>
+
+                <td>
+                    <ion-item>
+                        <i class="fas fa-truck-monster" style="font-size:24px;"></i>
+
+                        <!-- <img src="../assets/icon/motorbike.png" alt="" style="height:50px;"> -->
+                        <ion-radio slot="start" value="riff" checked></ion-radio>
+                    </ion-item>
+                </td>
+
+
+                <td>
+                    <ion-item>
+                        <i class="fas fa-truck-moving" style="font-size:24px;"></i>
+
+                        <!-- <img src="../assets/icon/motorbike.png" alt="" style="height:50px;"> -->
+                        <ion-radio slot="start" value="riff" checked></ion-radio>
+                    </ion-item>
+                </td>
+            </tr>
+        </ion-radio-group>
+    </table>
+
+    <ion-item>
+        <ion-label>Select Toll Plaza</ion-label>
+        <ionic-selectable [(ngModel)]="port" [isMultiple]="true" [items]="ports" itemValueField="id" itemTextField="name" [canSearch]="true" (onChange)="portChange($event)">
+        </ionic-selectable>
+    </ion-item>
+
+    <ion-button expand="block" [routerLink]="['/payment-method']" routerLinkActive="router-link-active">Next</ion-button>
+</ion-content>

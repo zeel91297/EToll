@@ -28,7 +28,7 @@ export class LoginPage implements OnInit, OnDestroy {
      }
 
   ngOnInit() {
-    this.menuCtrl.enable(false);
+  this.menuCtrl.enable(false);
   }
 
   onlogin() {
@@ -43,7 +43,7 @@ export class LoginPage implements OnInit, OnDestroy {
           this.id=data[0].user_id;
           localStorage.setItem('id',this.id);
           localStorage.setItem('name',data[0].user_name);
-          
+          console.log(this.id);
           this.router.navigate(['/home']);
         }
        
