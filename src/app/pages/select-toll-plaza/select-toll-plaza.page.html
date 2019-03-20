@@ -3,7 +3,7 @@
         <ion-buttons slot="start">
             <ion-back-button defaultHref="home"></ion-back-button>
         </ion-buttons>
-        <h3>Select Toll Plaza</h3>
+        <ion-title>Select Toll Plaza</ion-title>
     </ion-toolbar>
 </ion-header>
 
@@ -102,5 +102,5 @@
         </ionic-selectable>
     </ion-item>
 
-    <ion-button expand="block">Next</ion-button>
+    <ion-button expand="block" [routerLink]="['/payment-method']" routerLinkActive="router-link-active">Next</ion-button>
 </ion-content>
