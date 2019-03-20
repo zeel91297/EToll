@@ -10,7 +10,8 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
 import { MenuItemPage } from '../app/menu-item/menu-item.page';
-import { VehiclesServicesService } from './providers/vehiclesDB/vehicles-services.service';
+import { VehicledbProvider } from './providers/vehicledb/vehicledb';
+import { vehicleTypeProvider } from './providers/vehicledb/vehicleType';
 
 @NgModule({
   declarations: [AppComponent, MenuItemPage],
@@ -25,7 +26,8 @@ import { VehiclesServicesService } from './providers/vehiclesDB/vehicles-service
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    VehiclesServicesService
+    VehicledbProvider,
+    vehicleTypeProvider
   ],
   bootstrap: [AppComponent]
 })
