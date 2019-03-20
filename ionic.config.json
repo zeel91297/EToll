@@ -1,5 +1,7 @@
 {
   "name": "GPSToll",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

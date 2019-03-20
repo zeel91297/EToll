@@ -8,7 +8,9 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { IonicSelectableModule } from 'ionic-selectable';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
+
 import { MenuItemPage } from '../app/menu-item/menu-item.page';
+import { VehiclesServicesService } from './providers/vehiclesDB/vehicles-services.service';
 
 @NgModule({
   declarations: [AppComponent, MenuItemPage],
@@ -22,7 +24,8 @@ import { MenuItemPage } from '../app/menu-item/menu-item.page';
   providers: [
     StatusBar,
     SplashScreen,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    VehiclesServicesService
   ],
   bootstrap: [AppComponent]
 })

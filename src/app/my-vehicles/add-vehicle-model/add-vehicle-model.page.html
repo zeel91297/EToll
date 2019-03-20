@@ -1,0 +1,28 @@
+<ion-header color="light">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-text (click)="cancel()" color="danger">Cancel</ion-text>
+    </ion-buttons>
+    <ion-title>Add Vehicle</ion-title>
+    <ion-buttons slot="end">
+      <ion-text (click)="done()" color="success">Done</ion-text>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-list>
+    <ion-item>
+      <ion-input placeholder="Enter Vehicle No" clearInput></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Vehicle Type</ion-label>
+      <ion-select placeholder="Vehicle Type">
+        <ion-select-option value="2">2 Wheeler</ion-select-option>
+        <ion-select-option value="3">3 Wheeler</ion-select-option>
+        <ion-select-option value="4">4 Wheeler</ion-select-option>
+        <ion-select-option value="6">6 Wheeler</ion-select-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>
+</ion-content>
