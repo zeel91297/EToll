@@ -8,22 +8,37 @@
   <!-- <ion-text color="primary" class="ion-text-center">
     <h2>GPS Based Toll Collection System</h2>
   </ion-text> -->
+  <form [formGroup]="loginform">
   <br><br>
+
   <ion-item>
     <ion-label position="floating">Email ID</ion-label>
-    <ion-input type="text"></ion-input>
+    <ion-input formControlName="email" type="text"  id="email" [(ngModel)]="email"></ion-input>
   </ion-item>
+  <br>
+    <div *ngIf="!loginform.controls.email.valid &&
+                 loginform.controls.email.dirty">
+      Please enter a valid email.
+    </div>
   <ion-item>
     <ion-label position="floating">Password</ion-label>
-    <ion-input type="password"></ion-input>
+    <ion-input formControlName="password1" type="text"  id="password1" [(ngModel)]="password1"></ion-input>
   </ion-item>
+  <br>
+    <div *ngIf="!loginform.controls.password1.valid &&
+               loginform.controls.password1.dirty">
+      Please enter a valid password
+      <br>minmum 6 charactor
+
+    </div>
   <br>
   <a style="float:right;font-size:12px;">Forget Password??</a>
   <br>
-  <ion-button (click)="onLoginClick()" expand="full">
+  <ion-button [disabled]="!loginform.valid"   (click)="onlogin()" expand="full">
     Login
     <ion-icon slot="end" name="log-in"></ion-icon>
   </ion-button>
   <a style="float:right;font-size:15px;" [routerLink]="['/login/signup']" routerLinkActive="router-link-active" >Don't have an account??</a>
   <br>
+</form>
 </ion-content>

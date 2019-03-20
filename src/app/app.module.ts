@@ -13,6 +13,7 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { MenuItemPage } from '../app/menu-item/menu-item.page';
 import { VehiclesServicesService } from './providers/vehiclesDB/vehicles-services.service';
+import { UserserviceService } from './providers/userDB/userservice.service';
 
 @NgModule({
   declarations: [AppComponent, MenuItemPage],
@@ -29,7 +30,8 @@ import { VehiclesServicesService } from './providers/vehiclesDB/vehicles-service
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    VehiclesServicesService
+    VehiclesServicesService,
+    UserserviceService
   ],
   bootstrap: [AppComponent]
 })
