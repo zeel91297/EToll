@@ -15,6 +15,7 @@ class Port {
 export class SelectTollPlazaPage implements OnInit {
   ports: Port[];
   port: Port;
+  a : any;
   private isDisabled: Boolean = false;
   constructor() {
     this.ports = [

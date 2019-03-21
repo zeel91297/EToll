@@ -25,6 +25,8 @@ const routes: Routes = [
   { path: 'payment-details', loadChildren: './pages/payment-details/payment-details.module#PaymentDetailsPageModule' },
   { path: 'payment-details-add', loadChildren: './pages/payment-details-add/payment-details-add.module#PaymentDetailsAddPageModule' },
   { path: 'transection-status', loadChildren: './pages/transection-status/transection-status.module#TransectionStatusPageModule' },
+  { path: 'view-payment-method', loadChildren: './pages/view-payment-method/view-payment-method.module#ViewPaymentMethodPageModule' },
+  { path: 'edit-payment-details', loadChildren: './pages/edit-payment-details/edit-payment-details.module#EditPaymentDetailsPageModule' },
 
 ];
 

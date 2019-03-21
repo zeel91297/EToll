@@ -1,0 +1,47 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref="payment-method"></ion-back-button>
+        </ion-buttons>
+        <ion-title>Edit payment details</ion-title>
+    </ion-toolbar>
+</ion-header>
+<ion-content padding>
+    <ion-item>
+        <ion-input placeholder="Card Holder Name"> <i class="fa fa-user icon">  </i>&nbsp;&nbsp;</ion-input>
+    </ion-item>
+    <br>
+    <ion-item>
+        <ion-input placeholder="Card Number" type="number"> <i class="fa fa-key icon"></i> &nbsp;&nbsp;</ion-input>
+    </ion-item>
+    <br>
+    <ion-label>Expiry Date</ion-label>
+    <table>
+
+        <tr>
+
+            <td>
+                <ion-item>
+                    <ion-input type="text" placeholder="MM" name="psw"></ion-input>
+                </ion-item>
+            </td>
+            <td>
+                <ion-item>
+                    <ion-input type="text" placeholder="YY" name="psw"></ion-input>
+                </ion-item>
+            </td>
+
+
+        </tr><br>
+        <ion-label>Cvv Code</ion-label>
+        <tr>
+            <td>
+
+                <ion-item>
+                    <ion-input type="text" placeholder="Cvv" name="psw"></ion-input>
+                </ion-item>
+            </td>
+        </tr>
+    </table>
+    <ion-button [routerLink]="['/view-payment-method']" style="position:fixed;width:100%;bottom:0;left:0" routerLinkActive="router-link-active">Update</ion-button>
+</ion-content>
