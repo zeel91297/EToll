@@ -8,8 +8,10 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { IonicSelectableModule } from 'ionic-selectable';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
+import { HttpClientModule } from '@angular/common/http';
 
 import { MenuItemPage } from '../app/menu-item/menu-item.page';
+import { UserserviceService } from './providers/userDB/userservice.service';
 import { VehicledbProvider } from './providers/vehicledb/vehicledb';
 import { vehicleTypeProvider } from './providers/vehicledb/vehicleType';
 
@@ -20,12 +22,14 @@ import { vehicleTypeProvider } from './providers/vehicledb/vehicleType';
     BrowserModule,
     IonicModule.forRoot(),
     AppRoutingModule,
-    IonicSelectableModule
+    IonicSelectableModule,
+    HttpClientModule
   ],
   providers: [
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    UserserviceService,
     VehicledbProvider,
     vehicleTypeProvider
   ],
