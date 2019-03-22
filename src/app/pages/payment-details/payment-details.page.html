@@ -1,0 +1,80 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref="payment-method"></ion-back-button>
+        </ion-buttons>
+        <ion-title>Payment Details</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+    <table>
+        <ion-radio-group>
+            <tr>
+                <td>
+                    <ion-radio slot="start" value="griff"></ion-radio>
+                </td>
+                <td>
+                    <ion-card>
+                        <ion-card-content>
+                            <p style="color:black;font-size:15px;">Card Holder Name - Shivani</p>
+                            <p style="color:rgb(119, 116, 116);font-size:13px">Card No - 123456789</p>
+                            <p style="color:rgb(119, 116, 116);font-size:13px">Cvv - *** Date - 11/20</p>
+                        </ion-card-content>
+
+                    </ion-card>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <ion-radio slot="start" value="riff"></ion-radio>
+                </td>
+                <td>
+                    <ion-card>
+                        <ion-card-content>
+                            <p style="color:black;font-size:15px;">Card Holder Name - Shivani</p>
+                            <p style="color:rgb(119, 116, 116);font-size:13px">Card No - 123456789</p>
+                            <p style="color:rgb(119, 116, 116);font-size:13px">Cvv - *** Date - 11/20</p>
+                        </ion-card-content>
+
+                    </ion-card>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <ion-radio slot="start" value="iff"></ion-radio>
+                </td>
+                <td>
+                    <ion-card>
+                        <ion-card-content>
+                            <p style="color:black;font-size:15px;">Card Holder Name - Shivani</p>
+                            <p style="color:rgb(119, 116, 116);font-size:13px">Card No - 123456789</p>
+                            <p style="color:rgb(119, 116, 116);font-size:13px">Cvv - *** Date - 11/20</p>
+                        </ion-card-content>
+
+                    </ion-card>
+                </td>
+            </tr>
+        </ion-radio-group>
+    </table>
+
+
+
+
+    <table>
+        <tr>
+
+            <td>
+                <ion-button [routerLink]="['/view-payment-method']" style="position:fixed;width:50%;bottom:0;left:0" routerLinkActive="router-link-active">Next</ion-button>
+            </td>
+            <td>
+                <ion-fab-button color="primary" style="position:fixed;bottom:0;right:0px" [routerLink]="['/payment-details-add']">
+                    <ion-icon name="add"></ion-icon>
+                </ion-fab-button>
+            </td>
+        </tr>
+    </table>
+</ion-content>

@@ -8,26 +8,53 @@
 </ion-header>
 
 <ion-content padding>
+    <form [formGroup]="myform">
   <br><br><br>
   <ion-list>
     <ion-item>
       <ion-icon name="person" item-start></ion-icon>
-      <ion-input type="text" placeholder="Enter Username" name="email" required></ion-input>
+      <ion-input formControlName="name" type="text" id="name" [(ngModel)]="name" placeholder="Enter Name"></ion-input>
     </ion-item>
+    <br>
+    <div *ngIf="!myform.controls.name.valid &&
+       myform.controls.name.dirty">
+      Please enter a valid name.
+    </div>
     <ion-item>
       <ion-icon name="mail" item-start></ion-icon>
-      <ion-input type="text" placeholder="Enter Email ID" name="email" required></ion-input>
+      <ion-input  placeholder="Enter Email ID" formControlName="email" type="text" id="email" [(ngModel)]="email"></ion-input>
     </ion-item>
+    <br>
+    <div *ngIf="!myform.controls.email.valid &&
+      myform.controls.email.dirty">
+      Please enter a valid email.
+    </div>
     <ion-item>
       <ion-icon name="lock" item-start></ion-icon>
-      <ion-input type="password" placeholder="Enter Password" name="email" required></ion-input>
+      <ion-input placeholder="Enter Password" formControlName="password1" type="text" id="password1" [(ngModel)]="password1"></ion-input>
     </ion-item>
+    <br>
+    <div *ngIf="!myform.controls.password1.valid &&
+      myform.controls.password1.dirty">
+      Please enter a valid password
+      <br>minmum 6 charactor
+      <br>one special charactor
+      <br>one digit
+
+    </div>
     <ion-item>
       <ion-icon name="call" item-start></ion-icon>
-      <ion-input type="tel" placeholder="Enter Contact No" name="email" required></ion-input>
+      <ion-input  placeholder="Enter Contact No" formControlName="contact1" type="text" id="contact1" [(ngModel)]="contact1"></ion-input>
     </ion-item>
+    
+    <br>
+    <div *ngIf="!myform.controls.contact1.valid &&
+      myform.controls.contact1.dirty">
+      Please enter number only
+    </div>
   </ion-list>
-  <ion-button expand="full" color="tertiary">Create Account
-    <ion-icon slot="end" name="arrow-round-forward"></ion-icon>
+  <ion-button expand="full" color="tertiary" [disabled]="!myform.valid" (click)="onsignup()">Create Account
+    <ion-icon slot="end" name="arrow-round-forward" ></ion-icon>
   </ion-button>
+  </form>
 </ion-content>

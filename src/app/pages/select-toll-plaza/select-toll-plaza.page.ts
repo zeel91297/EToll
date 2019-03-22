@@ -25,6 +25,7 @@ export class SelectTollPlazaPage implements OnInit {
   vehicle_type: any;
   amt: number = 0;
   selectedTollPlaza: Tollplazza[] = [];
+  a : any;
   private isDisabled: Boolean = false;
   vehicle: string;
   constructor(public tpdata: TollplazaService) {}

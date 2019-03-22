@@ -11,8 +11,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 
 import { MenuItemPage } from '../app/menu-item/menu-item.page';
-import { VehiclesServicesService } from './providers/vehiclesDB/vehicles-services.service';
 import { TollplazaService } from "./providers/tollplazadb/tollplaza.service";
+import { UserserviceService } from './providers/userDB/userservice.service';
+import { VehicledbProvider } from './providers/vehicledb/vehicledb';
+import { vehicleTypeProvider } from './providers/vehicledb/vehicleType';
 
 @NgModule({
   declarations: [AppComponent, MenuItemPage],
@@ -28,8 +30,10 @@ import { TollplazaService } from "./providers/tollplazadb/tollplaza.service";
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    VehiclesServicesService,
-    TollplazaService
+    TollplazaService,
+    UserserviceService,
+    VehicledbProvider,
+    vehicleTypeProvider
   ],
   bootstrap: [AppComponent]
 })

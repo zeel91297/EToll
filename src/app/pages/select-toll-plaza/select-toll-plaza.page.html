@@ -1,13 +1,10 @@
 <ion-header>
-   
     <ion-toolbar>
-        
-            <ion-back-button></ion-back-button>
-
-        <ion-title style="color:white">Select Toll Plaza
-        </ion-title>
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref="home"></ion-back-button>
+        </ion-buttons>
+        <ion-title>Select Toll Plaza</ion-title>
     </ion-toolbar>
-
 </ion-header>
 
 <ion-content>
@@ -36,18 +33,23 @@
     </ion-item>
     <br>
     <table>
+
         <ion-radio-group [(ngModel)]="vehicle" (ionChange)="myAmountChange()">
+
             <tr>
                 <td>
                     <ion-item>
                         <i class="fas fa-motorcycle" style="font-size: 24px;"></i>
                         <ion-radio slot="start"  value="two_wheeler" checked></ion-radio>
+
+                        
                     </ion-item>
                 </td>
                 <td>
                     <ion-item>
                         <i class="fas fa-car" style="font-size: 24px;"></i>
                         <ion-radio slot="start"  value="four_wheeler"></ion-radio>
+                       
                     </ion-item>
 
                 </td>
@@ -57,13 +59,17 @@
                     <ion-item>
                         <ion-icon name="bus" size="large"  style="font-size:24px;color:black"></ion-icon>
                         <ion-radio slot="start" value="bus"   ></ion-radio>
-                    </ion-item>
+                        </ion-item>
                 </td>
 
                 <td>
                     <ion-item>
                         <i class="fas fa-truck" size="large" style="font-size:24px;"></i>
+
                         <ion-radio slot="start" value="truck"   ></ion-radio>
+
+                       
+
                     </ion-item>
                 </td>
             </tr>
@@ -73,6 +79,7 @@
                     <ion-item>
                         <i class="fas fa-truck-monster" style="font-size:24px;"></i>
                         <ion-radio slot="start" value="monster"   ></ion-radio>
+                       
                     </ion-item>
                 </td>
 
@@ -81,6 +88,7 @@
                     <ion-item>
                         <i class="fas fa-truck-moving" style="font-size:24px;"></i>
                         <ion-radio slot="start" value="six_wheeler" ></ion-radio>
+                       
                     </ion-item>
                 </td>
             </tr>
@@ -94,6 +102,8 @@
                
         </ionic-selectable>
     </ion-item>
+    
 
-    <ion-button expand="block">Next</ion-button>
+    <ion-button expand="block" [routerLink]="['/payment-method']" routerLinkActive="router-link-active">Next</ion-button>
+
 </ion-content>
