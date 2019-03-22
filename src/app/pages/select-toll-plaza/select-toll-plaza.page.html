@@ -1,5 +1,9 @@
 <ion-header>
-    <ion-toolbar color=" --ion-color-primary-shade">
+   
+    <ion-toolbar>
+        
+            <ion-back-button></ion-back-button>
+
         <ion-title style="color:white">Select Toll Plaza
         </ion-title>
     </ion-toolbar>
@@ -9,19 +13,19 @@
 <ion-content>
 
     <ion-item>
-        <ion-input value="Amount" disabled></ion-input>
+        <ion-label>Total Amount to be paid: </ion-label><ion-input [(ngModel)]="totalAmount" disabled></ion-input>
     </ion-item>
 
-    <ion-radio-group>
+    <ion-radio-group [(ngModel)]="whichJ" (ionChange)="myAmountChange()" >
 
         <ion-item>
             <ion-label>Single Journey</ion-label>
-            <ion-radio slot="start" value="biff" checked></ion-radio>
+            <ion-radio  slot="start" value="single" checked></ion-radio>
         </ion-item>
 
         <ion-item>
             <ion-label>Return journey</ion-label>
-            <ion-radio slot="start" value="griff"></ion-radio>
+            <ion-radio  slot="start" value="return" ></ion-radio>
         </ion-item>
 
 
@@ -32,23 +36,18 @@
     </ion-item>
     <br>
     <table>
-        <ion-radio-group>
+        <ion-radio-group [(ngModel)]="vehicle" (ionChange)="myAmountChange()">
             <tr>
                 <td>
                     <ion-item>
                         <i class="fas fa-motorcycle" style="font-size: 24px;"></i>
-
-
-                        <!-- <img src="../assets/icon/motorbike.png" alt=""> -->
-                        <ion-radio slot="start" value="biff" checked></ion-radio>
+                        <ion-radio slot="start"  value="two_wheeler" checked></ion-radio>
                     </ion-item>
                 </td>
                 <td>
                     <ion-item>
                         <i class="fas fa-car" style="font-size: 24px;"></i>
-
-                        <!-- <img src="../assets/icon/car.png" alt="" style="height:50px;"> -->
-                        <ion-radio slot="start" value="griff"></ion-radio>
+                        <ion-radio slot="start"  value="four_wheeler"></ion-radio>
                     </ion-item>
 
                 </td>
@@ -56,18 +55,15 @@
             <tr>
                 <td>
                     <ion-item>
-                        <ion-icon name="bus" size="large" style="font-size:24px;color:black"></ion-icon>
-
-                        <!-- <img src="../assets/icon/delivery-truck.png" alt="" style="height:50px;"> -->
-                        <ion-radio slot="start" value="giff" checked></ion-radio>
+                        <ion-icon name="bus" size="large"  style="font-size:24px;color:black"></ion-icon>
+                        <ion-radio slot="start" value="bus"   ></ion-radio>
                     </ion-item>
                 </td>
 
                 <td>
                     <ion-item>
                         <i class="fas fa-truck" size="large" style="font-size:24px;"></i>
-                        <!-- <img src="../assets/icon/bus.png" alt="" style="height:50px;"> -->
-                        <ion-radio slot="start" value="sniff" checked></ion-radio>
+                        <ion-radio slot="start" value="truck"   ></ion-radio>
                     </ion-item>
                 </td>
             </tr>
@@ -76,9 +72,7 @@
                 <td>
                     <ion-item>
                         <i class="fas fa-truck-monster" style="font-size:24px;"></i>
-
-                        <!-- <img src="../assets/icon/motorbike.png" alt="" style="height:50px;"> -->
-                        <ion-radio slot="start" value="riff" checked></ion-radio>
+                        <ion-radio slot="start" value="monster"   ></ion-radio>
                     </ion-item>
                 </td>
 
@@ -86,18 +80,18 @@
                 <td>
                     <ion-item>
                         <i class="fas fa-truck-moving" style="font-size:24px;"></i>
-
-                        <!-- <img src="../assets/icon/motorbike.png" alt="" style="height:50px;"> -->
-                        <ion-radio slot="start" value="riff" checked></ion-radio>
+                        <ion-radio slot="start" value="six_wheeler" ></ion-radio>
                     </ion-item>
                 </td>
             </tr>
         </ion-radio-group>
     </table>
 
-    <ion-item>
+    <ion-item > 
         <ion-label>Select Toll Plaza</ion-label>
-        <ionic-selectable [(ngModel)]="port" [isMultiple]="true" [items]="ports" itemValueField="id" itemTextField="name" [canSearch]="true" (onChange)="portChange($event)">
+        
+        <ionic-selectable [(ngModel)]="port" [isMultiple]="true" [items]="tp" itemValueField="toll_plaza_id" itemTextField="toll_name" [canSearch]="true" (onChange)="portChange($event)">
+               
         </ionic-selectable>
     </ion-item>
 

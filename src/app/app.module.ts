@@ -8,9 +8,11 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { IonicSelectableModule } from 'ionic-selectable';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
+import { HttpClientModule } from '@angular/common/http';
 
 import { MenuItemPage } from '../app/menu-item/menu-item.page';
 import { VehiclesServicesService } from './providers/vehiclesDB/vehicles-services.service';
+import { TollplazaService } from "./providers/tollplazadb/tollplaza.service";
 
 @NgModule({
   declarations: [AppComponent, MenuItemPage],
@@ -19,13 +21,15 @@ import { VehiclesServicesService } from './providers/vehiclesDB/vehicles-service
     BrowserModule,
     IonicModule.forRoot(),
     AppRoutingModule,
-    IonicSelectableModule
+    IonicSelectableModule,
+    HttpClientModule
   ],
   providers: [
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    VehiclesServicesService
+    VehiclesServicesService,
+    TollplazaService
   ],
   bootstrap: [AppComponent]
 })
