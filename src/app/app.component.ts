@@ -11,6 +11,7 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Router, RouterEvent, NavigationEnd } from '@angular/router';
 import { async } from 'q';
+import { PermissionsService } from './providers/background-geo-location/permissions.service';
 
 @Component({
   selector: 'app-root',
@@ -72,10 +73,12 @@ export class AppComponent implements OnInit {
     private router: Router,
     private menuController: MenuController,
     private modalCtrl: ModalController,
-    private toast: ToastController
+    private toast: ToastController,
+    private perm:PermissionsService
   ) {
     this.initializeApp();
     this.backButtonEnable();
+    this.perm.checkGPSPermission();
     /* this.router.navigate(['']); */
    
   }
