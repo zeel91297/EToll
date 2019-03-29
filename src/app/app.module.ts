@@ -47,6 +47,7 @@ import { LocationAccuracy } from '@ionic-native/location-accuracy/ngx';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { BackgroundGeolocation } from '@ionic-native/background-geolocation/ngx';
 import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
+import { Md5 } from 'ts-md5';
 //ends here
 
 @NgModule({
@@ -59,7 +60,7 @@ import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
     IonicSelectableModule,
     HttpClientModule,
     ReactiveFormsModule,
-  FormsModule
+    FormsModule,
   ],
   providers: [
     StatusBar,
@@ -69,7 +70,6 @@ import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
     UserserviceService,
     VehicledbProvider,
     vehicleTypeProvider,
-
     /*
     Background Geolocation
     */
@@ -77,8 +77,9 @@ import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
     LocationAccuracy,
     Geolocation,
     BackgroundGeolocation,
-    LocalNotifications
+    LocalNotifications,
+    Md5
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }
