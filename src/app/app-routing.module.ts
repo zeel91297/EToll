@@ -27,6 +27,8 @@ const routes: Routes = [
   { path: 'transection-status', loadChildren: './pages/transection-status/transection-status.module#TransectionStatusPageModule' },
   { path: 'view-payment-method', loadChildren: './pages/view-payment-method/view-payment-method.module#ViewPaymentMethodPageModule' },
   { path: 'edit-payment-details', loadChildren: './pages/edit-payment-details/edit-payment-details.module#EditPaymentDetailsPageModule' },
+  { path: 'confirm-payment', loadChildren: './pages/confirm-payment/confirm-payment.module#ConfirmPaymentPageModule' },
+  { path: 'add-vehicle-details', loadChildren: './pages/add-vehicle-details/add-vehicle-details.module#AddVehicleDetailsPageModule' },
 
 ];
 

@@ -28,8 +28,6 @@ export class AddVehicleModelPage implements OnInit {
     private _vehicles: VehicledbProvider,
     private formBuilder: FormBuilder
   ) {
-
-    
   }
 
   validation_messages = {

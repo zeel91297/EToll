@@ -15,6 +15,7 @@ import { TollplazaService } from "./providers/tollplazadb/tollplaza.service";
 import { UserserviceService } from './providers/userDB/userservice.service';
 import { VehicledbProvider } from './providers/vehicledb/vehicledb';
 import { vehicleTypeProvider } from './providers/vehicledb/vehicleType';
+import { PaymentmethodService } from "./providers/paymentmethoddb/paymentmethod.service";
 
 @NgModule({
   declarations: [AppComponent, MenuItemPage],
@@ -33,7 +34,8 @@ import { vehicleTypeProvider } from './providers/vehicledb/vehicleType';
     TollplazaService,
     UserserviceService,
     VehicledbProvider,
-    vehicleTypeProvider
+    vehicleTypeProvider,
+    PaymentmethodService
   ],
   bootstrap: [AppComponent]
 })
