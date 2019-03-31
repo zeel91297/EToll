@@ -1,13 +1,21 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button></ion-back-button>
+        <ion-back-button ></ion-back-button>
     </ion-buttons>
     <ion-title>Confirm Payment</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding> 
-
+<ion-content padding>
+   
+ <ion-item>
+   {{mdate | date:'mediumDate'}}
+ </ion-item>
+  
+ <ion-item>
+    {{stime | date:'shortTime'}}
+  </ion-item>
+ 
   
 </ion-content>

@@ -32,10 +32,9 @@
   </ion-list>
 
   <ion-button
-    [routerLink]="['/payment-details']"
     [disabled]="!buttonDisabled"
     style="position:fixed;width:100%;bottom:0;left:0"
-    routerLinkActive="router-link-active"
+    (click)="getVehicleNo()"
     >Next</ion-button
   >
 </ion-content>

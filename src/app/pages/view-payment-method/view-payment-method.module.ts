@@ -6,6 +6,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { ViewPaymentMethodPage } from './view-payment-method.page';
+import { HttpClientModule } from '@angular/common/http';
+// import { CreditCardMaskPipe } from 'src/app/shared/credit_card_mask';
 
 const routes: Routes = [
   {
@@ -19,7 +21,8 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    HttpClientModule
   ],
   declarations: [ViewPaymentMethodPage]
 })

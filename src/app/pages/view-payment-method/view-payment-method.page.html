@@ -1,67 +1,70 @@
 <ion-header>
     <ion-toolbar>
         <ion-buttons slot="start">
-            <ion-back-button defaultHref="payment-method"></ion-back-button>
+            <!-- <ion-back-button defaultHref="payment-method"></ion-back-button> -->
+            <ion-menu-button></ion-menu-button>
         </ion-buttons>
-        <ion-title>View Payment Method</ion-title>
+        <ion-title>Payment Method</ion-title>
     </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
-    <ion-card>
+    <ion-card *ngFor="let item of payment_methods">
         <table>
             <tr>
                 <td>
                     <ion-card-content>
-                        <p style="color:black;font-size:15px;">Card Holder Name - Shivani</p>
-                        <p style="color:rgb(119, 116, 116);font-size:13px">Card No - 123456789</p>
-                        <p style="color:rgb(119, 116, 116);font-size:13px">Cvv - *** Date - 11/20</p>
+                        <p style="color:black;font-size:15px;">Card Holder Name - {{item.user_name}}</p>
+                        <p style="color:rgb(119, 116, 116);font-size:13px">Card No - {{item.card_no}}</p>
+                        <p style="color:rgb(119, 116, 116);font-size:13px">Card Name - {{item.card_name}}</p>
+                        <p style="color:rgb(119, 116, 116);font-size:13px">Cvv - *** Date -
+                            {{item.expiry_month}}/{{item.expiry_year}}</p>
                     </ion-card-content>
                 </td>
                 <td style="background:green;color:white;font-size:25px;">
-                    <ion-icon name="create" routerLink="/edit-payment-details"></ion-icon>
-                </td>
-
-            </tr>
-        </table>
-    </ion-card>
-
-
-    <ion-card>
-        <table>
-            <tr>
-                <td>
-                    <ion-card-content>
-                        <p style="color:black;font-size:15px;">Card Holder Name - Shivani</p>
-                        <p style="color:rgb(119, 116, 116);font-size:13px">Card No - 123456789</p>
-                        <p style="color:rgb(119, 116, 116);font-size:13px">Cvv - *** Date - 11/20</p>
-                    </ion-card-content>
-                </td>
-                <td style="background:green;color:white;font-size:25px;">
-                    <ion-icon name="create" routerLink="/edit-payment-details"></ion-icon>
-                </td>
-
-            </tr>
-        </table>
-    </ion-card>
-
-
-
-    <ion-card>
-        <table>
-            <tr>
-                <td>
-                    <ion-card-content>
-                        <p style="color:black;font-size:15px;">Card Holder Name - Shivani</p>
-                        <p style="color:rgb(119, 116, 116);font-size:13px">Card No - 123456789</p>
-                        <p style="color:rgb(119, 116, 116);font-size:13px">Cvv - *** Date - 11/20</p>
-                    </ion-card-content>
-                </td>
-                <td style="background:green;color:white;font-size:25px;">
-                    <ion-icon name="create" routerLink="/edit-payment-details"></ion-icon>
+                    <!-- <ion-icon name="create" routerLink="/edit-payment-details"></ion-icon> -->
+                    <ion-icon name="create" (click)="editPayment(item)"></ion-icon>
                 </td>
 
             </tr>
         </table>
     </ion-card>
 </ion-content>
+<!-- 
+    <ion-card>
+        <table>
+            <tr>
+                <td>
+                    <ion-card-content>
+                        <p style="color:black;font-size:15px;">Card Holder Name - Shivani</p>
+                        <p style="color:rgb(119, 116, 116);font-size:13px">Card No - 123456789</p>
+                        <p style="color:rgb(119, 116, 116);font-size:13px">Cvv - *** Date - 11/20</p>
+                    </ion-card-content>
+                </td>
+                <td style="background:green;color:white;font-size:25px;">
+                    <ion-icon name="create" routerLink="/edit-payment-details"></ion-icon>
+                </td>
+
+            </tr>
+        </table>
+    </ion-card> -->
+
+
+
+<!-- <ion-card>
+        <table>
+            <tr>
+                <td>
+                    <ion-card-content>
+                        <p style="color:black;font-size:15px;">Card Holder Name - Shivani</p>
+                        <p style="color:rgb(119, 116, 116);font-size:13px">Card No - 123456789</p>
+                        <p style="color:rgb(119, 116, 116);font-size:13px">Cvv - *** Date - 11/20</p>
+                    </ion-card-content>
+                </td>
+                <td style="background:green;color:white;font-size:25px;">
+                    <ion-icon name="create" routerLink="/edit-payment-details"></ion-icon>
+                </td>
+
+            </tr>
+        </table>
+    </ion-card> -->

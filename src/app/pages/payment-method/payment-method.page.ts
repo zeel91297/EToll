@@ -5,6 +5,8 @@ import { PaymentmethodService } from "../../providers/paymentmethoddb/paymentmet
 import { PaymentMethod } from "../../shared/paymentmethod_class";
 import { element } from "@angular/core/src/render3";
 
+import { NavigationExtras,Router } from '@angular/router';
+
 @Component({
   selector: "app-payment-method",
   templateUrl: "./payment-method.page.html",
@@ -17,12 +19,20 @@ export class PaymentMethodPage implements OnInit {
   mid: any;
   method: any;
   name: any;
+  vno:any;
 
   buttonDisabled: boolean = false;
 
-  constructor(public pm: PaymentmethodService) {}
+  constructor(public pm: PaymentmethodService,public router:Router) {
+    if(this.router.getCurrentNavigation().extras.state){
+      this.vno=this.router.getCurrentNavigation().extras.state.prev_vehicle_no;
+    }
+    
+   
+  }
 
   ngOnInit() {
+    //this.vno=localStorage.getItem("vno");
     this.pm.getAllPaymentMethod().subscribe(
       (data: any[]) => {
         this.paymeth = data;
@@ -34,6 +44,19 @@ export class PaymentMethodPage implements OnInit {
         console.log("complete");
       }
     );
+  }
+  getVehicleNo()
+  {
+    console.log("in");
+    let navigationExtras:NavigationExtras={
+      state:{
+
+        prev_vehicle_no:this.vno
+      }
+    };
+    console.log(navigationExtras);
+    this.router.navigateByUrl('/payment-details',navigationExtras);
+ 
   }
 
   getId(num) {

@@ -8,7 +8,7 @@ import { Tollplazza } from "../../shared/tollplaza_class";
 import { vehicleType } from "../../providers/classes/classVehicleType";
 import { vehicleTypeProvider } from "../../providers/vehicledb/vehicleType";
 import { element } from '@angular/core/src/render3';
-import { NavigationExtras, Router } from '@angular/router';
+import { NavigationExtras, Router, ActivatedRoute } from '@angular/router';
 class Port {
   public id: number;
   public name: string;
@@ -24,6 +24,7 @@ export class SelectTollPlazaPage implements OnInit {
   tp: Tollplazza[] = [];
   tid: string = "";
   totalAmount: number = 0;
+  tollplazas:number[]=[];
   whichJ: any;
   whichV: any;
   vehicle_type: any;
@@ -38,7 +39,9 @@ export class SelectTollPlazaPage implements OnInit {
   vtid:any;
   id=0;
 
-  constructor(public tpdata: TollplazaService,public vtdata:vehicleTypeProvider,public router:Router) {}
+  constructor(public tpdata: TollplazaService,
+    public activateroute:ActivatedRoute,
+    public vtdata:vehicleTypeProvider,public router:Router) {}
 
   ngOnInit() {
     this.tpdata.getAllTollPlaza().subscribe(
@@ -87,7 +90,6 @@ export class SelectTollPlazaPage implements OnInit {
     alert(this.vtid);
   }
   portChange(event: { component: IonicSelectableComponent; value: any }) {
-    // console.log('tp:', event.value[0]);
     this.selectedTollPlaza = event.value;
     // console.log(this.selectedTollPlaza," <- ");
     this.myAmountChange();
@@ -97,13 +99,10 @@ export class SelectTollPlazaPage implements OnInit {
   }
   onVehicle()
   {
-    let navigationExtras:NavigationExtras={
-      state:{
-        prev_vehicle_type:this.id
-      }
-    };
-    this.router.navigateByUrl('/add-vehicle-details',navigationExtras);
-  }
+    console.log("in");
+    this.router.navigate(['/add-vehicle-details', {  prev_vehicle_type:this.id,
+      prev_amt:this.totalAmount,totalPlaza:this.selectedTollPlaza }], { relativeTo: this.activateroute });
+ }
   anotherMyAmountChange(){
    
     if(this.vehicle!=""){
@@ -119,10 +118,10 @@ export class SelectTollPlazaPage implements OnInit {
       else if(this.vehicle=="truck"){
         this.id=4;
       }
-      else if(this.vehicle=="six_wheeler"){
+      else if(this.vehicle=="moster"){
         this.id=5;
       }
-      else if(this.vehicle== "HCM"){
+      else if(this.vehicle== "six_wheeler"){
         this.id=6;
       }
     }
@@ -191,9 +190,8 @@ export class SelectTollPlazaPage implements OnInit {
               console.log("Error");
             }
             console.log(this.amt);
-            this.totalAmount = this.amt + this.totalAmount;
+            this.totalAmount = parseInt(this.amt+"") + parseInt(this.totalAmount+"");
           });
-        // this.totalAmount = parseInt(this.amt + "") + this.totalAmount;
         console.log("jainam " + this.vehicle);
         console.log("ja " + this.whichJ);
         console.log(this.totalAmount);

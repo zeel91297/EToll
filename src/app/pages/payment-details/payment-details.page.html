@@ -20,6 +20,7 @@
               slot="start"
               (ionSelect)="onRadioChange(item.payment_id)"
               value="{{ item.payment_id }}"
+              
             >
             </ion-radio>
           </td>
@@ -52,9 +53,9 @@
     <tr>
       <td>
         <ion-button
-          [routerLink]="['/view-payment-method']"
           style="position:fixed;width:50%;bottom:0;left:0"
           routerLinkActive="router-link-active"
+
           >Next</ion-button
         >
       </td>
