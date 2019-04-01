@@ -9,6 +9,12 @@ import { vehicleType } from "../../providers/classes/classVehicleType";
 import { vehicleTypeProvider } from "../../providers/vehicledb/vehicleType";
 import { element } from "@angular/core/src/render3";
 import { NavigationExtras, Router, ActivatedRoute } from "@angular/router";
+import {
+  FormGroup,
+  FormBuilder,
+  FormControl,
+  Validators
+} from "@angular/forms";
 class Port {
   public id: number;
   public name: string;
@@ -39,11 +45,14 @@ export class SelectTollPlazaPage implements OnInit {
   vtid: any;
   id = 0;
 
+  select_toll_plaza: FormGroup;
+
   constructor(
     public tpdata: TollplazaService,
     public activateroute: ActivatedRoute,
     public vtdata: vehicleTypeProvider,
-    public router: Router
+    public router: Router,
+    private formBuilder: FormBuilder
   ) {}
 
   ngOnInit() {
@@ -60,6 +69,13 @@ export class SelectTollPlazaPage implements OnInit {
         console.log("Completed");
       }
     );
+
+    this.select_toll_plaza = new FormGroup({
+      journey: new FormControl("", Validators.required),
+      vehicle_type: new FormControl("", Validators.required),
+      toll_list: new FormControl("", Validators.required),
+      amt: new FormControl()
+    });
   }
   OnInit() {
     this.vtdata.getAllVehicleType().subscribe((data: vehicleType[]) => {
@@ -111,41 +127,47 @@ export class SelectTollPlazaPage implements OnInit {
         user: this.selectedTollPlaza
       }
     };
-    this.router.navigate(["/add-vehicle-details",{
-      prev_vehicle_type: this.id,
+    this.router.navigate(
+      [
+        "/add-vehicle-details",
+        {
+          prev_vehicle_type: this.id,
           prev_amt: this.totalAmount
-    }],navigationExtras);
+        }
+      ],
+      navigationExtras
+    );
   }
   anotherMyAmountChange() {
-    if (this.vehicle != '') {
-      if (this.vehicle == 'two_wheeler') {
+    if (this.vehicle != "") {
+      if (this.vehicle == "two_wheeler") {
         this.id = 1;
-      } else if (this.vehicle == 'four_wheeler') {
+      } else if (this.vehicle == "four_wheeler") {
         this.id = 2;
-      } else if (this.vehicle == 'bus') {
+      } else if (this.vehicle == "bus") {
         this.id = 3;
-      } else if (this.vehicle == 'truck') {
+      } else if (this.vehicle == "truck") {
         this.id = 4;
-      } else if (this.vehicle == 'moster') {
+      } else if (this.vehicle == "moster") {
         this.id = 5;
-      } else if (this.vehicle == 'six_wheeler') {
+      } else if (this.vehicle == "six_wheeler") {
         this.id = 6;
       }
     }
     this.myAmountChange();
   }
   myAmountChange() {
-    console.log('myAmountChange');
+    console.log("myAmountChange");
 
     this.totalAmount = 0;
     // var amt:number=0;
     // this.whichJ="single";
     // console.log("this myAmountChange ", this.selectedTollPlaza)
     if (
-      this.vehicle !== '' &&
+      this.vehicle !== "" &&
       this.vehicle != null &&
       this.selectedTollPlaza.length !== 0 &&
-      this.whichJ !== '' &&
+      this.whichJ !== "" &&
       this.whichJ != null
     ) {
       this.selectedTollPlaza.forEach(element => {
@@ -154,54 +176,54 @@ export class SelectTollPlazaPage implements OnInit {
           .subscribe((data: Tollplazza[]) => {
             // console.log(data);
 
-            if (this.vehicle === 'two_wheeler' && this.whichJ === 'single') {
+            if (this.vehicle === "two_wheeler" && this.whichJ === "single") {
               this.amt = data[0].twheeler_one;
             } else if (
-              this.vehicle === 'two_wheeler' &&
-              this.whichJ === 'return'
+              this.vehicle === "two_wheeler" &&
+              this.whichJ === "return"
             ) {
               this.amt = data[0].twheeler_return;
             } else if (
-              this.vehicle === 'four_wheeler' &&
-              this.whichJ === 'single'
+              this.vehicle === "four_wheeler" &&
+              this.whichJ === "single"
             ) {
               this.amt = data[0].fwheeler_one;
             } else if (
-              this.vehicle === 'four_wheeler' &&
-              this.whichJ === 'return'
+              this.vehicle === "four_wheeler" &&
+              this.whichJ === "return"
             ) {
               this.amt = data[0].fwheeler_return;
-            } else if (this.vehicle === 'bus' && this.whichJ === 'single') {
+            } else if (this.vehicle === "bus" && this.whichJ === "single") {
               this.amt = data[0].bus_one;
-            } else if (this.vehicle === 'bus' && this.whichJ === 'return') {
+            } else if (this.vehicle === "bus" && this.whichJ === "return") {
               this.amt = data[0].bus_return;
-            } else if (this.vehicle === 'truck' && this.whichJ === 'single') {
+            } else if (this.vehicle === "truck" && this.whichJ === "single") {
               this.amt = data[0].truck_one;
-            } else if (this.vehicle === 'truck' && this.whichJ === 'return') {
+            } else if (this.vehicle === "truck" && this.whichJ === "return") {
               this.amt = data[0].truck_return;
-            } else if (this.vehicle === 'monster' && this.whichJ === 'single') {
+            } else if (this.vehicle === "monster" && this.whichJ === "single") {
               this.amt = data[0].HCM_one;
-            } else if (this.vehicle === 'monster' && this.whichJ === 'return') {
+            } else if (this.vehicle === "monster" && this.whichJ === "return") {
               this.amt = data[0].HCM_return;
             } else if (
-              this.vehicle === 'six_wheeler' &&
-              this.whichJ === 'single'
+              this.vehicle === "six_wheeler" &&
+              this.whichJ === "single"
             ) {
               this.amt = data[0].swheeler_one;
             } else if (
-              this.vehicle === 'six_wheeler' &&
-              this.whichJ === 'return'
+              this.vehicle === "six_wheeler" &&
+              this.whichJ === "return"
             ) {
               this.amt = data[0].swheeler_return;
             } else {
-              console.log('Error');
+              console.log("Error");
             }
             console.log(this.amt);
             this.totalAmount =
-              parseInt(this.amt + '') + parseInt(this.totalAmount + '');
+              parseInt(this.amt + "") + parseInt(this.totalAmount + "");
           });
-        console.log('jainam ' + this.vehicle);
-        console.log('ja ' + this.whichJ);
+        console.log("jainam " + this.vehicle);
+        console.log("ja " + this.whichJ);
         console.log(this.totalAmount);
         // this.ngOnInit();
       });
