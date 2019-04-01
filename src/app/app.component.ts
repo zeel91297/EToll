@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChildren, QueryList } from '@angular/core';
+import { Component, OnInit, ViewChildren, QueryList } from "@angular/core";
 
 import {
   Platform,
@@ -6,16 +6,16 @@ import {
   IonRouterOutlet,
   ModalController,
   ToastController
-} from '@ionic/angular';
-import { SplashScreen } from '@ionic-native/splash-screen/ngx';
-import { StatusBar } from '@ionic-native/status-bar/ngx';
-import { Router, RouterEvent, NavigationEnd } from '@angular/router';
-import { async } from 'q';
-import { PermissionsService } from './providers/background-geo-location/permissions.service';
+} from "@ionic/angular";
+import { SplashScreen } from "@ionic-native/splash-screen/ngx";
+import { StatusBar } from "@ionic-native/status-bar/ngx";
+import { Router, RouterEvent, NavigationEnd } from "@angular/router";
+import { async } from "q";
+import { PermissionsService } from "./providers/background-geo-location/permissions.service";
 
 @Component({
-  selector: 'app-root',
-  templateUrl: 'app.component.html'
+  selector: "app-root",
+  templateUrl: "app.component.html"
 })
 export class AppComponent implements OnInit {
   lastTimeBack = 0;
@@ -25,9 +25,9 @@ export class AppComponent implements OnInit {
 
   public appPages = [
     {
-      title: 'Home',
-      url: '/home',
-      icon: 'home'
+      title: "Home",
+      url: "/home",
+      icon: "home"
     },
     /* {
       title: 'List',
@@ -40,29 +40,29 @@ export class AppComponent implements OnInit {
       icon: 'log-in'
     }, */
     {
-      title: 'My Vehicles',
-      url: '/my-vehicles',
-      icon: 'car'
+      title: "My Vehicles",
+      url: "/my-vehicles",
+      icon: "car"
     },
     {
-      title: 'Past Payments',
-      url: '/past-payments',
-      icon: 'pricetags'
+      title: "Past Payments",
+      url: "/past-payments",
+      icon: "pricetags"
     },
     {
-      title: 'Payment Options',
-      url: '/payment-options',
-      icon: 'wallet'
+      title: "Payment Options",
+      url: "/payment-options",
+      icon: "wallet"
     },
     {
-      title: 'My Profile',
-      url: '/my-profile',
-      icon: 'Person'
+      title: "My Profile",
+      url: "/my-profile",
+      icon: "Person"
     },
     {
-      title: 'Sign Out',
-      url: '',
-      icon: 'power'
+      title: "Sign Out",
+      url: "",
+      icon: "power"
     }
   ];
 
@@ -74,13 +74,12 @@ export class AppComponent implements OnInit {
     private menuController: MenuController,
     private modalCtrl: ModalController,
     private toast: ToastController,
-    private perm:PermissionsService
+    private perm: PermissionsService
   ) {
     this.initializeApp();
     this.backButtonEnable();
     this.perm.checkGPSPermission();
     /* this.router.navigate(['']); */
-   
   }
 
   ngOnInit() {
@@ -96,7 +95,7 @@ export class AppComponent implements OnInit {
     this.router.events.subscribe((event: RouterEvent) => {
       if (event instanceof NavigationEnd) {
         this.appPages.map(p => {
-          return (p['active'] = event.url === p.url);
+          return (p["active"] = event.url === p.url);
         });
       }
     });
@@ -137,17 +136,17 @@ export class AppComponent implements OnInit {
         if (outlet && outlet.canGoBack()) {
           outlet.pop();
         } else if (
-          this.router.url === '/home' ||
-          this.router.url === '/login' ||
-          this.router.url === '' ||
-          this.router.url === 'my-vehicles'
+          this.router.url === "/home" ||
+          this.router.url === "/login" ||
+          this.router.url === "" ||
+          this.router.url === "my-vehicles"
         ) {
           if (new Date().getTime() - this.lastTimeBack < this.timeOut) {
-            navigator['app'].exitApp();
+            navigator["app"].exitApp();
           } else {
             const tstCtrl = await this.toast.create({
-              message: 'Press back again to exit App',
-              position: 'bottom',
+              message: "Press back again to exit App",
+              position: "bottom",
               duration: 2000
             });
             tstCtrl.present();

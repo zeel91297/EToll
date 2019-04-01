@@ -33,15 +33,19 @@ export class AddVehicleDetailsPage implements OnInit {
      console.log(data);
      this.vehicle_type=data.prev_vehicle_type;
      this.amt=data.prev_amt;
-      this.tollPlazas=data["totalPlaza"];
-      console.log("hello ",this.tollPlazas);
-     alert(this.amt);
-     alert(this.vehicle_type);
-     for (let index = 0; index < this.tollPlazas.length; index++) {
+      // this.tollPlazas=data["totalPlaza"];
+      // console.log("hello ",this.tollPlazas);
+      if(this.router.getCurrentNavigation().extras.state){
+        this.tollPlazas=this.router.getCurrentNavigation().extras.state.user;
+      }
+      console.log("HELLO  ",this.tollPlazas);
+    //  alert(this.amt);
+    //  alert(this.vehicle_type);
+    //  for (let index = 0; index < this.tollPlazas.length; index++) {
       // const element = array[index];
-      console.log(parseInt(this.tollPlazas[index].toll_id+""));
+     
       
-    }
+    // }
    });
 
   }
