@@ -113,7 +113,8 @@ export class SelectTollPlazaPage implements OnInit {
     };
     this.router.navigate(["/add-vehicle-details",{
       prev_vehicle_type: this.id,
-          prev_amt: this.totalAmount
+          prev_amt: this.totalAmount,
+          prev_journey:this.whichJ
     }],navigationExtras);
   }
   anotherMyAmountChange() {

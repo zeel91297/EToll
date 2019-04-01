@@ -24,6 +24,7 @@ export class AddVehicleDetailsPage implements OnInit {
   vnum:string='';
   vehicle_no:any;
   amt:any;
+  whichj:any;
   tollPlazas:Tollplazza[]=[];
   constructor(public router:Router,
     public activateroute:ActivatedRoute,
@@ -33,18 +34,18 @@ export class AddVehicleDetailsPage implements OnInit {
      console.log(data);
      this.vehicle_type=data.prev_vehicle_type;
      this.amt=data.prev_amt;
+     this.whichj=data.prev_journey;
       // this.tollPlazas=data["totalPlaza"];
       // console.log("hello ",this.tollPlazas);
       if(this.router.getCurrentNavigation().extras.state){
         this.tollPlazas=this.router.getCurrentNavigation().extras.state.user;
       }
       console.log("HELLO  ",this.tollPlazas);
-    //  alert(this.amt);
-    //  alert(this.vehicle_type);
+     alert(this.amt);
+     alert(this.whichj);
+    alert(this.vehicle_type);
     //  for (let index = 0; index < this.tollPlazas.length; index++) {
       // const element = array[index];
-     
-      
     // }
    });
 
@@ -59,11 +60,16 @@ export class AddVehicleDetailsPage implements OnInit {
     let navigationExtras:NavigationExtras={
       state:{
 
-        prev_vehicle_no:this.vno
+        prev_vehicle_no:this.vno,
+        user:this.tollPlazas
       }
     };
     console.log(navigationExtras);
-    this.router.navigateByUrl('/payment-method',navigationExtras);
+    this.router.navigate(["/payment-method",{
+      prev_vehicle_type: this.vehicle_type,
+          prev_amt: this.amt,
+          prev_journey:this.whichj
+    }],navigationExtras);  
   }
    async ngOnInit() {
   //   this.tollPlazas.forEach((element) => {
@@ -79,6 +85,7 @@ export class AddVehicleDetailsPage implements OnInit {
       translucent: true,
       animated: true
     });
+   
     
     this.uid=localStorage.getItem('id');
     this.vdata.getVehicleById(this.vehicle_type,this.uid).subscribe((data:VehicleClass[])=>{
@@ -109,11 +116,22 @@ export class AddVehicleDetailsPage implements OnInit {
       translucent: true,
       animated: true
     });
+    const tos1 = await this.toast.create({
+      message: "Vehicle Number can not be Empty",
+      duration: 3000,
+      showCloseButton: true,
+      closeButtonText: "Ok",
+      position: 'bottom',
+      translucent: true,
+      animated: true
+    });
     this.uid=localStorage.getItem('id');
     alert(this.uid);
     this.vdata.addVehicle(new VehicleClass(this.vno,this.vehicle_type,this.uid)).subscribe
     ((data:any[])=>{
       tos.present();
+      this.vno="";
+      this.ngOnInit();
     },
     function(err){
       console.log(err);

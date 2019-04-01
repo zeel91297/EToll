@@ -8,14 +8,39 @@
 </ion-header>
 
 <ion-content padding>
-   
- <ion-item>
-   {{mdate | date:'mediumDate'}}
- </ion-item>
-  
- <ion-item>
-    {{stime | date:'shortTime'}}
+
+  <table style="border: 1px solid black">
+    <tr>
+      <td>
+          <ion-label style="float:left;text-decoration:bold">
+            <b> Date :- {{mdate | date:'mediumDate'}}</b>
+          </ion-label>
+          <ion-label style="float: right;">
+            <b>Time :-  {{stime | date:'shortTime'}} </b>
+
+          </ion-label>
+      </td>
+    </tr>
+  </table>
+  <ion-item *ngFor="let item of vehicletype">
+    <ion-label>
+      {{item.vehicle_type_name}}
+    </ion-label>
   </ion-item>
+  <ion-item *ngFor="let item of tollPlazas">
+    <ion-label>
+      {{item.highway_name}} | 
+    </ion-label>
+  </ion-item>
+  <ion-label>
+    {{amt}}
+  </ion-label>
+  <ion-label>
+    {{vno}}
+  </ion-label>
+  <ion-label>
+    {{whichj}}
+  </ion-label>
  
   
 </ion-content>

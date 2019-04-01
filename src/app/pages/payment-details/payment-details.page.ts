@@ -7,9 +7,11 @@ import { PaymentDetais } from "../../shared/paymentdetails";
 import { PaymentMethod } from "../../shared/paymentmethod_class";
 
 import { PaymentmethodService } from "../../providers/paymentmethoddb/paymentmethod.service";
-import { Router } from "@angular/router";
+import { Router, ActivatedRoute } from "@angular/router";
 
 import { NavigationExtras } from '@angular/router';
+
+import { Tollplazza } from "../../shared/tollplaza_class";
 
 @Component({
   selector: "app-payment-details",
@@ -30,20 +32,36 @@ export class PaymentDetailsPage implements OnInit {
   paym: PaymentMethod[] = [];
   vno:any;
   vehicle_no:any;
-
+  tollPlazas:Tollplazza[]=[];
+  vehicle_type:any;
+  amt:any;
   payment_type: any;
+  whichj:any;
 
   constructor(
     public payd: PaymentdetailsService,
     public paymeth: PaymentmethodService,
-    public router: Router
+    public router: Router,
+    public activateroute:ActivatedRoute
   ) {
     if(this.router.getCurrentNavigation().extras.state){
       this.vno=this.router.getCurrentNavigation().extras.state.prev_vehicle_no;
     }
+    this.activateroute.params.subscribe((data:any)=>
+    {
+      console.log(data);
+      this.vehicle_type=data.prev_vehicle_type;
+      this.amt=data.prev_amt;
+      this.whichj=data.prev_journey;
+       if(this.router.getCurrentNavigation().extras.state){
+         this.tollPlazas=this.router.getCurrentNavigation().extras.state.user;
+       }
+       console.log("pay detail",this.tollPlazas);
+      alert(this.amt);
+     alert(this.vehicle_type);
+    });
     console.log(this.vno);
   }
-
   ngOnInit() {
     this.id = parseInt(localStorage.getItem("id"));
     this.mid = parseInt(localStorage.getItem("mid"));
@@ -74,6 +92,7 @@ export class PaymentDetailsPage implements OnInit {
       }
     };
     console.log(navigationExtras);
+    
     this.router.navigateByUrl('/view-payment-method',navigationExtras);
   }
 onRadioChange(p_id) {
@@ -82,10 +101,16 @@ onRadioChange(p_id) {
      let navigationExtras:NavigationExtras={
       state:{
 
-        prev_vehicle_no:this.vno
+        prev_vehicle_no:this.vno,
+        user:this.tollPlazas
       }
     };
     console.log(navigationExtras);
-    this.router.navigateByUrl('/confirm-payment',navigationExtras);
+    console.log(navigationExtras);
+    this.router.navigate(["/confirm-payment",{
+      prev_vehicle_type: this.vehicle_type,
+          prev_amt: this.amt,
+          prev_journey:this.whichj
+    }],navigationExtras);
   }
 }
