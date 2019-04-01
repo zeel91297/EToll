@@ -8,6 +8,7 @@
 </ion-header>
 
 <ion-content padding>
+<<<<<<< HEAD
     <table>
         <ion-list>
             <ion-radio-group *ngFor="let item of paydetail" [(ngModel)]="payment_type">
@@ -39,6 +40,56 @@
             </ion-radio-group>
         </ion-list>
     </table>
+=======
+  <table>
+    <ion-list>
+      <ion-radio-group
+        *ngFor="let item of paydetail"
+        [(ngModel)]="payment_type"
+      >
+        <tr *ngIf="item.method_id == mid">
+          <td>
+            <ion-radio
+              slot="start"
+              (ionSelect)="onRadioChange(item.payment_id)"
+              value="{{ item.payment_id }}"
+              
+              
+            >
+            </ion-radio>
+          </td>
+          <td>
+            <ion-card>
+              <ion-card-content>
+                <ion-label>
+                  <i class="far fa-credit-card"></i> {{ item.method_name }}
+                </ion-label>
+                <p style="color:black;font-size:15px;">{{ item.user_name }}</p>
+                <p style="color:rgb(119, 116, 116);font-size:13px">
+                  Card No {{ item.card_no }}
+                </p>
+                <p style="color:rgb(119, 116, 116);font-size:13px" >
+                  Cvv  ***<br />
+                  Valid Upto - {{ item.expiry_month }} / {{ item.expiry_year }}
+                </p>
+                <ion-label style="float : right" >
+                    <i class="far fa-credit-card"></i> {{item.card_name}}
+                </ion-label>
+              </ion-card-content>
+            </ion-card>
+          </td>
+        </tr>
+      </ion-radio-group>
+    </ion-list>
+  </table>
+
+  <table>
+    <tr>
+      <td>
+        <ion-button
+          style="position:fixed;width:50%;bottom:0;left:0"
+          routerLinkActive="router-link-active"
+>>>>>>> aae8b79839ef7aa49ef347a92f1dd569ef74db87
 
     <table>
         <tr>

@@ -22,6 +22,7 @@ export class MyVehiclesPage implements OnInit {
   vehiclesDup: vehicle[] = [];
   vehicle_type: vehicleType[] = [];
   searchVehicle: FormControl;
+  uid:any;
   constructor(
     private menuController: MenuController,
     private alertController: AlertController,
@@ -33,9 +34,9 @@ export class MyVehiclesPage implements OnInit {
   }
 
   ngOnInit() {
+    this.uid=localStorage.getItem('id');
     this.menuController.enable(true);
-
-    this._vehicle.getVehicleByUser(1).subscribe(
+    this._vehicle.getVehicleByUser(this.uid).subscribe(
       (data: vehicle[]) => {
         this.vehicles = data;
         this.vehiclesDup = data;

@@ -1,21 +1,62 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-        <ion-back-button ></ion-back-button>
+      <ion-back-button></ion-back-button>
     </ion-buttons>
     <ion-title>Confirm Payment</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
-   
- <ion-item>
-   {{mdate | date:'mediumDate'}}
- </ion-item>
-  
- <ion-item>
-    {{stime | date:'shortTime'}}
-  </ion-item>
- 
-  
+  <table style="padding: 2%">
+    <tr>
+      <td>
+        <ion-label style="float:left;text-decoration:bold">
+          <b> Date :- {{ mdate | date: "mediumDate" }}</b>
+        </ion-label>
+        <ion-label style="float: right;">
+          <b>Time :- {{ stime | date: "shortTime" }} </b>
+        </ion-label>
+      </td>
+    </tr>
+  </table>
+
+  <br /><br />
+  <table style="border: 1px solid black">
+      <tr>
+          <td>
+            <ion-label>
+              <b> Vehicle No :- {{ vno }}</b>
+            </ion-label>
+          </td>
+        </tr>    
+    <tr>
+      <td>
+        <ion-label>
+          <b> Jounrey Type :- {{ whichj }}</b>
+        </ion-label>
+        <br/>
+        <ion-label *ngFor="let item of vehicletype" style="float:left" >
+            <b> Vehicle :- {{ item.vehicle_type_name }}</b>
+          </ion-label>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <ol>
+          <li *ngFor="let item of tollPlazas">{{ item.highway_name }}</li>
+        </ol>
+        <!-- <ion-label>
+          {{ item.highway_name }}
+        </ion-label> -->
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <ion-label style="float:right">
+         <b> Total Amount :- {{ amt | currency: "INR" }}</b>
+        </ion-label>
+      </td>
+    </tr>
+     </table>
 </ion-content>
