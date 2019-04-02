@@ -1,50 +1,53 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
 
-import { PaymentDetais } from '../../shared/paymentdetails';
+import { PaymentDetais } from "../../shared/paymentdetails";
 
-import { user } from '../../shared/user_class';
+import { user } from "../../shared/user_class";
 
-import { PaymentMethod } from '../../shared/paymentmethod_class';
+import { PaymentMethod } from "../../shared/paymentmethod_class";
 
-import { PaymentdetailsService } from '../../providers/paymentdetailsdb/paymentdetails.service';
-import { element } from '@angular/core/src/render3';
-import { PaymentmethodService } from 'src/app/providers/paymentmethoddb/paymentmethod.service';
+import { PaymentdetailsService } from "../../providers/paymentdetailsdb/paymentdetails.service";
+import { element } from "@angular/core/src/render3";
+import { PaymentmethodService } from "src/app/providers/paymentmethoddb/paymentmethod.service";
+import { FormGroup } from '@angular/forms';
 
 @Component({
-  selector: 'app-payment-details-add',
-  templateUrl: './payment-details-add.page.html',
-  styleUrls: ['./payment-details-add.page.scss']
+  selector: "app-payment-details-add",
+  templateUrl: "./payment-details-add.page.html",
+  styleUrls: ["./payment-details-add.page.scss"]
 })
 export class PaymentDetailsAddPage implements OnInit {
   constructor(
     public pdata: PaymentdetailsService,
     public paym: PaymentmethodService
   ) {}
-  uname = '';
+  uname = "";
   card_no = 0;
   expiry_mon = 0;
   expiry_year = 0;
-  cvv = '';
+  cvv = "";
   id = 0;
   mid = 0;
-  cname = '';
+  cname = "";
   pay: PaymentDetais[] = [];
   usr: user[] = [];
   pm: PaymentMethod[] = [];
-  mname = '';
-  uemail = '';
+  mname = "";
+  uemail = "";
   cno = 0;
   cid: any;
   paymeth: PaymentMethod[] = [];
+  card_details: FormGroup;
   ngOnInit() {}
   onInsert() {
-    this.mid=parseInt(localStorage.getItem('mid'));
-    this.id=parseInt(localStorage.getItem('id'));
-    alert('in');
+    this.mid = parseInt(localStorage.getItem("mid"));
+    this.id = parseInt(localStorage.getItem("id"));
+    alert("in");
     alert(this.id);
     alert(this.mid);
     this.pdata
-      .insertPaymentDetails(new PaymentDetais(
+      .insertPaymentDetails(
+        new PaymentDetais(
           null,
           this.id,
           this.mid,
@@ -66,7 +69,7 @@ export class PaymentDetailsAddPage implements OnInit {
           console.log(err);
         },
         function() {
-          console.log('complete');
+          console.log("complete");
         }
       );
   }

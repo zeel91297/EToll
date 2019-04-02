@@ -36,19 +36,16 @@ export class PaymentDetailsPage implements OnInit {
   paydet: PaymentDetais[] = [];
   mname: string = "";
   paym: PaymentMethod[] = [];
-<<<<<<< HEAD
   vno: any;
   vehicle_no: any;
 
-=======
-  vno:any;
-  vehicle_no:any;
-  tollPlazas:Tollplazza[]=[];
-  vehicle_type:any;
-  amt:any;
->>>>>>> aae8b79839ef7aa49ef347a92f1dd569ef74db87
+  /*   vno:any;
+  vehicle_no:any; */
+  tollPlazas: Tollplazza[] = [];
+  vehicle_type: any;
+  amt: any;
   payment_type: any;
-  whichj:any;
+  whichj: any;
 
   card_details: FormGroup;
 
@@ -56,27 +53,23 @@ export class PaymentDetailsPage implements OnInit {
     public payd: PaymentdetailsService,
     public paymeth: PaymentmethodService,
     public router: Router,
-<<<<<<< HEAD
-    private formBuilder: FormBuilder
-=======
-    public activateroute:ActivatedRoute
->>>>>>> aae8b79839ef7aa49ef347a92f1dd569ef74db87
+    private formBuilder: FormBuilder,
+    public activateroute: ActivatedRoute
   ) {
     if (this.router.getCurrentNavigation().extras.state) {
       this.vno = this.router.getCurrentNavigation().extras.state.prev_vehicle_no;
     }
-    this.activateroute.params.subscribe((data:any)=>
-    {
+    this.activateroute.params.subscribe((data: any) => {
       console.log(data);
-      this.vehicle_type=data.prev_vehicle_type;
-      this.amt=data.prev_amt;
-      this.whichj=data.prev_journey;
-       if(this.router.getCurrentNavigation().extras.state){
-         this.tollPlazas=this.router.getCurrentNavigation().extras.state.user;
-       }
-       console.log("pay detail",this.tollPlazas);
+      this.vehicle_type = data.prev_vehicle_type;
+      this.amt = data.prev_amt;
+      this.whichj = data.prev_journey;
+      if (this.router.getCurrentNavigation().extras.state) {
+        this.tollPlazas = this.router.getCurrentNavigation().extras.state.user;
+      }
+      console.log("pay detail", this.tollPlazas);
       alert(this.amt);
-     alert(this.vehicle_type);
+      alert(this.vehicle_type);
     });
     console.log(this.vno);
   }
@@ -136,17 +129,13 @@ export class PaymentDetailsPage implements OnInit {
       }
     };
     console.log(navigationExtras);
-<<<<<<< HEAD
     this.router.navigateByUrl("/view-payment-method", navigationExtras);
-=======
-    
-    this.router.navigateByUrl('/view-payment-method',navigationExtras);
->>>>>>> aae8b79839ef7aa49ef347a92f1dd569ef74db87
+
+    this.router.navigateByUrl("/view-payment-method", navigationExtras);
   }
   onRadioChange(p_id) {
     this.payment_type = p_id;
     console.log(this.payment_type);
-<<<<<<< HEAD
     let navigationExtras: NavigationExtras = {
       state: {
         prev_vehicle_no: this.vno
@@ -154,21 +143,24 @@ export class PaymentDetailsPage implements OnInit {
     };
     console.log(navigationExtras);
     this.router.navigateByUrl("/confirm-payment", navigationExtras);
-=======
-     let navigationExtras:NavigationExtras={
-      state:{
-
-        prev_vehicle_no:this.vno,
-        user:this.tollPlazas
+    /* let navigationExtras: NavigationExtras = {
+      state: {
+        prev_vehicle_no: this.vno,
+        user: this.tollPlazas
       }
-    };
+    }; */
     console.log(navigationExtras);
     console.log(navigationExtras);
-    this.router.navigate(["/confirm-payment",{
-      prev_vehicle_type: this.vehicle_type,
+    this.router.navigate(
+      [
+        "/confirm-payment",
+        {
+          prev_vehicle_type: this.vehicle_type,
           prev_amt: this.amt,
-          prev_journey:this.whichj
-    }],navigationExtras);
->>>>>>> aae8b79839ef7aa49ef347a92f1dd569ef74db87
+          prev_journey: this.whichj
+        }
+      ],
+      navigationExtras
+    );
   }
 }

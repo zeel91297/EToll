@@ -127,7 +127,6 @@ export class SelectTollPlazaPage implements OnInit {
         user: this.selectedTollPlaza
       }
     };
-<<<<<<< HEAD
     this.router.navigate(
       [
         "/add-vehicle-details",
@@ -138,13 +137,11 @@ export class SelectTollPlazaPage implements OnInit {
       ],
       navigationExtras
     );
-=======
     this.router.navigate(["/add-vehicle-details",{
       prev_vehicle_type: this.id,
           prev_amt: this.totalAmount,
           prev_journey:this.whichJ
     }],navigationExtras);
->>>>>>> aae8b79839ef7aa49ef347a92f1dd569ef74db87
   }
   anotherMyAmountChange() {
     if (this.vehicle != "") {
