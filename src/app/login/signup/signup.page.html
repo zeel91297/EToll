@@ -17,7 +17,7 @@
     </ion-item>
     <br>
     <div *ngIf="!myform.controls.name.valid &&
-       myform.controls.name.dirty">
+       myform.controls.name.dirty" style="color:red;">
       Please enter a valid name.
     </div>
     <ion-item>
@@ -26,7 +26,7 @@
     </ion-item>
     <br>
     <div *ngIf="!myform.controls.email.valid &&
-      myform.controls.email.dirty">
+      myform.controls.email.dirty"  style="color:red;">
       Please enter a valid email.
     </div>
     <ion-item>
@@ -35,7 +35,7 @@
     </ion-item>
     <br>
     <div *ngIf="!myform.controls.password1.valid &&
-      myform.controls.password1.dirty">
+      myform.controls.password1.dirty"  style="color:red;">
       Please enter a valid password
       <br>minmum 6 charactor
       <br>one special charactor
@@ -49,7 +49,7 @@
     
     <br>
     <div *ngIf="!myform.controls.contact1.valid &&
-      myform.controls.contact1.dirty">
+      myform.controls.contact1.dirty"  style="color:red;">
       Please enter number only
     </div>
   </ion-list>

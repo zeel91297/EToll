@@ -22,7 +22,7 @@
     </div>
   <ion-item>
     <ion-label position="floating">Password</ion-label>
-    <ion-input formControlName="password1" type="text"  id="password1" [(ngModel)]="password1"></ion-input>
+    <ion-input formControlName="password1" type="password"  id="password1" [(ngModel)]="password1"></ion-input>
   </ion-item>
   <br>
     <div *ngIf="!loginform.controls.password1.valid &&
@@ -34,7 +34,7 @@
   <br>
   <a style="float:right;font-size:12px;">Forget Password??</a>
   <br>
-  <ion-button [disabled]="!loginform.valid"   (click)="onlogin()" expand="full">
+  <ion-button [disabled]="!loginform.valid"   (click)="onlogin()"  expand="full">
     Login
     <ion-icon slot="end" name="log-in"></ion-icon>
   </ion-button>

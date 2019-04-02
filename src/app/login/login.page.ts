@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { MenuController } from '@ionic/angular';
+import { MenuController, ToastController } from '@ionic/angular';
 import { Router } from '@angular/router';
-import {  FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { user } from "../shared/user_class";
 import { UserserviceService } from "../providers/userDB/userservice.service";
 
@@ -12,53 +12,77 @@ import { UserserviceService } from "../providers/userDB/userservice.service";
 })
 
 export class LoginPage implements OnInit, OnDestroy {
-  email:string;
-  password1:string;
+  email: string;
+  password1: string;
   loginform: FormGroup;
-  id:any;
+  id: any;
   constructor(private menuCtrl: MenuController,
     private router: Router,
-    private userservice: UserserviceService)
-     {
-         this.loginform = new FormGroup({
-             password1: new FormControl('', [Validators.required, Validators.minLength(6)]),
-            email: new FormControl('', [Validators.required, Validators.pattern(".+\@.+\..+"), Validators.email]),
+    private userservice: UserserviceService,
+    private toast: ToastController) {
+    this.loginform = new FormGroup({
+      password1: new FormControl('', [Validators.required, Validators.minLength(6)]),
+      email: new FormControl('', [Validators.required, Validators.pattern(".+\@.+\..+"), Validators.email]),
 
-              });
-     }
-
-  ngOnInit() {
-  this.menuCtrl.enable(false);
+    });
   }
 
-  onlogin() {
-    console.log(this.password1);
-    console.log(this.email);
-    this.userservice.userlogin(new user(null,'', this.password1, this.email,'')).subscribe(
-      (data:user[]) => {
+  ngOnInit() {
+    this.menuCtrl.enable(false);
+  }
+  
+    
       
-      console.log(data);
+      
+    
+  onlogin() {
+    let t1 =  this.toast.create({
+      message: "Login Successfully",
+      duration: 3000,
+      position: "bottom"
+    });
+     
+    const t3=this.toast.create({
+      message:
+        "Enter proper mail id and Password or You had not verified your account",
+      duration: 3000,
+      position: "bottom"
+    });
+    this.userservice.userlogin(new user(null, '', this.password1, this.email, '')).subscribe(
+      (data: user[]) => {
+       
+        console.log(data);
         if (data.length > 0) {
-          
-          this.id=data[0].user_id;
-          localStorage.setItem('id',this.id);
-          localStorage.setItem('name',data[0].user_name);
+
+          this.id = data[0].user_id;
+          localStorage.setItem('id', this.id);
+          localStorage.setItem('name', data[0].user_name);
           console.log(this.id);
+          t1.present();
           this.router.navigate(['/home']);
         }
-       
+        else
+        {
+         
+            t3.present();
+
+          
+
+         }
+
       },
       function (error) {
         console.log(error);
+
       },
       function () {
         console.log("done");
-        
+
       }
     );
-    }
-
-    ngOnDestroy() {
-      this.menuCtrl.enable(true);
-    }
   }
+
+  ngOnDestroy() {
+    this.menuCtrl.enable(true);
+  }
+}
