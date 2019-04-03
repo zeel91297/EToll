@@ -8,11 +8,13 @@ import { vehicle } from '../classes/classVehicle';
 export class VehicledbProvider {
   public url = 'http://localhost:3000/vehicles/';
   public url2 = 'http://localhost:3000/vehicle_user/';
+  public url1 = 'http://localhost:3000/vehiclebyid/'
 
   vcle: vehicle[] = [];
   constructor(public http: HttpClient) {
 
   }
+  
   getVehicleByno(vno: string) {
       return this.http.get(this.url + vno);
   }
@@ -31,6 +33,10 @@ export class VehicledbProvider {
 
   deleteVehicleByUser(vehicle_no: number) {
     return this.http.delete(this.url + vehicle_no, {headers: new HttpHeaders().set('Content-type' , 'application/json')});
+  }
+  getVehicleById(vtid:any,uid:any)
+  {
+    return this.http.get(this.url1 + vtid + "/" + uid);
   }
 
 }

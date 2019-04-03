@@ -1,3 +1,28 @@
+/*
+  Background GeoLocaiton Tracking Plugins installation
+1.Permissions
+ionic cordova plugin add cordova-plugin-android-permissions
+npm install @ionic-native/android-permissions
+
+2.Location Accuracy
+ionic cordova plugin add cordova-plugin-request-location-accuracy
+npm install @ionic-native/location-accuracy
+
+3.GeoLocation
+ionic cordova plugin add cordova-plugin-geolocation
+npm install @ionic-native/geolocation
+
+4.Background GeoLocation
+ionic cordova plugin add cordova-plugin-mauron85-background-geolocation@alpha
+npm install @ionic-native/background-geolocation
+
+5.Local Notification
+ionic cordova plugin add cordova-plugin-local-notification
+npm install @ionic-native/local-notifications
+
+
+*/
+
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
@@ -11,9 +36,20 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 
 import { MenuItemPage } from '../app/menu-item/menu-item.page';
+import { TollplazaService } from "./providers/tollplazadb/tollplaza.service";
 import { UserserviceService } from './providers/userDB/userservice.service';
 import { VehicledbProvider } from './providers/vehicledb/vehicledb';
 import { vehicleTypeProvider } from './providers/vehicledb/vehicleType';
+import { PaymentmethodService } from "./providers/paymentmethoddb/paymentmethod.service";
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+//Background Geolocation
+import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
+import { LocationAccuracy } from '@ionic-native/location-accuracy/ngx';
+import { Geolocation } from '@ionic-native/geolocation/ngx';
+import { BackgroundGeolocation } from '@ionic-native/background-geolocation/ngx';
+import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
+import { Md5 } from 'ts-md5';
+//ends here
 
 @NgModule({
   declarations: [AppComponent, MenuItemPage],
@@ -23,16 +59,29 @@ import { vehicleTypeProvider } from './providers/vehicledb/vehicleType';
     IonicModule.forRoot(),
     AppRoutingModule,
     IonicSelectableModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule,
+    FormsModule,
   ],
   providers: [
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    TollplazaService,
     UserserviceService,
     VehicledbProvider,
-    vehicleTypeProvider
+    vehicleTypeProvider,
+    PaymentmethodService,
+    /*
+    Background Geolocation
+    */
+    AndroidPermissions,
+    LocationAccuracy,
+    Geolocation,
+    BackgroundGeolocation,
+    LocalNotifications,
+    Md5
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }

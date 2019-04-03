@@ -18,6 +18,7 @@ export class AddVehicleModelPage implements OnInit {
   add_vehicle_form: FormGroup;
   vehicle_no: any;
   vehicle_type_id: number;
+  uid:any;
 
   vehicle_type: vehicleType[] = [];
 
@@ -28,8 +29,6 @@ export class AddVehicleModelPage implements OnInit {
     private _vehicles: VehicledbProvider,
     private formBuilder: FormBuilder
   ) {
-
-    
   }
 
   validation_messages = {
@@ -44,6 +43,7 @@ export class AddVehicleModelPage implements OnInit {
   };
 
   ngOnInit() {
+    this.uid=localStorage.getItem('id');
     this._vehicletype.getAllVehicleType().subscribe(
       (data: any) => {
         this.vehicle_type = data;
@@ -73,9 +73,10 @@ export class AddVehicleModelPage implements OnInit {
   }
 
   async done() {
-    this._vehicles.addVehicle(new VehicleClass(this.vehicle_no, this.vehicle_type_id, 1)).subscribe(
+    
+    this._vehicles.addVehicle(new VehicleClass(this.vehicle_no, this.vehicle_type_id, this.uid)).subscribe(
       async (data: any) => {
-        await this.modelCtrl.dismiss(new VehicleClass(this.vehicle_no, this.vehicle_type_id, 1));
+        await this.modelCtrl.dismiss(new VehicleClass(this.vehicle_no, this.vehicle_type_id, this.uid));
       },
       (err) => {
         console.log(err);
