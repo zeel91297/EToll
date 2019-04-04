@@ -18,7 +18,9 @@ export class UserserviceService {
     const body=JSON.stringify(user);
     return this.http.post(this.urllogin,body,{headers:new HttpHeaders().set('Content-type','application/json')});
   }
-
+  GetAllUser(email){
+    return this.http.get(this.urllogin+email);
+  }
   usersignup(user:user){
   
     const body=JSON.stringify(user);
