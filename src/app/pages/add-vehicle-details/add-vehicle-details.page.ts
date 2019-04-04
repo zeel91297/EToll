@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { Router, ActivatedRoute } from "@angular/router";
-import { ToastController } from "@ionic/angular";
+import { ToastController, AlertController } from "@ionic/angular";
 
 import { VehicledbProvider } from "../../providers/vehicledb/vehicledb";
 import { vehicleTypeProvider } from "src/app/providers/vehicledb/vehicleType";
@@ -9,6 +9,7 @@ import { VehicleClass } from "../../shared/vehicle_class";
 
 import { NavigationExtras } from "@angular/router";
 import { Tollplazza } from "src/app/shared/tollplaza_class";
+import { AlertOptions } from "@ionic/core";
 
 @Component({
   selector: "app-add-vehicle-details",
@@ -26,12 +27,15 @@ export class AddVehicleDetailsPage implements OnInit {
   amt: any;
   whichj: any;
   tollPlazas: Tollplazza[] = [];
+  shouldDisabled:boolean=true;
+  tmp_vno: any;
   constructor(
     public router: Router,
     public activateroute: ActivatedRoute,
     public toast: ToastController,
     public vtdata: vehicleTypeProvider,
-    public vdata: VehicledbProvider
+    public vdata: VehicledbProvider,
+    public alertController: AlertController
   ) {
     this.activateroute.params.subscribe((data: any) => {
       console.log(data);
@@ -52,8 +56,44 @@ export class AddVehicleDetailsPage implements OnInit {
       // }
     });
   }
+  async onAdd1() {
+    this.presentAlert();
+  }
   change() {
+    this.shouldDisabled=true;
     this.vno = this.vehicleno;
+  }
+  async presentAlert() {
+    this.shouldDisabled=false;
+    const alert = await this.alertController.create({
+      header: "Add New Vehicle",
+      inputs: [
+        {
+          name: "new_vehicle_no",
+          type: "text",
+          placeholder: "Enter New Vehicle No"
+        }
+      ],
+      buttons: [
+        {
+          text: "Add",
+          handler: data => {
+            if (data != "") {
+              this.onAdd(data.new_vehicle_no);
+              this.tmp_vno=data.new_vehicle_no;
+            }
+          }
+        },
+        {
+          text: "Cancel",
+          handler: data => {
+            console.log(data);
+          },
+          role: "cancel"
+        }
+      ]
+    });
+    return await alert.present();
   }
   getVehicleNo() {
     console.log("in");
@@ -108,7 +148,11 @@ export class AddVehicleDetailsPage implements OnInit {
       }
     );
   }
-  async onAdd() {
+  async onAdd(vehicle_no: any) {
+    // console.log("afjds;lf",this.presentAlert().then((data)=>{
+    //   console.log("data " + data);
+    // }));
+    this.vno = vehicle_no;
     const tos = await this.toast.create({
       message: "Vehicle Added Successfully",
       duration: 5000,
