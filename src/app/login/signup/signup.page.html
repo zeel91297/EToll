@@ -19,7 +19,7 @@
     <br>
     <div *ngIf="!myform.controls.name.valid &&
        myform.controls.name.dirty" style="color:red;">
-      Please enter a valid name.
+      Please Enter a Valid Name.
     </div>
     <ion-item>
       <ion-icon name="mail" item-start></ion-icon>
@@ -27,8 +27,8 @@
     </ion-item>
     <br>
     <div *ngIf="!myform.controls.email.valid &&
-      myform.controls.email.dirty"  style="color:red;">
-      Please enter a valid email.
+      myform.controls.email.dirty"  style="color:red;" >
+      Please Enter a Valid Email.
     </div>
     <ion-item>
       <ion-icon name="lock" item-start></ion-icon>
@@ -37,10 +37,10 @@
     <br>
     <div *ngIf="!myform.controls.password1.valid &&
       myform.controls.password1.dirty"  style="color:red;">
-      Please enter a valid password
-      <br>minmum 6 charactor
-      <br>one special charactor
-      <br>one digit
+      Please Enter a Valid Password
+      <br>Minmum 6 Charactor
+      <br>One Special Charactor
+      <br>One Digit
 
     </div>
     <ion-item>
@@ -51,7 +51,7 @@
     <br>
     <div *ngIf="!myform.controls.contact1.valid &&
       myform.controls.contact1.dirty"  style="color:red;">
-      Please enter number only
+      Please Enter Number Only
     </div>
   </ion-list>
   <ion-button expand="full" color="tertiary" [disabled]="!myform.valid" (click)="onsignup()">Create Account

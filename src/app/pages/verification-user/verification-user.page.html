@@ -1,0 +1,20 @@
+<ion-header>
+  <ion-toolbar>
+      <ion-buttons slot="start">
+          <ion-back-button></ion-back-button>
+        </ion-buttons>
+    <ion-title>verification_user</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+
+<ion-content padding>
+<ion-item>
+  
+  <ion-input type="text" placeholder="Enter OTP Here" [(ngModel)]="user_input"></ion-input>
+  <ion-button (click)="verify_user()">Submit</ion-button><br>
+  
+</ion-item>
+<a style="text-decoration: none" (click)="resend()">resend OTP</a>
+</ion-content>
