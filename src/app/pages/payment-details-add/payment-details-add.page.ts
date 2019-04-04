@@ -9,7 +9,12 @@ import { PaymentMethod } from "../../shared/paymentmethod_class";
 import { PaymentdetailsService } from "../../providers/paymentdetailsdb/paymentdetails.service";
 import { element } from "@angular/core/src/render3";
 import { PaymentmethodService } from "src/app/providers/paymentmethoddb/paymentmethod.service";
-import { FormGroup } from '@angular/forms';
+import {
+  FormGroup,
+  FormBuilder,
+  FormControl,
+  Validators
+} from "@angular/forms";
 
 @Component({
   selector: "app-payment-details-add",
@@ -17,10 +22,6 @@ import { FormGroup } from '@angular/forms';
   styleUrls: ["./payment-details-add.page.scss"]
 })
 export class PaymentDetailsAddPage implements OnInit {
-  constructor(
-    public pdata: PaymentdetailsService,
-    public paym: PaymentmethodService
-  ) {}
   uname = "";
   card_no = 0;
   expiry_mon = 0;
@@ -37,7 +38,41 @@ export class PaymentDetailsAddPage implements OnInit {
   cno = 0;
   cid: any;
   paymeth: PaymentMethod[] = [];
-  card_details: FormGroup;
+  payment_form: FormGroup;
+
+  constructor(
+    public pdata: PaymentdetailsService,
+    public paym: PaymentmethodService,
+    private fb: FormBuilder
+  ) {
+    this.payment_form = new FormGroup({
+      card_holder_name: new FormControl("", Validators.required),
+      card_name: new FormControl("", Validators.required),
+      card_no: new FormControl("", [
+        Validators.required,
+        Validators.minLength(12),
+        Validators.maxLength(12),
+        Validators.pattern(/^-?(0|[1-9]\d*)?$/)
+      ]),
+      expiry_m: new FormControl("", [
+        Validators.required,
+        Validators.max(12),
+        Validators.min(1)
+      ]),
+      expiry_y: new FormControl("", [
+        Validators.required,
+        Validators.min(19),
+        Validators.max(25)
+      ]),
+      cvv: new FormControl("", [
+        Validators.required,
+        Validators.minLength(3),
+        Validators.maxLength(3),
+        Validators.pattern(/^-?(0|[1-9]\d*)?$/)
+      ])
+    });
+  }
+
   ngOnInit() {}
   onInsert() {
     this.mid = parseInt(localStorage.getItem("mid"));
