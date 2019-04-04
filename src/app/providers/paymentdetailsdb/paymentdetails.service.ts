@@ -18,6 +18,10 @@ export class PaymentdetailsService {
     this.uid = parseInt(localStorage.getItem("id"));
     return this.http.get<PaymentDetais[]>(this.url + uid);
   }
+  getPaymentDetailById(pid:any)
+  {
+    return this.http.get(this.url1 + pid);
+  }
   deletePaymentDetails(pid: any) {
     return this.http.delete(this.url + pid);
   }

@@ -10,6 +10,7 @@ import { paymentMethodClass } from 'src/app/shared/payment_method_class';
   styleUrls: ['./view-payment-method.page.scss'],
 })
 export class ViewPaymentMethodPage implements OnInit {
+  id:any;
   payment_methods:paymentMethodsUser[]=[];
   visited:boolean=false;
   paymentMethod:paymentMethodsUser=null;
@@ -25,7 +26,8 @@ export class ViewPaymentMethodPage implements OnInit {
   }
 
   ngOnInit() {
-    this.user_payment_method_db.getAllPaymentByUid(1).subscribe((data:paymentMethodsUser[])=>{
+    this.id=localStorage.getItem('id');
+    this.user_payment_method_db.getAllPaymentByUid(this.id).subscribe((data:paymentMethodsUser[])=>{
       this.payment_methods=data;
       this.visited=true;
     });

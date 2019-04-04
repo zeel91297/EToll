@@ -29,16 +29,6 @@ export class AppComponent implements OnInit {
       url: "/home",
       icon: "home"
     },
-    /* {
-      title: 'List',
-      url: '/list',
-      icon: 'list'
-    }, */
-    /* {
-      title: 'Login',
-      url: '/login',
-      icon: 'log-in'
-    }, */
     {
       title: "My Vehicles",
       url: "/my-vehicles",
@@ -50,7 +40,7 @@ export class AppComponent implements OnInit {
       icon: "pricetags"
     },
     {
-      title: "Payment Options",
+      title: "My Saved Cards",
       url: "/payment-options",
       icon: "wallet"
     },

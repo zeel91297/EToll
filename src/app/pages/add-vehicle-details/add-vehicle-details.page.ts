@@ -26,56 +26,48 @@ export class AddVehicleDetailsPage implements OnInit {
   amt:any;
   whichj:any;
   tollPlazas:Tollplazza[]=[];
+  amounts:number[]=[];
   constructor(public router:Router,
     public activateroute:ActivatedRoute,
     public toast:ToastController,public vtdata:vehicleTypeProvider,public vdata:VehicledbProvider ) { 
    this.activateroute.params.subscribe((data:any)=>
    {
-     console.log(data);
      this.vehicle_type=data.prev_vehicle_type;
      this.amt=data.prev_amt;
      this.whichj=data.prev_journey;
-      // this.tollPlazas=data["totalPlaza"];
-      // console.log("hello ",this.tollPlazas);
       if(this.router.getCurrentNavigation().extras.state){
         this.tollPlazas=this.router.getCurrentNavigation().extras.state.user;
+        this.amounts=this.router.getCurrentNavigation().extras.state.amounts;
       }
-      console.log("HELLO  ",this.tollPlazas);
-     alert(this.amt);
-     alert(this.whichj);
-    alert(this.vehicle_type);
-    //  for (let index = 0; index < this.tollPlazas.length; index++) {
-      // const element = array[index];
-    // }
    });
 
   }
+  //For print selected vehicle no in input box
   change()
   {
     this.vno=this.vehicleno;
   }
+  //send all details on next page
   getVehicleNo()
   {
-    console.log("in");
+   
     let navigationExtras:NavigationExtras={
       state:{
 
         prev_vehicle_no:this.vno,
-        user:this.tollPlazas
+        user:this.tollPlazas,
+        amounts:this.amounts,
+        
       }
     };
     console.log(navigationExtras);
     this.router.navigate(["/payment-method",{
       prev_vehicle_type: this.vehicle_type,
           prev_amt: this.amt,
-          prev_journey:this.whichj
+          prev_journey:this.whichj,
     }],navigationExtras);  
   }
    async ngOnInit() {
-  //   this.tollPlazas.forEach((element) => {
-  //     console.log(element.highway_name);
-  // });
-  
     const tos = await this.toast.create({
       message: "There is no vehicle number of this type so please Add Vehicle",
       duration: 5000,
@@ -85,8 +77,7 @@ export class AddVehicleDetailsPage implements OnInit {
       translucent: true,
       animated: true
     });
-   
-    
+    //Get Vehicle By id and user id
     this.uid=localStorage.getItem('id');
     this.vdata.getVehicleById(this.vehicle_type,this.uid).subscribe((data:VehicleClass[])=>{
       this.vehicle=data;
@@ -105,6 +96,7 @@ export class AddVehicleDetailsPage implements OnInit {
       console.log("Complete");
     });
   }
+  //for Add New Vehicle
   async onAdd()
   {
     const tos = await this.toast.create({
@@ -126,11 +118,9 @@ export class AddVehicleDetailsPage implements OnInit {
       animated: true
     });
     this.uid=localStorage.getItem('id');
-    alert(this.uid);
     this.vdata.addVehicle(new VehicleClass(this.vno,this.vehicle_type,this.uid)).subscribe
     ((data:any[])=>{
       tos.present();
-      this.vno="";
       this.ngOnInit();
     },
     function(err){

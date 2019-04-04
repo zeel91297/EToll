@@ -25,8 +25,9 @@ export class PaymentMethodPage implements OnInit {
   vehicle_type:any;
   amt:any;
   whichj:any;
-
+  amounts:number[]=[];
   tollPlazas:Tollplazza[]=[];
+  vname:string='';
 
   buttonDisabled: boolean = false;
 
@@ -36,26 +37,18 @@ export class PaymentMethodPage implements OnInit {
     }
     this.activateroute.params.subscribe((data:any)=>
    {
-     console.log(data);
      this.vehicle_type=data.prev_vehicle_type;
      this.amt=data.prev_amt;
      this.whichj=data.prev_journey;
-      // this.tollPlazas=data["totalPlaza"];
-      // console.log("hello ",this.tollPlazas);
+     this.vname=data.new_vname;
       if(this.router.getCurrentNavigation().extras.state){
         this.tollPlazas=this.router.getCurrentNavigation().extras.state.user;
+        this.amounts=this.router.getCurrentNavigation().extras.state.amounts;
       }
-      console.log("PAY",this.tollPlazas);
-    alert(this.amt);
-      alert(this.vehicle_type);
-    //  for (let index = 0; index < this.tollPlazas.length; index++) {
-      // const element = array[index];
-    // }
    });
   }
-
+//Get All Payment Method
   ngOnInit() {
-    //this.vno=localStorage.getItem("vno");
     this.pm.getAllPaymentMethod().subscribe(
       (data: any[]) => {
         this.paymeth = data;
@@ -68,31 +61,36 @@ export class PaymentMethodPage implements OnInit {
       }
     );
   }
+  
+  // Params Value Change On Next Page
   getVehicleNo()
   {
-    console.log("in");
     let navigationExtras:NavigationExtras={
       state:{
 
         prev_vehicle_no:this.vno,
-        user:this.tollPlazas
+        user:this.tollPlazas,
+        amounts:this.amounts
       }
     };
-    console.log(navigationExtras);
     this.router.navigate(["/payment-details",{
       prev_vehicle_type: this.vehicle_type,
           prev_amt: this.amt,
-          prev_journey:this.whichj
+          prev_journey:this.whichj,
+          prev_mname:this.name,
+          prev_vehicle_no:this.vno,
+          new_vname:this.vname
     }],navigationExtras);
   }
 
+  //For Get Payment Method Id
   getId(num) {
     this.method = num;
     localStorage.setItem("mid", this.method);
     this.buttonDisabled = true;
   }
+  //For Get Payment Method Name
   getvalue(str) {
-    this.name = str;
-    localStorage.setItem("mname", this.name);
+    this.name = str; 
   }
 }

@@ -30,6 +30,8 @@ const routes: Routes = [
   { path: 'edit-payment-details', loadChildren: './pages/edit-payment-details/edit-payment-details.module#EditPaymentDetailsPageModule' },
   { path: 'confirm-payment', loadChildren: './pages/confirm-payment/confirm-payment.module#ConfirmPaymentPageModule' },
   { path: 'add-vehicle-details', loadChildren: './pages/add-vehicle-details/add-vehicle-details.module#AddVehicleDetailsPageModule' },
+  { path: 'transaction-failed', loadChildren: './pages/transaction-failed/transaction-failed.module#TransactionFailedPageModule' },
+
 
 ];
   

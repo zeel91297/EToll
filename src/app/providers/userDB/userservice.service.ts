@@ -20,9 +20,12 @@ export class UserserviceService {
   }
 
   usersignup(user:user){
-  
     const body=JSON.stringify(user);
     return this.http.post(this.url,body,{headers:new HttpHeaders().set('Content-type','application/json')});
-  
+  }
+
+  getUserById(id:any)
+  {
+    return this.http.get(this.url + id);
   }
 }

@@ -18,10 +18,9 @@
           <td>
             <ion-radio
               slot="start"
+              (ionSelect)="getId(item.payment_id)"
               (ionSelect)="onRadioChange(item.payment_id)"
               value="{{ item.payment_id }}"
-              
-              
             >
             </ion-radio>
           </td>
@@ -36,7 +35,6 @@
                   Card No {{ item.card_no }}
                 </p>
                 <p style="color:rgb(119, 116, 116);font-size:13px" >
-                  Cvv  ***<br />
                   Valid Upto - {{ item.expiry_month }} / {{ item.expiry_year }}
                 </p>
                 <ion-label style="float : right" >
@@ -53,18 +51,10 @@
   <table>
     <tr>
       <td>
-        <ion-button
-          style="position:fixed;width:50%;bottom:0;left:0"
-          routerLinkActive="router-link-active"
-
-          >Next</ion-button
-        >
-      </td>
-      <td>
         <ion-fab-button
           color="primary"
           style="position:fixed;bottom:0;right:0px"
-          [routerLink]="['/payment-details-add']"
+          (click)="addPayDetail()"
         >
           <ion-icon name="add"></ion-icon>
         </ion-fab-button>
