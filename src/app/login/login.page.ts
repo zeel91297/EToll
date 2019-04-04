@@ -42,17 +42,14 @@ export class LoginPage implements OnInit, OnDestroy {
     
     this.userservice.userlogin(new user(null,'', hashedPassword.toString(), this.email,'')).subscribe(
       (data:user[]) => {
-      
       console.log(data);
         if (data.length > 0) {
-          
           this.id=data[0].user_id;
           localStorage.setItem('id',this.id);
           localStorage.setItem('name',data[0].user_name);
           console.log(this.id);
           this.router.navigate(['/home']);
         }
-       
       },
       function (error) {
         console.log(error);

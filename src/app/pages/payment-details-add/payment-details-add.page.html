@@ -13,22 +13,31 @@
     <form style="max-width:500px;margin:auto">
         <ion-label style="font-size:17px">Card Holder Name</ion-label><br>
         <div class="input-container">
-            <input class="input-field" type="text" placeholder="Card Holder Name" name="usrnm">
+            <input class="input-field" type="text" placeholder="Card Holder Name" [(ngModel)]="uname" name="usrnm">
             <i class="fa fa-user icon"></i>
         </div>
         <ion-label style="font-size:17px">Card No</ion-label><br>
         <div class="input-container">
 
-            <input class="input-field" type="number" placeholder="Card No" name="psw">
+            <input class="input-field" type="number" placeholder="Card No" [(ngModel)]="card_no" name="psw">
             <i class="fa fa-key icon"></i>
         </div>
+        <ion-label style="font-size:17px">Card  Name</ion-label><br>
+        <div class="input-container">
+                <input class="input-field" type="text" placeholder="Card Name" [(ngModel)]="cname" name="cn">
+                <i class="far fa-credit-card icon"></i>
+            </div>
+           
+
+       
+
         <table style="width:300px;">
             <tr>
                 <td>
                     <ion-label style="font-size:17px">Expiry Date</ion-label>
                 </td>
                 <td>
-                    <ion-label style="font-size:17px">Cv Code</ion-label>
+                    <ion-label style="font-size:17px">CVV Code</ion-label>
                 </td>
 
             </tr>
@@ -36,20 +45,20 @@
                 <td>
                     <div class="input-container">
 
-                        <input class="input-field" type="text" placeholder="MM" name="psw" style="width:60px">
-                        <input class="input-field" type="text" placeholder="YY" name="psw" style="width:60px">
+                        <input class="input-field" type="text" placeholder="MM" name="psw" [(ngModel)]="expiry_mon" style="width:60px">
+                        <input class="input-field" type="text" placeholder="YY" name="psw" [(ngModel)]="expiry_year" style="width:60px">
                     </div>
                 </td>
 
                 <td>
                     <div class="input-container">
 
-                        <input class="input-field" type="text" placeholder="CV " style="width:120px" name="psw">
+                        <input class="input-field" type="password" pattern="[0-9]{3}" title="Enter Only Three Digit" placeholder="CVV" style="width:120px" name="psw">
                     </div>
                 </td>
             </tr>
         </table>
-        <ion-button [routerLink]="['/transection-status']" style="position:fixed;width:100%;bottom:0;left:0" routerLinkActive="router-link-active">Next</ion-button>
+        <ion-button [routerLink]="['/transection-status']" style="position:fixed;width:100%;bottom:0;left:0" routerLinkActive="router-link-active"  (click)="onInsert()">Next</ion-button>
 
 
     </form>

@@ -40,6 +40,7 @@ import { TollplazaService } from "./providers/tollplazadb/tollplaza.service";
 import { UserserviceService } from './providers/userDB/userservice.service';
 import { VehicledbProvider } from './providers/vehicledb/vehicledb';
 import { vehicleTypeProvider } from './providers/vehicledb/vehicleType';
+import { PaymentmethodService } from "./providers/paymentmethoddb/paymentmethod.service";
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 //Background Geolocation
 import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
@@ -70,6 +71,7 @@ import { Md5 } from 'ts-md5';
     UserserviceService,
     VehicledbProvider,
     vehicleTypeProvider,
+    PaymentmethodService,
     /*
     Background Geolocation
     */
