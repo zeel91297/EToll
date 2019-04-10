@@ -17,8 +17,8 @@
   </ion-item>
   <br>
     <div *ngIf="!loginform.controls.email.valid &&
-                 loginform.controls.email.dirty">
-      Please enter a valid email.
+                 loginform.controls.email.dirty" style="color:red;"> 
+      Please Enter a Valid Email.
     </div>
   <ion-item>
     <ion-label position="floating">Password</ion-label>
@@ -26,15 +26,15 @@
   </ion-item>
   <br>
     <div *ngIf="!loginform.controls.password1.valid &&
-               loginform.controls.password1.dirty">
-      Please enter a valid password
-      <br>minmum 6 charactor
+               loginform.controls.password1.dirty" style="color:red;">
+      Please Enter a Valid Password
+      <br>Minmum 6 Charactor
 
     </div>
   <br>
-  <a style="float:right;font-size:12px;">Forget Password??</a>
+  <a style="float:right;font-size:12px;" (click)="forgetpassword()">Forget Password??</a>
   <br>
-  <ion-button [disabled]="!loginform.valid"   (click)="onlogin()" expand="full">
+  <ion-button [disabled]="!loginform.valid"   (click)="onlogin()"  expand="full">
     Login
     <ion-icon slot="end" name="log-in"></ion-icon>
   </ion-button>
