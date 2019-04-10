@@ -9,27 +9,41 @@
 
 <ion-content padding>
 
-
-    <form style="max-width:500px;margin:auto">
+    <form style="max-width:500px;margin:auto" [formGroup]="payment_form" (ngSubmit)="onInsert()">
         <ion-label style="font-size:17px">Card Holder Name</ion-label><br>
         <div class="input-container">
-            <input class="input-field" type="text" placeholder="Card Holder Name" [(ngModel)]="uname" name="usrnm">
+            <input class="input-field" type="text" formControlName="card_holder_name" placeholder="Card Holder Name" [(ngModel)]="uname" name="usrnm">
             <i class="fa fa-user icon"></i>
+        </div>
+        <div *ngIf="!payment_form.get('card_holder_name').valid && payment_form.get('card_holder_name').touched ">
+            <div *ngIf="payment_form.get('card_holder_name').hasError('required')">
+                Card Holder Name is must.</div>
         </div>
         <ion-label style="font-size:17px">Card No</ion-label><br>
         <div class="input-container">
-
-            <input class="input-field" type="number" placeholder="Card No" [(ngModel)]="card_no" name="psw">
+            <input class="input-field" formControlName="card_no" type="number" placeholder="Card No" [(ngModel)]="card_no" name="psw">
             <i class="fa fa-key icon"></i>
         </div>
-        <ion-label style="font-size:17px">Card  Name</ion-label><br>
-        <div class="input-container">
-                <input class="input-field" type="text" placeholder="Card Name" [(ngModel)]="cname" name="cn">
-                <i class="far fa-credit-card icon"></i>
-            </div>
-           
+        <div *ngIf="!payment_form.get('card_no').valid && payment_form.get('card_no').touched ">
+            <div *ngIf="payment_form.get('card_no').hasError('required')">
+                Card Number is must.</div>
+            <div *ngIf="payment_form.get('card_no').hasError('minLength')">
+                Card Number is must of 12 digits.</div>
+            <div *ngIf="payment_form.get('card_no').hasError('maxLength')">
+                Card Number is must of 12 digits.</div>
 
-       
+            <div *ngIf="payment_form.get('card_no').hasError('maxLength')">
+                Card Number is must contain only digits.</div>
+        </div>
+        <ion-label style="font-size:17px">Card Name</ion-label><br>
+        <div class="input-container">
+            <input class="input-field" formControlName="card_name" type="text" placeholder="Card Name" [(ngModel)]="cname" name="cn">
+            <i class="far fa-credit-card icon"></i>
+        </div>
+        <div *ngIf="!payment_form.get('card_name').valid && payment_form.get('card_name').touched ">
+            <div *ngIf="payment_form.get('card_name').hasError('required')">
+                Card Name is must.</div>
+        </div>
 
         <table style="width:300px;">
             <tr>
@@ -39,29 +53,51 @@
                 <td>
                     <ion-label style="font-size:17px">CVV Code</ion-label>
                 </td>
-
             </tr>
             <tr>
                 <td>
                     <div class="input-container">
 
-                        <input class="input-field" type="text" placeholder="MM" name="psw" [(ngModel)]="expiry_mon" style="width:60px">
-                        <input class="input-field" type="text" placeholder="YY" name="psw" [(ngModel)]="expiry_year" style="width:60px">
+                        <input class="input-field" type="text" placeholder="MM" name="psw" formControlName="expiry_m" [(ngModel)]="expiry_mon" style="width:60px">
+                        <input class="input-field" type="text" formControlName="expiry_y" placeholder="YY" name="psw" [(ngModel)]="expiry_year" style="width:60px">
+                    </div>
+                    <div *ngIf="!payment_form.get('expiry_m').valid && payment_form.get('expiry_m').touched ">
+                        <div *ngIf="payment_form.get('expiry_m').hasError('required')">
+                            Expiry Month is must.</div>
+                        <div *ngIf="payment_form.get('expiry_m').hasError('min')">
+                            Expiry Month must between 1 to 12</div>
+                        <div *ngIf="payment_form.get('expiry_m').hasError('max')">
+                            Expiry Month must between 1 to 12</div>
+                    </div>
+
+                    <div *ngIf="!payment_form.get('expiry_y').valid && payment_form.get('expiry_y').touched ">
+                        <div *ngIf="payment_form.get('expiry_y').hasError('required')">
+                            Expiry Month is must.</div>
+                        <div *ngIf="payment_form.get('expiry_y').hasError('min')">
+                            Expiry Year must between 19 to 25</div>
+                        <div *ngIf="payment_form.get('expiry_y').hasError('max')">
+                            Expiry Year must between 19 to 25</div>
                     </div>
                 </td>
 
                 <td>
                     <div class="input-container">
+                        <input class="input-field" formControlName="cvv" type="password" pattern="[0-9]{3}" title="Enter Only Three Digit" placeholder="CVV" style="width:120px" name="psw">
+                    </div>
+                    <div *ngIf="!payment_form.get('cvv').valid && payment_form.get('cvv').touched ">
+                        <div *ngIf="payment_form.get('cvv').hasError('required')">
+                            CVV is must.</div>
+                        <div *ngIf="payment_form.get('cvv').hasError('minLength')">
+                            CVV is must of 3 digits.</div>
+                        <div *ngIf="payment_form.get('cvv').hasError('maxLength')">
+                            CVV is must of 3 digits.</div>
 
-                        <input class="input-field" type="password" pattern="[0-9]{3}" title="Enter Only Three Digit" placeholder="CVV" style="width:120px" name="psw">
+                        <div *ngIf="payment_form.get('cvv').hasError('maxLength')">
+                            CVV is must contain only digits.</div>
                     </div>
                 </td>
             </tr>
         </table>
-        <ion-button [routerLink]="['/transection-status']" style="position:fixed;width:100%;bottom:0;left:0" routerLinkActive="router-link-active"  (click)="onInsert()">Next</ion-button>
-
-
+        <ion-button [routerLink]="['/transection-status']" [disabled]="!payment_form.valid" style="position:fixed;width:100%;bottom:0;left:0" routerLinkActive="router-link-active" (click)="onInsert()">Next</ion-button>
     </form>
-
-
 </ion-content>
