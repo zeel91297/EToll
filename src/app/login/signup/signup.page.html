@@ -1,70 +1,70 @@
 <ion-header>
-  
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-back-button></ion-back-button>
-    </ion-buttons>
-    <ion-title>Signup</ion-title>
-  </ion-toolbar>
+
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button></ion-back-button>
+        </ion-buttons>
+        <ion-title>Signup</ion-title>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
     <form [formGroup]="myform">
-  <br><br><br>
-  <ion-list>
-    <ion-item>
-      <ion-icon name="person" item-start></ion-icon>
-      <ion-input formControlName="name" type="text" id="name" [(ngModel)]="name" placeholder="Enter Name"></ion-input>
-    </ion-item>
-    <br>
-    <div *ngIf="!myform.controls.name.valid &&
+        <br><br><br>
+        <ion-list>
+            <ion-item>
+                <ion-icon name="person" item-start></ion-icon>
+                <ion-input formControlName="name" type="text" id="name" [(ngModel)]="name" placeholder="Enter Name"></ion-input>
+            </ion-item>
+            <br>
+            <div *ngIf="!myform.controls.name.valid &&
        myform.controls.name.dirty">
-      Please enter a valid name.
-    </div>
-    
-    <ion-item>
-      <ion-icon name="mail" item-start></ion-icon>
-      <ion-input  placeholder="Enter Email ID" formControlName="email" type="text" id="email" [(ngModel)]="email"></ion-input>
-    </ion-item>
-    <br>
-    <div *ngIf="myform.get('email').hasError('pattern')">
-      Please enter a valid email.
-    </div>
-    <div *ngIf="myform.get('email').hasError('required')">
-      Please enter a valid email.
-    </div>
-    <div *ngIf="myform.get('email').hasError('email')">
-      Please enter a valid email.
-    </div>
-    <div *ngIf="myform.get('email').hasError('EmailAlreadyExsits')">
-      Email Already Exist.
-    </div>
-    <ion-item>
-      <ion-icon name="lock" item-start></ion-icon>
-      <ion-input placeholder="Enter Password" formControlName="password1" type="password" id="password1" [(ngModel)]="password1"></ion-input>
-    </ion-item>
-    <br>
-    <div *ngIf="!myform.controls.password1.valid &&
-      myform.controls.password1.dirty">
-      Please enter a valid password
-      <br>minmum 6 charactor
-      <br>one special charactor
-      <br>one digit
+                Please enter a valid name.
+            </div>
 
-    </div>
-    <ion-item>
-      <ion-icon name="call" item-start></ion-icon>
-      <ion-input  placeholder="Enter Contact No" formControlName="contact1" type="text" id="contact1" [(ngModel)]="contact1"></ion-input>
-    </ion-item>
-    
-    <br>
-    <div *ngIf="!myform.controls.contact1.valid &&
+            <ion-item>
+                <ion-icon name="mail" item-start></ion-icon>
+                <ion-input placeholder="Enter Email ID" formControlName="email" type="text" id="email" [(ngModel)]="email"></ion-input>
+            </ion-item>
+            <br>
+            <div *ngIf="myform.get('email').hasError('pattern')">
+                Please enter a valid email.
+            </div>
+            <div *ngIf="myform.get('email').hasError('required')">
+                Please enter a valid email.
+            </div>
+            <div *ngIf="myform.get('email').hasError('email')">
+                Please enter a valid email.
+            </div>
+            <div *ngIf="myform.get('email').hasError('EmailAlreadyExsits')">
+                Email Already Exist.
+            </div>
+            <ion-item>
+                <ion-icon name="lock" item-start></ion-icon>
+                <ion-input placeholder="Enter Password" formControlName="password1" type="password" id="password1" [(ngModel)]="password1"></ion-input>
+            </ion-item>
+            <br>
+            <div *ngIf="!myform.controls.password1.valid &&
+      myform.controls.password1.dirty">
+                Please enter a valid password
+                <br>minmum 6 charactor
+                <br>one special charactor
+                <br>one digit
+
+            </div>
+            <ion-item>
+                <ion-icon name="call" item-start></ion-icon>
+                <ion-input placeholder="Enter Contact No" formControlName="contact1" type="text" id="contact1" [(ngModel)]="contact1"></ion-input>
+            </ion-item>
+
+            <br>
+            <div *ngIf="!myform.controls.contact1.valid &&
       myform.controls.contact1.dirty">
-      Please enter number only
-    </div>
-  </ion-list>
-  <ion-button expand="full" color="tertiary" [disabled]="!myform.valid" (click)="onsignup()">Create Account
-    <ion-icon slot="end" name="arrow-round-forward" ></ion-icon>
-  </ion-button>
-  </form>
+                Please enter number only
+            </div>
+        </ion-list>
+        <ion-button expand="full" color="tertiary" [disabled]="!myform.valid" (click)="onsignup()">Create Account
+            <ion-icon slot="end" name="arrow-round-forward"></ion-icon>
+        </ion-button>
+    </form>
 </ion-content>
