@@ -13,6 +13,9 @@ export class UserserviceService {
   private urllogin:string="http://localhost:3000/userlogin/";
   private url:string="http://localhost:3000/userss/";
   private url_mail="https://mailappdemo.herokuapp.com/mail/"
+  private url_password_update="http://localhost:3000/userpassword/";
+  private url_verify="http://localhost:3000/verifyuser/";
+  private url_resend="http://localhost:3000/resendotp/";
   constructor(public http: HttpClient) { }
   userlogin(user:user)
   {
@@ -20,7 +23,9 @@ export class UserserviceService {
     const body=JSON.stringify(user);
     return this.http.post(this.urllogin,body,{headers:new HttpHeaders().set('Content-type','application/json')});
   }
-
+  GetAllUser(email){
+    return this.http.get(this.urllogin+email);
+  }
   usersignup(user:user){
   
     const body=JSON.stringify(user);
@@ -43,7 +48,23 @@ export class UserserviceService {
   user_update_password(mail:any,user:any)
   {
     const body=JSON.stringify(user);
-    return this.http.put(this.urllogin + mail,body,{headers:new HttpHeaders().set('Content-type','application/json')});
+    return this.http.put(this.url_password_update + mail,body,{headers:new HttpHeaders().set('Content-type','application/json')});
   }
-
+  user_verify(otp:any,email:any)
+  {
+    
+    return this.http.get(this.url_verify + otp + "/" + email);
+  }
+  emailsend(user:any)
+  {
+    console.log("in service");
+    const body=JSON.stringify(user);
+    return this.http.post(this.url,body,{headers:new HttpHeaders().set('Content-type','application/json')});
+  }
+  resend(user:any)
+  {
+    console.log("in service");
+    const body=JSON.stringify(user);
+    return this.http.post(this.url_resend,body,{headers:new HttpHeaders().set('Content-type','application/json')});
+  }
 }

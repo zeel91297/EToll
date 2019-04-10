@@ -21,14 +21,21 @@
        myform.controls.name.dirty" style="color:red;">
       Please Enter a Valid Name.
     </div>
+    
     <ion-item>
       <ion-icon name="mail" item-start></ion-icon>
       <ion-input  placeholder="Enter Email ID" formControlName="email" type="text" id="email" [(ngModel)]="email"></ion-input>
     </ion-item>
     <br>
-    <div *ngIf="!myform.controls.email.valid &&
-      myform.controls.email.dirty"  style="color:red;" >
-      Please Enter a Valid Email.
+  
+    <div *ngIf="myform.get('email').hasError('required')">
+       Email Can Not Be Empty
+    </div>
+    <div *ngIf="myform.get('email').hasError('email')">
+      Please enter a valid email.
+    </div>
+    <div *ngIf="myform.get('email').hasError('EmailAlreadyExsits')">
+      Email Already Exist.
     </div>
     <ion-item>
       <ion-icon name="lock" item-start></ion-icon>

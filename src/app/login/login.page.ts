@@ -59,33 +59,56 @@ export class LoginPage implements OnInit, OnDestroy {
     
     // console.log(this.password1);
     // console.log(this.email);
-    const md5=new Md5();
     // const ls=md5.appendStr("hellohellohello").end();
+    const md5=new Md5();
     var hashedPassword=md5.appendStr(this.password1).end();
     
-    console.log('helloo');
+  
     this.userservice.userlogin(new user(null,'', hashedPassword.toString(), this.email,'',null,0)).subscribe(
       (data:user[]) => {
-        console.log(data);
         if (data.length > 0) {
-          this.id=data[0].user_id;
-          localStorage.setItem('id',this.id);
-          localStorage.setItem('name',data[0].user_name);
-          console.log(this.id);
-          tos.present();
-          this.router.navigate(['/home']);
+          if(data[0].verify==1){
+            
+            this.id=data[0].user_id;
+            localStorage.setItem('id',this.id);
+            localStorage.setItem('name',data[0].user_name);
+            
+            tos.present();
+            console.log('verifird');
+            this.router.navigate(['/home']);
+          }else{
+            localStorage.setItem('flag','true');
+            console.log('not verifird');
+            this.userservice.resend(new user(null,null,null,this.email,null,null,null)).subscribe(
+              (data:any[])=>{
+                this.router.navigate(['/verification-user']);
+              },
+              function(err)
+              {
+                  console.log(err);
+              },
+              function()
+              {
+
+              }
+            );
+
+            
+
+          }
         }
         else
         {
+          console.log('')
           tos1.present();
         }
       },
       function (error) {
-        console.log(error);
+        
 
       },
       function () {
-        console.log("done");
+        
 
       }
     );

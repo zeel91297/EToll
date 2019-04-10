@@ -11,10 +11,11 @@
     <form [formGroup]="select_toll_plaza" (ngSubmit)="onVehicle()">
         <ion-item>
             <ion-label>Total Amount to be paid: </ion-label>
-            <ion-input [(ngModel)]="totalAmount" formControlName="amt" disabled></ion-input>
+            <!-- [(ngModel)]="totalAmount" -->
+            <ion-input formControlName="amt" [(ngModel)]="totalAmount" readonly></ion-input>
         </ion-item>
-
-        <ion-radio-group [(ngModel)]="whichJ" formControlName="journey" (ionChange)="myAmountChange()" (ionSelect)="journeyselect()">
+        <!-- [(ngModel)]="whichJ" -->
+        <ion-radio-group formControlName="journey" [(ngModel)]="whichJ" (ionChange)="myAmountChange()" (ionSelect)="journeyselect()">
             <ion-item>
                 <ion-label>Single Journey</ion-label>
                 <ion-radio slot="start" value="single"></ion-radio>
@@ -30,7 +31,8 @@
         </ion-item>
         <br />
         <table>
-            <ion-radio-group [(ngModel)]="vehicle" formControlName="vehicle_type" (ionChange)="anotherMyAmountChange()" (ionSelect)="onSelectVehicle()" (ionSelect)="OnInit()">
+            <!-- //[(ngModel)]="vehicle" -->
+            <ion-radio-group formControlName="vehicle_type" [(ngModel)]="vehicle" name="vehicle_type" id="vehicle_type" (ionChange)="anotherMyAmountChange()" (ionSelect)="onSelectVehicle()" (ionSelect)="OnInit()">
                 <tr>
                     <td>
                         <ion-item>
@@ -81,8 +83,7 @@
 
         <ion-item>
             <ion-label>Select Toll Plaza</ion-label>
-
-            <ionic-selectable [(ngModel)]="port" formControlName="toll_list" [isMultiple]="true" [items]="tp" itemValueField="toll_plaza_id" itemTextField="toll_name" [canSearch]="true" (onChange)="portChange($event)" (ionSelect)="plazaSelect()">
+            <ionic-selectable formControlName="toll_list" [(ngModel)]="port" [isMultiple]="true" [items]="tp" itemValueField="toll_plaza_id" itemTextField="toll_name" [canSearch]="true" (onChange)="portChange($event)" (ionSelect)="plazaSelect()">
             </ionic-selectable>
         </ion-item>
     </form>

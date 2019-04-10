@@ -56,10 +56,10 @@ export class ForgetpasswordPage implements OnInit {
             );
           },
           function (err) {
-            console.log("error in update");
+            
           },
           function () {
-            console.log('success in update');
+            
           }
         );
       },
@@ -67,7 +67,7 @@ export class ForgetpasswordPage implements OnInit {
         t2.present();
       },
       function () {
-        console.log('success in fetch');
+        
       }
     );
   }

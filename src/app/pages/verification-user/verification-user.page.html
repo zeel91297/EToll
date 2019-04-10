@@ -2,7 +2,7 @@
   <ion-toolbar>
       <ion-buttons slot="start">
           <ion-back-button></ion-back-button>
-        </ion-buttons>
+        </ion-buttons>  
     <ion-title>verification_user</ion-title>
   </ion-toolbar>
 </ion-header>
@@ -10,8 +10,8 @@
 
 
 <ion-content padding>
+  <div *ngIf="flag">Your Email is not Verified.<br>Check Your Email to verify</div>
 <ion-item>
-  
   <ion-input type="text" placeholder="Enter OTP Here" [(ngModel)]="user_input"></ion-input>
   <ion-button (click)="verify_user()">Submit</ion-button><br>
   
