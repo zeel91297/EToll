@@ -23,9 +23,9 @@ import {
 })
 export class PaymentDetailsAddPage implements OnInit {
   uname = "";
-  card_no = 0;
-  expiry_mon = 0;
-  expiry_year = 0;
+  card_no: any;
+  expiry_mon: any;
+  expiry_year: any;
   cvv = "";
   id = 0;
   mid = 0;
@@ -50,8 +50,8 @@ export class PaymentDetailsAddPage implements OnInit {
       card_name: new FormControl("", Validators.required),
       card_no: new FormControl("", [
         Validators.required,
-        Validators.minLength(12),
-        Validators.maxLength(12),
+        Validators.minLength(16),
+        Validators.maxLength(16),
         Validators.pattern(/^-?(0|[1-9]\d*)?$/)
       ]),
       expiry_m: new FormControl("", [

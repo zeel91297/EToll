@@ -29,8 +29,10 @@ const routes: Routes = [
   { path: 'view-payment-method', loadChildren: './pages/view-payment-method/view-payment-method.module#ViewPaymentMethodPageModule' },
   { path: 'edit-payment-details', loadChildren: './pages/edit-payment-details/edit-payment-details.module#EditPaymentDetailsPageModule' },
   { path: 'confirm-payment', loadChildren: './pages/confirm-payment/confirm-payment.module#ConfirmPaymentPageModule' },
-  { path: 'add-vehicle-details', loadChildren: './pages/add-vehicle-details/add-vehicle-details.module#AddVehicleDetailsPageModule' },  { path: 'verification-user', loadChildren: './pages/verification-user/verification-user.module#VerificationUserPageModule' },
+  { path: 'add-vehicle-details', loadChildren: './pages/add-vehicle-details/add-vehicle-details.module#AddVehicleDetailsPageModule' },
+  { path: 'verification-user', loadChildren: './pages/verification-user/verification-user.module#VerificationUserPageModule' },
   { path: 'forgetpassword', loadChildren: './pages/forgetpassword/forgetpassword.module#ForgetpasswordPageModule' },
+
 
 
 ];

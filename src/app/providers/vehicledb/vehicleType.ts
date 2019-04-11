@@ -5,7 +5,7 @@ import { vehicleType } from '../classes/classVehicleType';
 
 @Injectable()
 export class vehicleTypeProvider {
-  public url = 'http://localhost:3000/vehicle_type/';
+  public url = 'https://tollproject.herokuapp.com/vehicle_type/';
 
   vclet: vehicleType[] = [];
   constructor(public http: HttpClient) {}
