@@ -1,10 +1,10 @@
 <ion-header>
-  <ion-toolbar>
-      <ion-buttons slot="start">
-          <ion-back-button defaultHref="select-toll-plaza"></ion-back-button>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref="select-toll-plaza"></ion-back-button>
         </ion-buttons>
-    <ion-title>AddVehicleDetails</ion-title>
-  </ion-toolbar>
+        <ion-title>Add Vehicle Details</ion-title>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
@@ -12,29 +12,27 @@
     <ion-list>
         <ion-list-header><b>Select Vehicle</b></ion-list-header>
         <ion-item>
-          <ion-label>Past Vehicle Number </ion-label>
-          <ion-select value="brown" (ionChange)="change()" [(ngModel)]="vehicleno" okText="Okay" cancelText="Dismiss">
-            <ion-select-option value="{{item.vehicle_no}}"  *ngFor="let item of vehicle" >{{item.vehicle_no}}</ion-select-option>
-           
-          </ion-select>
+            <ion-label>Past Vehicle Number </ion-label>
+            <ion-select value="brown" (ionChange)="change()" [(ngModel)]="vehicleno" okText="Okay" cancelText="Dismiss">
+                <ion-select-option value="{{item.vehicle_no}}" *ngFor="let item of vehicle">{{item.vehicle_no}}
+                </ion-select-option>
+            </ion-select>
         </ion-item>
-      
-      </ion-list>
 
-      <ion-item>
-          <ion-label position="floating" >Enter New Vehicle Number</ion-label>
-          <ion-input [(ngModel)]="vno" ></ion-input>
-        </ion-item>
-        
-        <ion-button color="primary" (click)="onAdd()" style="float:right">Add Vehcile</ion-button>
-        <br/>
-        <br/><br/><br/><br/><br/>
-        <br/><br/><br/><br/><br/>
-        
-        <ion-button expand="full"  style="bottom:30px" (click)="getVehicleNo()" 
-        
-        >Next</ion-button>
+    </ion-list>
 
-        
-        
+    <ion-item>
+        <ion-label position="floating">New Vehicle Number</ion-label>
+        <ion-input [(ngModel)]="tmp_vno" readonly></ion-input>
+    </ion-item>
+    <ion-button color="primary" (click)="onAdd1()" style="float:right">Add Vehcile</ion-button>
+
+    <br />
+    <br /><br /><br /><br /><br />
+    <br /><br /><br /><br /><br />
+
+    <ion-button expand="full" [disabled]="vno==''" style="bottom:30px" (click)="getVehicleNo()">Next</ion-button>
+
+
+
 </ion-content>

@@ -9,59 +9,96 @@
 
 <ion-content padding>
 
+    <form [formGroup]="payment_form" (ngSubmit)="onInsert()">
 
-    <form style="max-width:500px;margin:auto">
-        <ion-label style="font-size:17px">Card Holder Name</ion-label><br>
-        <div class="input-container">
-            <input class="input-field" type="text" placeholder="Card Holder Name" [(ngModel)]="uname" name="usrnm">
-            <i class="fa fa-user icon"></i>
-        </div>
-        <ion-label style="font-size:17px">Card No</ion-label><br>
-        <div class="input-container">
-
-            <input class="input-field" type="number" placeholder="Card No" [(ngModel)]="card_no" name="psw">
-            <i class="fa fa-key icon"></i>
-        </div>
-        <ion-label style="font-size:17px">Card  Name</ion-label><br>
-        <div class="input-container">
-                <input class="input-field" type="text" placeholder="Card Name" [(ngModel)]="cname" name="cn">
-                <i class="far fa-credit-card icon"></i>
+        <ion-item>
+            <ion-icon name="person" item-start></ion-icon>
+            <ion-input formControlName="card_holder_name" type="text" id="card_holder_name" [(ngModel)]="uname" placeholder="Card Holder Name"></ion-input>
+        </ion-item>
+        <div class="validation-errors" *ngIf="!payment_form.get('card_holder_name').valid && payment_form.get('card_holder_name').touched ">
+            <div *ngIf="payment_form.get('card_holder_name').hasError('required')">
+                <ion-icon name="information-circle-outline"></ion-icon>Card Holder Name is must.
             </div>
-           
+        </div>
 
-       
+        <ion-item>
+            <ion-icon name="card" item-start></ion-icon>
+            <ion-input formControlName="card_no" type="text" name="card_no" [(ngModel)]="card_no" placeholder="Card No"></ion-input>
+        </ion-item>
+        <div class="validation-errors" *ngIf="!payment_form.get('card_no').valid && payment_form.get('card_no').touched ">
+            <div *ngIf="payment_form.get('card_no').hasError('required')">
+                <ion-icon name="information-circle-outline"></ion-icon>Card Number is must.</div>
+            <div *ngIf="payment_form.get('card_no').hasError('minLength')">
+                <ion-icon name="information-circle-outline"></ion-icon>Card Number is must of 16 digits.</div>
+            <div *ngIf="payment_form.get('card_no').hasError('maxLength')">
+                <ion-icon name="information-circle-outline"></ion-icon>Card Number is must of 16 digits.</div>
+            <div *ngIf="payment_form.get('card_no').hasError('maxLength')">
+                <ion-icon name="information-circle-outline"></ion-icon>Card Number is must contain only digits.</div>
+        </div>
 
-        <table style="width:300px;">
-            <tr>
-                <td>
-                    <ion-label style="font-size:17px">Expiry Date</ion-label>
-                </td>
-                <td>
-                    <ion-label style="font-size:17px">CVV Code</ion-label>
-                </td>
+        <ion-item>
+            <ion-icon name="briefcase" item-start></ion-icon>
+            <ion-input formControlName="card_name" type="text" id="card_name" name="cn" [(ngModel)]="cname" placeholder="Card Name"></ion-input>
+        </ion-item>
 
-            </tr>
-            <tr>
-                <td>
-                    <div class="input-container">
+        <div class="validation-errors" *ngIf="!payment_form.get('card_name').valid && payment_form.get('card_name').touched ">
+            <div *ngIf="payment_form.get('card_name').hasError('required')">
+                <ion-icon name="information-circle-outline"></ion-icon>Card Name is must.</div>
+        </div>
 
-                        <input class="input-field" type="text" placeholder="MM" name="psw" [(ngModel)]="expiry_mon" style="width:60px">
-                        <input class="input-field" type="text" placeholder="YY" name="psw" [(ngModel)]="expiry_year" style="width:60px">
-                    </div>
-                </td>
+        <ion-row>
+            <ion-col size="6">
+                <ion-item>
+                    <ion-icon name="calendar" item-start></ion-icon>
+                    <ion-input formControlName="expiry_m" type="text" id="expiry_m" [(ngModel)]="expiry_mon" placeholder="MM"></ion-input>
+                </ion-item>
+                <div class="validation-errors" *ngIf="!payment_form.get('expiry_m').valid && payment_form.get('expiry_m').touched ">
+                    <div *ngIf="payment_form.get('expiry_m').hasError('required')">
+                        <ion-icon name="information-circle-outline"></ion-icon>Expiry Month is must.</div>
+                    <div *ngIf="payment_form.get('expiry_m').hasError('min')">
+                        <ion-icon name="information-circle-outline"></ion-icon>Expiry Month must between 1 to 12</div>
+                    <div *ngIf="payment_form.get('expiry_m').hasError('max')">
+                        <ion-icon name="information-circle-outline"></ion-icon>Expiry Month must between 1 to 12</div>
+                </div>
+            </ion-col>
+            <ion-col size="6">
+                <ion-item>
+                    <ion-icon name="calendar" item-start></ion-icon>
+                    <ion-input formControlName="expiry_y" type="text" id="card_holder_name" [(ngModel)]="expiry_year" placeholder="YY"></ion-input>
+                </ion-item>
+                <div class="validation-errors" *ngIf="!payment_form.get('expiry_y').valid && payment_form.get('expiry_y').touched ">
+                    <div *ngIf="payment_form.get('expiry_y').hasError('required')">
+                        <ion-icon name="information-circle-outline"></ion-icon>Expiry Month is must.</div>
+                    <div *ngIf="payment_form.get('expiry_y').hasError('min')">
+                        <ion-icon name="information-circle-outline"></ion-icon>Expiry Year must between 19 to 25</div>
+                    <div *ngIf="payment_form.get('expiry_y').hasError('max')">
+                        <ion-icon name="information-circle-outline"></ion-icon>Expiry Year must between 19 to 25</div>
+                </div>
+            </ion-col>
+        </ion-row>
 
-                <td>
-                    <div class="input-container">
+        <ion-item>
+            <ion-icon name="lock" item-start></ion-icon>
+            <ion-input formControlName="cvv" type="password" name="cvv" [(ngModel)]="cvv" pattern="[0-9]{3}" placeholder="CVV" style="width:120px"></ion-input>
+        </ion-item>
+        <div class="validation-errors" *ngIf="!payment_form.get('cvv').valid && payment_form.get('cvv').touched ">
+            <div *ngIf="payment_form.get('cvv').hasError('required')">
+                <ion-icon name="information-circle-outline"></ion-icon>CVV is must.</div>
+            <div *ngIf="payment_form.get('cvv').hasError('minLength')">
+                <ion-icon name="information-circle-outline"></ion-icon>CVV is must of 3 digits.</div>
+            <div *ngIf="payment_form.get('cvv').hasError('maxLength')">
+                <ion-icon name="information-circle-outline"></ion-icon>CVV is must of 3 digits.</div>
 
-                        <input class="input-field" type="password" pattern="[0-9]{3}" title="Enter Only Three Digit" placeholder="CVV" style="width:120px" name="psw">
-                    </div>
-                </td>
-            </tr>
-        </table>
-        <ion-button  style="position:fixed;width:100%;bottom:0;left:0" routerLinkActive="router-link-active"  (click)="onInsert()">Next</ion-button>
+            <div *ngIf="payment_form.get('cvv').hasError('maxLength')">
+                <ion-icon name="information-circle-outline"></ion-icon>CVV is must contain only digits.</div>
+        </div>
+
+        
+        
+      
 
 
+        
+        <ion-button  [disabled]="!payment_form.valid" style="position:fixed;width:100%;bottom:0;left:0"  (click)="onInsert()">Next</ion-button>
     </form>
-
-
 </ion-content>

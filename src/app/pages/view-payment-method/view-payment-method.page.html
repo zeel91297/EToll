@@ -9,7 +9,7 @@
 </ion-header>
 
 <ion-content padding>
-    <ion-card *ngFor="let item of payment_methods">
+    <!-- <ion-card *ngFor="let item of payment_methods">
         <table>
             <tr>
                 <td>
@@ -17,54 +17,44 @@
                         <p style="color:black;font-size:15px;">Card Holder Name - {{item.user_name}}</p>
                         <p style="color:rgb(119, 116, 116);font-size:13px">Card No - {{item.card_no}}</p>
                         <p style="color:rgb(119, 116, 116);font-size:13px">Card Name - {{item.card_name}}</p>
-                        <p style="color:rgb(119, 116, 116);font-size:13px">Cvv - *** Date -
-                            {{item.expiry_month}}/{{item.expiry_year}}</p>
+                        <p style="color:rgb(119, 116, 116);font-size:13px">Expiry Date -
+                            {{item.expiry_month}}/{{item.expiry_year}}
+                        </p>
                     </ion-card-content>
                 </td>
                 <td style="background:green;color:white;font-size:25px;">
-                    <!-- <ion-icon name="create" routerLink="/edit-payment-details"></ion-icon> -->
                     <ion-icon name="create" (click)="editPayment(item)"></ion-icon>
                 </td>
 
             </tr>
         </table>
-    </ion-card>
+    </ion-card> -->
+    <ion-list>
+        <ion-list-header>
+            List of Saved Cards
+        </ion-list-header>
+        <ion-item-sliding *ngFor="let item of payment_methods">
+            <ion-item>
+                <table>
+                    <tr>
+                        <td>
+                            <p style="color:black;font-size:15px;">Card Holder Name - {{item.user_name}}</p>
+                            <p style="color:rgb(119, 116, 116);font-size:13px">Card No - {{item.card_no}}</p>
+                            <p style="color:rgb(119, 116, 116);font-size:13px">Card Name - {{item.card_name}}
+                            </p>
+                            <p style="color:rgb(119, 116, 116);font-size:13px">Expiry Date - {{item.expiry_month}}/{{item.expiry_year}}
+                            </p>
+                        </td>
+
+                    </tr>
+                </table>
+            </ion-item>
+            <ion-item-options>
+                <button ion-button color="danger" icon-start (click)="onDeleteCard(item.payment_id)">
+                    <ion-icon color="danger" name="trash"></ion-icon>
+                    Delete
+                </button>
+            </ion-item-options>
+        </ion-item-sliding>
+    </ion-list>
 </ion-content>
-<!-- 
-    <ion-card>
-        <table>
-            <tr>
-                <td>
-                    <ion-card-content>
-                        <p style="color:black;font-size:15px;">Card Holder Name - Shivani</p>
-                        <p style="color:rgb(119, 116, 116);font-size:13px">Card No - 123456789</p>
-                        <p style="color:rgb(119, 116, 116);font-size:13px">Cvv - *** Date - 11/20</p>
-                    </ion-card-content>
-                </td>
-                <td style="background:green;color:white;font-size:25px;">
-                    <ion-icon name="create" routerLink="/edit-payment-details"></ion-icon>
-                </td>
-
-            </tr>
-        </table>
-    </ion-card> -->
-
-
-
-<!-- <ion-card>
-        <table>
-            <tr>
-                <td>
-                    <ion-card-content>
-                        <p style="color:black;font-size:15px;">Card Holder Name - Shivani</p>
-                        <p style="color:rgb(119, 116, 116);font-size:13px">Card No - 123456789</p>
-                        <p style="color:rgb(119, 116, 116);font-size:13px">Cvv - *** Date - 11/20</p>
-                    </ion-card-content>
-                </td>
-                <td style="background:green;color:white;font-size:25px;">
-                    <ion-icon name="create" routerLink="/edit-payment-details"></ion-icon>
-                </td>
-
-            </tr>
-        </table>
-    </ion-card> -->

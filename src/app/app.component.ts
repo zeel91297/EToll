@@ -51,7 +51,7 @@ export class AppComponent implements OnInit {
     },
     {
       title: "Sign Out",
-      url: "",
+      url: "/logout",
       icon: "power"
     }
   ];
@@ -69,7 +69,6 @@ export class AppComponent implements OnInit {
     this.initializeApp();
     this.backButtonEnable();
     this.perm.checkGPSPermission();
-    /* this.router.navigate(['']); */
   }
 
   ngOnInit() {
@@ -145,5 +144,10 @@ export class AppComponent implements OnInit {
         }
       });
     });
+  }
+
+  onLogout() {
+    localStorage.clear();
+    this.router.navigate(["/login"]);
   }
 }
