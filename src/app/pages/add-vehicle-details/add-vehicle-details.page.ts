@@ -26,6 +26,7 @@ export class AddVehicleDetailsPage implements OnInit {
   amt:any;
   whichj:any;
   tollPlazas:Tollplazza[]=[];
+  final_tollplaza:Tollplazza[]=[];
   amounts:number[]=[];
   constructor(public router:Router,
     public activateroute:ActivatedRoute,
@@ -38,7 +39,9 @@ export class AddVehicleDetailsPage implements OnInit {
       if(this.router.getCurrentNavigation().extras.state){
         this.tollPlazas=this.router.getCurrentNavigation().extras.state.user;
         this.amounts=this.router.getCurrentNavigation().extras.state.amounts;
+        this.final_tollplaza=this.router.getCurrentNavigation().extras.state.finalplaza;
       }
+      console.log("this.tollplaza  from select_toll_plaza, ",this.final_tollplaza);
    });
 
   }
@@ -57,7 +60,7 @@ export class AddVehicleDetailsPage implements OnInit {
         prev_vehicle_no:this.vno,
         user:this.tollPlazas,
         amounts:this.amounts,
-        
+        finalplaza:this.final_tollplaza
       }
     };
     console.log(navigationExtras);
@@ -81,6 +84,7 @@ export class AddVehicleDetailsPage implements OnInit {
     this.uid=localStorage.getItem('id');
     this.vdata.getVehicleById(this.vehicle_type,this.uid).subscribe((data:VehicleClass[])=>{
       this.vehicle=data;
+      console.log("vehicle data from addvehicle details",this.vehicle)
      if(this.vehicle.length==0)
      {
         tos.present();

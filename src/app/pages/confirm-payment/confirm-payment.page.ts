@@ -32,6 +32,7 @@ import { sendMail } from "../../shared/sendMail";
 import { UserserviceService } from "../../providers/userDB/userservice.service";
 
 import { user } from "../../shared/user_class";
+import { custom_class } from 'src/app/shared/custom_representational_class';
 
 @Component({
   selector: "app-confirm-payment",
@@ -39,6 +40,8 @@ import { user } from "../../shared/user_class";
   styleUrls: ["./confirm-payment.page.scss"]
 })
 export class ConfirmPaymentPage implements OnInit {
+
+
   myDate = new Date().toTimeString();
   ctime = new Date().toDateString();
   amt: any;
@@ -68,8 +71,11 @@ export class ConfirmPaymentPage implements OnInit {
   user: user[] = [];
   vname: string = "";
   pic:string='';
-
-  
+  val: number;
+  name:string='';
+  final_tollplaza:Tollplazza[]=[];
+  buttonDisabled: boolean = false;
+  final_arr_transaction:custom_class[]=[];
   constructor(
     public toast: ToastController,
     public router: Router,
@@ -85,7 +91,9 @@ export class ConfirmPaymentPage implements OnInit {
   ) {
     if (this.router.getCurrentNavigation().extras.state) {
       this.vno = this.router.getCurrentNavigation().extras.state.prev_vehicle_no;
+      console.log("inside confirm-payment this.router.getCurrentNavigation().extras.state.prev_vehicle_no ",this.router.getCurrentNavigation().extras.state.prev_vehicle_no);
       this.amounts = this.router.getCurrentNavigation().extras.state.amounts;
+      console.log("inside confirm-payment this.router.getCurrentNavigation().extras.state.prev_vehicle_no ",this.router.getCurrentNavigation().extras.state.amounts);
     }
     this.activateroute.params.subscribe((data: any) => {
       console.log(data);
@@ -98,9 +106,18 @@ export class ConfirmPaymentPage implements OnInit {
       if (this.router.getCurrentNavigation().extras.state) {
         this.tollPlazas = this.router.getCurrentNavigation().extras.state.user;
         this.amounts = this.router.getCurrentNavigation().extras.state.amounts;
+        this.final_tollplaza=this.router.getCurrentNavigation().extras.state.finalplaza;
         var i = 0;
       }
+      console.log("this.tollplaza  from select_toll_plaza, ",this.final_tollplaza);
     });
+      let iter=0;
+      for(iter=0;iter<this.final_tollplaza.length;iter++){
+        this.final_arr_transaction[iter]=new custom_class(
+          iter+1,this.final_tollplaza[iter].highway_name,this.final_tollplaza[iter].city,
+          this.final_tollplaza[iter].emergency_number,this.amounts[iter],0,this.final_tollplaza[iter].toll_name
+        );
+      }
   }
   ngOnInit() {
     alert(this.pid);
@@ -198,6 +215,7 @@ export class ConfirmPaymentPage implements OnInit {
       (data: any[]) => {
         this.user = data;
         this.recevier = data[0].user_email;
+        this.name=data[0].user_name;
       },
       function(err) {
         console.log(err);
@@ -213,8 +231,8 @@ export class ConfirmPaymentPage implements OnInit {
       tos.present();
       this.subject = "Transaction Status";
       this.text =
-        "<b>Transaction Successfull Receipt Of Transaction is below</b>"
-        "Respected Sir/Madam";
+        "<b>Transaction Successfull Receipt Of Transaction is below</b>"+
+        "Respected Sir/Madam,"+this.name+"gfh";
       this.send
         .sendEmail(new sendMail(this.subject, this.recevier, this.text))
         .subscribe(
@@ -233,7 +251,8 @@ export class ConfirmPaymentPage implements OnInit {
       this.router.navigate(["/transaction-failed"]);
     }
     var i = 0;
-    this.tollPlazas.forEach(element => {
+
+    this.final_tollplaza.forEach(element => {
       var isreturn;
       if (this.whichj == "return") {
         isreturn = 1;
@@ -241,6 +260,8 @@ export class ConfirmPaymentPage implements OnInit {
         isreturn = 0;
       }
       var amount = 0;
+       this.val = Math.floor(1000 + Math.random() * 900000);
+       console.log(this.val);
       this.tdata
         .addTransaction(
           new TransactionClass(
@@ -254,9 +275,12 @@ export class ConfirmPaymentPage implements OnInit {
             status,
             this.amounts[i++],
             isreturn,
+            1,
+            this.val,
             "",
             "",
-            ""
+            "",
+            0
           )
         )
         .subscribe(
@@ -269,5 +293,9 @@ export class ConfirmPaymentPage implements OnInit {
           }
         );
     });
+  }
+  inputBoxIfwrite()
+  {
+    this.buttonDisabled = true; 
   }
 }

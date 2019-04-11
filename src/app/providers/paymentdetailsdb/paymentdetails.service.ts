@@ -11,8 +11,11 @@ export class PaymentdetailsService {
   public uid: number;
   constructor(public http: HttpClient) {}
   public id: number;
-  public url = "http://localhost:3000/payment_user/";
-  public url1 = "http://localhost:3000/payment/";
+  // public url = "http://localhost:3000/payment_user/";
+  // public url1 = "http://localhost:3000/payment/";
+
+  public url='https://tollproject.herokuapp.com/payment_user/';
+  public url1='https://tollproject.herokuapp.com/payment/'
   pay: PaymentDetais[] = [];
   getAllPaymentDetailsByUser(uid: any) {
     this.uid = parseInt(localStorage.getItem("id"));

@@ -27,6 +27,7 @@ export class PaymentMethodPage implements OnInit {
   whichj:any;
   amounts:number[]=[];
   tollPlazas:Tollplazza[]=[];
+  final_tollplaza:Tollplazza[]=[];
   vname:string='';
 
   buttonDisabled: boolean = false;
@@ -44,7 +45,9 @@ export class PaymentMethodPage implements OnInit {
       if(this.router.getCurrentNavigation().extras.state){
         this.tollPlazas=this.router.getCurrentNavigation().extras.state.user;
         this.amounts=this.router.getCurrentNavigation().extras.state.amounts;
+        this.final_tollplaza=this.router.getCurrentNavigation().extras.state.finalplaza;
       }
+      console.log("this.tollplaza  from select_toll_plaza, ",this.final_tollplaza);
    });
   }
 //Get All Payment Method
@@ -70,7 +73,8 @@ export class PaymentMethodPage implements OnInit {
 
         prev_vehicle_no:this.vno,
         user:this.tollPlazas,
-        amounts:this.amounts
+        amounts:this.amounts,
+        finalplaza:this.final_tollplaza
       }
     };
     this.router.navigate(["/payment-details",{

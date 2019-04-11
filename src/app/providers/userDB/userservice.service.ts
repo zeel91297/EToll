@@ -9,8 +9,11 @@ import { HttpClient,HttpHeaders } from '@angular/common/http';
 })
 export class UserserviceService {
   private user:user[]=[];
-  private urllogin:string="http://localhost:3000/userlogin/";
-  private url:string="http://localhost:3000/userss/";
+  // private urllogin:string="http://localhost:3000/userlogin/";
+  // private url:string="http://localhost:3000/userss/";
+
+  private urllogin:string="https://tollproject.herokuapp.com/userlogin/";
+  private url:string="https://tollproject.herokuapp.com/userss/";
   constructor(public http: HttpClient) { }
   userlogin(user:user)
   {

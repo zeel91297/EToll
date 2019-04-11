@@ -33,17 +33,12 @@
   </ion-item>
   <br />
   <table>
-    <ion-radio-group
-      [(ngModel)]="vehicle"
-      (ionChange)="anotherMyAmountChange()"
-      (ionSelect)="onSelectVehicle()"
-      (ionSelect)="OnInit()"
-    >
+    <ion-radio-group [(ngModel)]="vehicle" (ionChange)="anotherMyAmountChange()">
       <tr>
         <td>
           <ion-item>
             <i class="fas fa-motorcycle" style="font-size: 24px;"></i>
-            <ion-radio slot="start" value="two_wheeler"   checked></ion-radio>
+            <ion-radio slot="start" value="two_wheeler"></ion-radio>
           </ion-item>
         </td>
         <td>
@@ -90,27 +85,5 @@
       </tr>
     </ion-radio-group>
   </table>
-
-  <ion-item>
-    <ion-label>Select Toll Plaza</ion-label>
-
-    <ionic-selectable
-      [(ngModel)]="port"
-      [isMultiple]="true"
-      [items]="tp"
-      itemValueField="toll_plaza_id"
-      itemTextField="toll_name"
-      [canSearch]="true"
-      (onChange)="portChange($event)"
-      (ionSelect)="plazaSelect()"
-    >
-    </ionic-selectable>
-  </ion-item>
-
-  <ion-button
-    expand="block"
-    [disabled]="((journey) && (vehicleselect) && (plaza))"
-    (click)="onVehicle()"
-    >Next</ion-button
-  >
+  <ion-button expand="block" [disabled]="((journey) && (vehicleselect) && (plaza))" (click)="onVehicle()">Next</ion-button>
 </ion-content>

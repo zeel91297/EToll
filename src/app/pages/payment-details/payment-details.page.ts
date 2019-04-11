@@ -39,6 +39,7 @@ export class PaymentDetailsPage implements OnInit {
   whichj:any;
   pid:any;
   amounts:number[]=[];
+  final_tollplaza:Tollplazza[]=[];
   constructor(
     public payd: PaymentdetailsService,
     public paymeth: PaymentmethodService,
@@ -57,7 +58,9 @@ export class PaymentDetailsPage implements OnInit {
        if(this.router.getCurrentNavigation().extras.state){
          this.tollPlazas=this.router.getCurrentNavigation().extras.state.user;
          this.amounts=this.router.getCurrentNavigation().extras.state.amounts;
+         this.final_tollplaza=this.router.getCurrentNavigation().extras.state.finalplaza;
        }
+       console.log("this.tollplaza  from select_toll_plaza, ",this.final_tollplaza);
     });
   }
   //Get Payment Details By User
@@ -99,7 +102,8 @@ onRadioChange(p_id) {
       state:{
         prev_vehicle_no:this.vno,
         user:this.tollPlazas,
-        amounts:this.amounts
+        amounts:this.amounts,
+        finalplaza:this.final_tollplaza
       }
     };
     this.router.navigate(["/confirm-payment",{
@@ -118,7 +122,8 @@ onRadioChange(p_id) {
       state:{
         prev_vehicle_no:this.vno,
         user:this.tollPlazas,
-        amounts:this.amounts
+        amounts:this.amounts,
+        finalplaza:this.final_tollplaza
       }
     };
     this.router.navigate(["/payment-details-add",{

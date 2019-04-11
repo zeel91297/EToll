@@ -26,7 +26,8 @@ export class PaymentDetailsAddPage implements OnInit {
   amt:any;
   vehicle_type:any;
   tollPlazas:Tollplazza[]=[];
-  amounts:number[]=[]
+  amounts:number[]=[];
+  final_tollplaza:Tollplazza[]=[];
   constructor(
     public pdata: PaymentdetailsService,
     public paym: PaymentmethodService,
@@ -35,6 +36,7 @@ export class PaymentDetailsAddPage implements OnInit {
   ) {
     if(this.router.getCurrentNavigation().extras.state){
       this.vno=this.router.getCurrentNavigation().extras.state.prev_vehicle_no;
+      
     }
     this.activateroute.params.subscribe((data:any)=>
    {
@@ -44,7 +46,9 @@ export class PaymentDetailsAddPage implements OnInit {
       if(this.router.getCurrentNavigation().extras.state){
         this.tollPlazas=this.router.getCurrentNavigation().extras.state.user;
         this.amounts=this.router.getCurrentNavigation().extras.state.amounts;
+        this.final_tollplaza=this.router.getCurrentNavigation().extras.state.finalplaza;
       }
+      console.log("this.tollplaza  from select_toll_plaza, ",this.final_tollplaza);
    });
   }
   uname = '';
@@ -73,7 +77,8 @@ export class PaymentDetailsAddPage implements OnInit {
 
         prev_vehicle_no:this.vno,
         user:this.tollPlazas,
-        amounts:this.amounts
+        amounts:this.amounts,
+        finalplaza:this.final_tollplaza
       }
     };
     this.router.navigate(["/confirm-payment",{

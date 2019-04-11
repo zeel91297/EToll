@@ -22,7 +22,6 @@ export class SelectTollPlazaPage implements OnInit {
   ports: Port[];
   port: Port;
   tp: Tollplazza[] = [];
-  tid: string = "";
   totalAmount: number = 0;
   tollplazas: number[] = [];
   whichJ: any;
@@ -38,29 +37,31 @@ export class SelectTollPlazaPage implements OnInit {
   plaza: boolean = true;
   vtid: any;
   id = 0;
-  amounts:number[]=[];
-
+  amounts: number[] = [];
+  tid: number[] = [];
+  tollpid: number;
+  final_tollplaza: Tollplazza[] = [];
   constructor(
     public tpdata: TollplazaService,
     public activateroute: ActivatedRoute,
     public vtdata: vehicleTypeProvider,
     public router: Router
-  ) {}
-//------------Give All The Toll Plaza
-  ngOnInit() {
-    this.tpdata.getAllTollPlaza().subscribe(
-      (data: any[]) => {
-        this.tp=data;
-      },
-      err => {
-        console.log(err);
-      },
-      () => {
-        console.log("Completed");
+  ) {
+    this.activateroute.params.subscribe((data: any) => {
+      if (this.router.getCurrentNavigation().extras.state) {
+        this.tid = this.router.getCurrentNavigation().extras.state.plazaids;
+        this.final_tollplaza = this.router.getCurrentNavigation().extras.state.finalplaza;
       }
+    });
+    console.log("this.tid ", this.tid);
+    console.log(
+      "this.tollplaza  from select_toll_plaza, ",
+      this.final_tollplaza
     );
   }
-//-----Give All VehicleTypes
+  //------------Give All The Toll Plaza
+  ngOnInit() {}
+  //-----Give All VehicleTypes
   OnInit() {
     this.vtdata.getAllVehicleType().subscribe((data: vehicleType[]) => {
       if (this.vehicle == "two_wheeler") {
@@ -84,44 +85,42 @@ export class SelectTollPlazaPage implements OnInit {
   getId(num) {
     this.vtid = num;
   }
-  //This is function for showing all toll plaza
-  portChange(event: { component: IonicSelectableComponent; value: any }) {
-    this.selectedTollPlaza = event.value;
-    // console.log(this.selectedTollPlaza," <- ");
-    this.myAmountChange();
-  }
-  //For checking purpose but important
-  myClick() {
-    console.log("myClick()");
-  }
   //it will send params on next page
   onVehicle() {
     let navigationExtras: NavigationExtras = {
       state: {
-        user: this.selectedTollPlaza,
-        amounts:this.amounts
+        user: this.tid,
+        amounts: this.amounts,
+        finalplaza: this.final_tollplaza
       }
     };
-    this.router.navigate(["/add-vehicle-details",{
-      prev_vehicle_type: this.id,
+    this.router.navigate(
+      [
+        "/add-vehicle-details",
+        {
+          prev_vehicle_type: this.id,
           prev_amt: this.totalAmount,
-          prev_journey:this.whichJ
-    }],navigationExtras);
+          prev_journey: this.whichJ,
+          prev_tid: this.tollpid
+        }
+      ],
+      navigationExtras
+    );
   }
   //For get vehicleid
   anotherMyAmountChange() {
-    if (this.vehicle != '') {
-      if (this.vehicle == 'two_wheeler') {
+    if (this.vehicle != "") {
+      if (this.vehicle == "two_wheeler") {
         this.id = 1;
-      } else if (this.vehicle == 'four_wheeler') {
+      } else if (this.vehicle == "four_wheeler") {
         this.id = 2;
-      } else if (this.vehicle == 'bus') {
+      } else if (this.vehicle == "bus") {
         this.id = 3;
-      } else if (this.vehicle == 'truck') {
+      } else if (this.vehicle == "truck") {
         this.id = 4;
-      } else if (this.vehicle == 'moster') {
+      } else if (this.vehicle == "moster") {
         this.id = 5;
-      } else if (this.vehicle == 'six_wheeler') {
+      } else if (this.vehicle == "six_wheeler") {
         this.id = 6;
       }
     }
@@ -129,70 +128,52 @@ export class SelectTollPlazaPage implements OnInit {
   }
   //for get price of selected toll
   myAmountChange() {
-    console.log('myAmountChange');
-    
-    this.totalAmount = 0;
     if (
-      this.vehicle !== '' &&
+      this.vehicle !== "" &&
       this.vehicle != null &&
-      this.selectedTollPlaza.length !== 0 &&
-      this.whichJ !== '' &&
+      this.whichJ !== "" &&
       this.whichJ != null
     ) {
-      var my_amounts:number[]=[];
-      var i=0;
-      this.selectedTollPlaza.forEach(element => {
-        this.tpdata
-          .getTollDetails(element.toll_plaza_id)
-          .subscribe((data: Tollplazza[]) => {
-            if (this.vehicle === 'two_wheeler' && this.whichJ === 'single') {
-              this.amt = data[0].twheeler_one;
-            } else if (
-              this.vehicle === 'two_wheeler' &&
-              this.whichJ === 'return'
-            ) {
-              this.amt = data[0].twheeler_return;
-            } else if (
-              this.vehicle === 'four_wheeler' &&
-              this.whichJ === 'single'
-            ) {
-              this.amt = data[0].fwheeler_one;
-            } else if (
-              this.vehicle === 'four_wheeler' &&
-              this.whichJ === 'return'
-            ) {
-              this.amt = data[0].fwheeler_return;
-            } else if (this.vehicle === 'bus' && this.whichJ === 'single') {
-              this.amt = data[0].bus_one;
-            } else if (this.vehicle === 'bus' && this.whichJ === 'return') {
-              this.amt = data[0].bus_return;
-            } else if (this.vehicle === 'truck' && this.whichJ === 'single') {
-              this.amt = data[0].truck_one;
-            } else if (this.vehicle === 'truck' && this.whichJ === 'return') {
-              this.amt = data[0].truck_return;
-            } else if (this.vehicle === 'monster' && this.whichJ === 'single') {
-              this.amt = data[0].HCM_one;
-            } else if (this.vehicle === 'monster' && this.whichJ === 'return') {
-              this.amt = data[0].HCM_return;
-            } else if (
-              this.vehicle === 'six_wheeler' &&
-              this.whichJ === 'single'
-            ) {
-              this.amt = data[0].swheeler_one;
-            } else if (
-              this.vehicle === 'six_wheeler' &&
-              this.whichJ === 'return'
-            ) {
-              this.amt = data[0].swheeler_return;
-            } else {
-              console.log('Error');
-            }
-            my_amounts[i++]=this.amt;
-            this.amounts=my_amounts;
-            this.totalAmount =
-              parseInt(this.amt + '') + parseInt(this.totalAmount + '');
-          });
-      });
+      this.totalAmount = 0;
+      var i = 0;
+      this.amt=0;
+      for (var i = 0; i < this.final_tollplaza.length; i++) {
+        if (this.vehicle === "two_wheeler" && this.whichJ === "single") {
+          this.amt = this.final_tollplaza[i].two_wheeler_one;
+        } else if (this.vehicle === "two_wheeler" && this.whichJ === "return") {
+          this.amt = this.final_tollplaza[i].two_wheeler_return;
+        } else if (
+          this.vehicle === "four_wheeler" &&
+          this.whichJ === "single"
+        ) {
+          this.amt = this.final_tollplaza[i].four_wheeler_one;
+        } else if (
+          this.vehicle === "four_wheeler" &&
+          this.whichJ === "return"
+        ) {
+          this.amt = this.final_tollplaza[i].four_wheeler_return;
+        } else if (this.vehicle === "bus" && this.whichJ === "single") {
+          this.amt = this.final_tollplaza[i].bus_one;
+        } else if (this.vehicle === "bus" && this.whichJ === "return") {
+          this.amt = this.final_tollplaza[i].bus_return;
+        } else if (this.vehicle === "truck" && this.whichJ === "single") {
+          this.amt = this.final_tollplaza[i].truck_one;
+        } else if (this.vehicle === "truck" && this.whichJ === "return") {
+          this.amt = this.final_tollplaza[i].truck_return;
+        } else if (this.vehicle === "monster" && this.whichJ === "single") {
+          this.amt = this.final_tollplaza[i].HCM_one;
+        } else if (this.vehicle === "monster" && this.whichJ === "return") {
+          this.amt = this.final_tollplaza[i].HCM_return;
+        } else if (this.vehicle === "six_wheeler" && this.whichJ === "single") {
+          this.amt = this.final_tollplaza[i].six_wheeler_one;
+        } else if (this.vehicle === "six_wheeler" && this.whichJ === "return") {
+          this.amt = this.final_tollplaza[i].six_wheeler_return;
+        } else {
+          console.log("Error");
+        }
+        this.amounts[i]=this.amt;
+        this.totalAmount =this.amt+this.totalAmount;
+      }
     } else {
       this.totalAmount = 0;
     }

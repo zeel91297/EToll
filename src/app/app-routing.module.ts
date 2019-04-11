@@ -31,6 +31,11 @@ const routes: Routes = [
   { path: 'confirm-payment', loadChildren: './pages/confirm-payment/confirm-payment.module#ConfirmPaymentPageModule' },
   { path: 'add-vehicle-details', loadChildren: './pages/add-vehicle-details/add-vehicle-details.module#AddVehicleDetailsPageModule' },
   { path: 'transaction-failed', loadChildren: './pages/transaction-failed/transaction-failed.module#TransactionFailedPageModule' },
+  { path: 'homeselect/:myid', loadChildren: './homeselect/homeselect.module#HomeselectPageModule' },
+  { path: 'varify-rout', loadChildren: './varify-rout/varify-rout.module#VarifyRoutPageModule' },
+
+
+
 
 
 ];
