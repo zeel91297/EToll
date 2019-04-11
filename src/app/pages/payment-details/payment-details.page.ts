@@ -1,7 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 
 import { PaymentdetailsService } from "../../providers/paymentdetailsdb/paymentdetails.service";
-
 import { PaymentDetais } from "../../shared/paymentdetails";
 
 import { PaymentMethod } from "../../shared/paymentmethod_class";

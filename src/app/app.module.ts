@@ -49,6 +49,7 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { BackgroundGeolocation } from '@ionic-native/background-geolocation/ngx';
 import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 import { Md5 } from 'ts-md5';
+
 //ends here
 
 @NgModule({
