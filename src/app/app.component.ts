@@ -40,7 +40,7 @@ export class AppComponent implements OnInit {
       icon: "pricetags"
     },
     {
-      title: "Payment Options",
+      title: "My Saved Cards",
       url: "/payment-options",
       icon: "wallet"
     },

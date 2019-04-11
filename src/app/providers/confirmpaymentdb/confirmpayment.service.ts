@@ -7,7 +7,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class ConfirmpaymentService {
 
-  public url='http://localhost:3000/transactionuser/';
+  //public url='http://localhost:3000/transactionuser/';
+  public url:'https://tollproject.herokuapp.com/transactionuser/'
   constructor(public http:HttpClient) { }
   getAllTransactionByUser(uid:any)
   {
