@@ -93,58 +93,12 @@
                 <ion-icon name="information-circle-outline"></ion-icon>CVV is must contain only digits.</div>
         </div>
 
-        <!-- <table style="width:300px;">
-            <tr>
-                <td>
-                    <ion-label style="font-size:17px">Expiry Date</ion-label>
-                </td>
+        
+        
+      
 
-            </tr>
-            <tr>
-                <td>
-                    <div class="input-container">
 
-                        <input class="input-field" type="text" placeholder="MM" name="psw" formControlName="expiry_m" [(ngModel)]="expiry_mon" style="width:60px">
-                        <input class="input-field" type="text" formControlName="expiry_y" placeholder="YY" name="psw" [(ngModel)]="expiry_year" style="width:60px">
-                    </div>
-                    <div *ngIf="!payment_form.get('expiry_m').valid && payment_form.get('expiry_m').touched ">
-                        <div *ngIf="payment_form.get('expiry_m').hasError('required')">
-                            Expiry Month is must.</div>
-                        <div *ngIf="payment_form.get('expiry_m').hasError('min')">
-                            Expiry Month must between 1 to 12</div>
-                        <div *ngIf="payment_form.get('expiry_m').hasError('max')">
-                            Expiry Month must between 1 to 12</div>
-                    </div>
-
-                    <div *ngIf="!payment_form.get('expiry_y').valid && payment_form.get('expiry_y').touched ">
-                        <div *ngIf="payment_form.get('expiry_y').hasError('required')">
-                            Expiry Month is must.</div>
-                        <div *ngIf="payment_form.get('expiry_y').hasError('min')">
-                            Expiry Year must between 19 to 25</div>
-                        <div *ngIf="payment_form.get('expiry_y').hasError('max')">
-                            Expiry Year must between 19 to 25</div>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <div class="input-container">
-                        <input class="input-field" formControlName="cvv" type="password" pattern="[0-9]{3}" title="Enter Only Three Digit" placeholder="CVV" style="width:120px" name="psw">
-                    </div>
-                    <div *ngIf="!payment_form.get('cvv').valid && payment_form.get('cvv').touched ">
-                        <div *ngIf="payment_form.get('cvv').hasError('required')">
-                            CVV is must.</div>
-                        <div *ngIf="payment_form.get('cvv').hasError('minLength')">
-                            CVV is must of 3 digits.</div>
-                        <div *ngIf="payment_form.get('cvv').hasError('maxLength')">
-                            CVV is must of 3 digits.</div>
-
-                        <div *ngIf="payment_form.get('cvv').hasError('maxLength')">
-                            CVV is must contain only digits.</div>
-                    </div>
-                </td>
-            </tr>
-        </table> -->
-        <ion-button [routerLink]="['/transection-status']" [disabled]="!payment_form.valid" style="position:fixed;width:100%;bottom:0;left:0" routerLinkActive="router-link-active" (click)="onInsert()">Next</ion-button>
+        
+        <ion-button  [disabled]="!payment_form.valid" style="position:fixed;width:100%;bottom:0;left:0"  (click)="onInsert()">Next</ion-button>
     </form>
 </ion-content>

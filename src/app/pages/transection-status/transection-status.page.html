@@ -10,7 +10,7 @@
 
 <ion-content padding>
 
-    <ion-card *ngIf=" a == 0" (click)="onclick()">
+    <ion-card >
         <ion-card-header>
 
             <ion-icon name="checkmark-circle" style="font-size:80px;margin-left:70px;"></ion-icon>
@@ -20,17 +20,4 @@
             Transaction successfully done.
         </ion-card-content>
     </ion-card>
-
-
-
-    <ion-card *ngIf=" a == 1" (click)="onclick1()">
-        <ion-card-header>
-            <ion-icon name="close" style="font-size:80px;margin-left:70px;"></ion-icon>
-        </ion-card-header>
-
-        <ion-card-content style="margin-left:20px;">
-            Transaction Failed.
-        </ion-card-content>
-    </ion-card>
-
 </ion-content>

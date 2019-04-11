@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-toolbar>
+      <ion-buttons slot="start">
+          <ion-back-button  defaultHref="home"  ></ion-back-button>
+        </ion-buttons>
+    <ion-title>Toll Plaza</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+
+  <ion-list>
+    <ion-item *ngFor="let item of plaza">
+      <ion-label>{{item.toll_name}} | {{item.city}}</ion-label>
+      <ion-checkbox slot="end" value="{{item.toll_plaza_id}}" (ionChange)="onSelect(item.toll_plaza_id)"  >{{item.toll_name}}</ion-checkbox>
+    </ion-item>
+  </ion-list>
+
+
+  <ion-button
+  style="position:fixed;width:100%;bottom:0;left:0"
+  (click)="onClick()"
+  >Next</ion-button>
+
+</ion-content>

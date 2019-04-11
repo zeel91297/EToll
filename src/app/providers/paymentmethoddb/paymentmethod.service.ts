@@ -7,7 +7,9 @@ import { PaymentMethod } from "../../shared/paymentmethod_class";
   providedIn: 'root'
 })
 export class PaymentmethodService {
-  public url:string="http://localhost:3000/payment_method/";
+  //public url:string="http://localhost:3000/payment_method/";
+
+  public url='https://tollproject.herokuapp.com/payment_method';
 
 
   constructor(public http:HttpClient) { }
