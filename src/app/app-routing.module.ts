@@ -33,12 +33,18 @@ const routes: Routes = [
   { path: 'confirm-payment', loadChildren: './pages/confirm-payment/confirm-payment.module#ConfirmPaymentPageModule' },
   { path: 'add-vehicle-details', loadChildren: './pages/add-vehicle-details/add-vehicle-details.module#AddVehicleDetailsPageModule' },
   { path: 'verification-user', loadChildren: './pages/verification-user/verification-user.module#VerificationUserPageModule' },
-  { path: 'forgetpassword', loadChildren: './pages/forgetpassword/forgetpassword.module#ForgetpasswordPageModule' },  { path: 'changepassword', loadChildren: './changepassword/changepassword.module#ChangepasswordPageModule' },
-
-
+  { path: 'forgetpassword', loadChildren: './pages/forgetpassword/forgetpassword.module#ForgetpasswordPageModule' },
+  { path: 'changepassword', loadChildren: './changepassword/changepassword.module#ChangepasswordPageModule' },
 
 ];
   
+//./payment-options/payment-options.module#PaymentOptionsPageModule
+@NgModule({
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
+})
+
+
 //./payment-options/payment-options.module#PaymentOptionsPageModule
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
