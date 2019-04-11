@@ -7,6 +7,8 @@ import { IonicModule } from '@ionic/angular';
 
 import { SignupPage } from './signup.page';
 import { UserserviceService } from 'src/app/providers/userDB/userservice.service';
+import { Md5 } from 'ts-md5';
+
 
 const routes: Routes = [
   {
@@ -24,7 +26,8 @@ const routes: Routes = [
     RouterModule.forChild(routes)
   ],
   providers: [
-    UserserviceService
+    UserserviceService,
+    Md5
   ],
 
   declarations: [SignupPage]

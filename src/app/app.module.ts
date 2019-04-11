@@ -40,6 +40,7 @@ import { TollplazaService } from "./providers/tollplazadb/tollplaza.service";
 import { UserserviceService } from './providers/userDB/userservice.service';
 import { VehicledbProvider } from './providers/vehicledb/vehicledb';
 import { vehicleTypeProvider } from './providers/vehicledb/vehicleType';
+import { PaymentmethodService } from "./providers/paymentmethoddb/paymentmethod.service";
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 //Background Geolocation
 import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
@@ -47,6 +48,7 @@ import { LocationAccuracy } from '@ionic-native/location-accuracy/ngx';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { BackgroundGeolocation } from '@ionic-native/background-geolocation/ngx';
 import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
+import { Md5 } from 'ts-md5';
 //ends here
 
 @NgModule({
@@ -59,7 +61,7 @@ import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
     IonicSelectableModule,
     HttpClientModule,
     ReactiveFormsModule,
-  FormsModule
+    FormsModule,
   ],
   providers: [
     StatusBar,
@@ -69,7 +71,7 @@ import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
     UserserviceService,
     VehicledbProvider,
     vehicleTypeProvider,
-
+    PaymentmethodService,
     /*
     Background Geolocation
     */
@@ -77,8 +79,9 @@ import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
     LocationAccuracy,
     Geolocation,
     BackgroundGeolocation,
-    LocalNotifications
+    LocalNotifications,
+    Md5
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }

@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 
-import { IonicModule } from '@ionic/angular';
+import { IonicModule} from '@ionic/angular';
 
 import { LoginPage } from './login.page';
 import { UserserviceService } from '../providers/userDB/userservice.service';
@@ -27,7 +27,8 @@ const routes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     IonicModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    
   ],
   providers: [
     UserserviceService

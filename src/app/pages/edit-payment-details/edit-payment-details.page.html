@@ -22,35 +22,33 @@
     </div> -->
         <ion-item>
             <ion-label position="floating">Card Name</ion-label>
-            <ion-input formControlName="card_name" type="text" id="card_name" name="card_name"> <i
-                    class="fa fa-user icon"> </i>
+            <ion-input formControlName="card_name" type="text" id="card_name" name="card_name"> <i class="fa fa-user icon"> </i>
             </ion-input>
-            
+
         </ion-item>
         <div *ngIf="!edit_payment_form.get('card_name').valid && edit_payment_form.get('card_name').touched ">
-                <div *ngIf="edit_payment_form.get('card_name').hasError('required')">
-                    Card Name is must.</div>
-            </div>
+            <div *ngIf="edit_payment_form.get('card_name').hasError('required')">
+                Card Name is must.</div>
+        </div>
         <br>
         <ion-item>
             <ion-label position="floating">Card Number</ion-label>
-            <ion-input formControlName="card_no" type="number" id="card_no" name="card_no"> <i
-                    class="fa fa-key icon"></i>
+            <ion-input formControlName="card_no" type="number" id="card_no" name="card_no"> <i class="fa fa-key icon"></i>
             </ion-input>
-           
+
         </ion-item>
         <div *ngIf="!edit_payment_form.get('card_no').valid && edit_payment_form.get('card_no').touched ">
-                <div *ngIf="edit_payment_form.get('card_no').hasError('required')">
-                    Card Number is must.</div>
-                <div *ngIf="edit_payment_form.get('card_no').hasError('minLength')">
-                    Card Number is must of 12 digits.</div>
-                <div *ngIf="edit_payment_form.get('card_no').hasError('maxLength')">
-                    Card Number is must of 12 digits.</div>
+            <div *ngIf="edit_payment_form.get('card_no').hasError('required')">
+                Card Number is must.</div>
+            <div *ngIf="edit_payment_form.get('card_no').hasError('minLength')">
+                Card Number is must of 12 digits.</div>
+            <div *ngIf="edit_payment_form.get('card_no').hasError('maxLength')">
+                Card Number is must of 12 digits.</div>
 
-                <div *ngIf="edit_payment_form.get('card_no').hasError('maxLength')">
-                    Card Number is must contain only digits.</div>
+            <div *ngIf="edit_payment_form.get('card_no').hasError('maxLength')">
+                Card Number is must contain only digits.</div>
 
-            </div>
+        </div>
         <br>
         <ion-label>Expiry Date</ion-label>
         <table>
@@ -73,34 +71,39 @@
                     <ion-item>
                         <ion-label position="floating">Expiry Year</ion-label>
                         <ion-input type="number" formControlName="expiry_y" name="expiry_y" id="expiry_y"></ion-input>
-                        
+
                     </ion-item>
-                    <div
-                            *ngIf="!edit_payment_form.get('expiry_y').valid && edit_payment_form.get('expiry_y').touched ">
-                            <div *ngIf="edit_payment_form.get('expiry_y').hasError('required')">
-                                Expiry Month is must.</div>
-                            <div *ngIf="edit_payment_form.get('expiry_y').hasError('min')">
-                                Expiry Year must between 19 to 25</div>
-                            <div *ngIf="edit_payment_form.get('expiry_y').hasError('max')">
-                                Expiry Year must between 19 to 25</div>
-                        </div>
+                    <div *ngIf="!edit_payment_form.get('expiry_y').valid && edit_payment_form.get('expiry_y').touched ">
+                        <div *ngIf="edit_payment_form.get('expiry_y').hasError('required')">
+                            Expiry Year is must.</div>
+                        <div *ngIf="edit_payment_form.get('expiry_y').hasError('min')">
+                            Expiry Year must between 19 to 25</div>
+                        <div *ngIf="edit_payment_form.get('expiry_y').hasError('max')">
+                            Expiry Year must between 19 to 25</div>
+                    </div>
                 </td>
             </tr><br>
             <tr>
-                <ion-item>
-                    <ion-select formControlName="method_type" [compareWith]="compareFn" id="method_type" name="method_type">
-                        <ion-select-option value="{{i.method_id}}" *ngFor="let i of paymentMethods">
-                            {{i.method_name}}</ion-select-option> 
-                    </ion-select>
-                </ion-item>
-                <div
-                    *ngIf="!edit_payment_form.get('method_type').valid && edit_payment_form.get('method_type').touched ">
-                    <div *ngIf="edit_payment_form.get('method_type').hasError('required')">
-                        Payment Method Type is must.</div>
-                </div>
+                <td>
+                    <ion-label>Select Payment Method</ion-label>
+                </td>
+                <td>
+
+                    <ion-item>
+                        <!-- <ion-label>Payment Method</ion-label>[compareWith]="compareFn"  -->
+                        <!-- placeholder="Select Payment Method"  -->
+                        <ion-select formControlName="method_type" [(ngModel)]="payment_method" [compareWith]="compareFn" id="method_type" name="method_type">
+                            <ion-select-option value="{{i.method_id}}" [value]="method_type" *ngFor="let i of paymentMethods">
+                                {{i.method_name}}</ion-select-option>
+                        </ion-select>
+                    </ion-item>
+                    <div *ngIf="!edit_payment_form.get('method_type').valid && edit_payment_form.get('method_type').touched ">
+                        <div *ngIf="edit_payment_form.get('method_type').hasError('required')">
+                            Payment Method Type is must.</div>
+                    </div>
+                </td>
             </tr>
         </table>
-        <ion-button [disabled]="!edit_payment_form.valid" style="position:fixed;width:100%;bottom:0;left:0" routerLinkActive="router-link-active" (click)="submit()"
-            type="submit">Update</ion-button>
+        <ion-button [disabled]="!edit_payment_form.valid" style="position:fixed;width:100%;bottom:0;left:0" routerLinkActive="router-link-active" (click)="submit()" type="submit">Update</ion-button>
     </form>
 </ion-content>
