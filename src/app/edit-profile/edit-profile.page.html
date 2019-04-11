@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-toolbar>
+      <ion-icon (click)="cancel()" style="position: absolute;left:5%;size: 10px" name="arrow-back"></ion-icon>
+    <ion-title  style="position: absolute;left:15%">EditProfile</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+    <ion-item>
+        <ion-label position="floating">Name :</ion-label>
+        <ion-input [(ngModel)]="us.user_name"></ion-input>
+      </ion-item>
+      <ion-item>
+          <ion-label position="floating">Mobile:</ion-label>
+          <ion-input [(ngModel)]="us.contact_no"></ion-input>
+        </ion-item>
+        <ion-button style="position: absolute;bottom: 5%;left:1%;width: 97%" expand="full" (click)="onDone()">Save Changes</ion-button><br>
+</ion-content>

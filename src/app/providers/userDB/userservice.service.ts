@@ -1,16 +1,15 @@
 import { Injectable } from '@angular/core';
-import { Response,RequestOptions, Headers } from '@angular/http';
-
 import { HttpClient,HttpHeaders } from '@angular/common/http';
- import { user } from "../../shared/user_class";
+import { user } from "../../shared/user_class";
+import { User } from '../classes/classUser';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserserviceService {
-  private user:user[]=[];
   private urllogin:string="http://localhost:3000/userlogin/";
   private url:string="http://localhost:3000/userss/";
+  private urltranactionuser:string="http://localhost:3000/transactionuser/";
   constructor(public http: HttpClient) { }
   userlogin(user:user)
   {
@@ -24,5 +23,21 @@ export class UserserviceService {
     const body=JSON.stringify(user);
     return this.http.post(this.url,body,{headers:new HttpHeaders().set('Content-type','application/json')});
   
+  }
+
+  updateUser(us:user)
+  {
+    console.log(us);
+    const body=JSON.stringify(us);
+    return this.http.put(this.urllogin,body,{headers:new HttpHeaders().set('Content-type','application/json')});
+
+  }
+  getTransactionByUserId(id:any)
+  {
+    return this.http.get(this.urltranactionuser+id);
+  }
+  getUserById(id:any)
+  {
+    return this.http.get(this.url+id);
   }
 }
