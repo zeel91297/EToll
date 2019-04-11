@@ -1,27 +1,21 @@
 import { Injectable } from '@angular/core';
 import { HttpClient,HttpHeaders } from '@angular/common/http';
-<<<<<<< HEAD
 import { user } from "../../shared/user_class";
 import { User } from '../classes/classUser';
-=======
- import { user } from "../../shared/user_class";
  import { user_mail } from "../../shared/user_mail";
->>>>>>> 8648f830ba1c40aeb2bc503564746c62e8f4c096
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserserviceService {
-  private urllogin:string="http://localhost:3000/userlogin/";
-  private url:string="http://localhost:3000/userss/";
-<<<<<<< HEAD
-  private urltranactionuser:string="http://localhost:3000/transactionuser/";
-=======
-  private url_mail="https://mailappdemo.herokuapp.com/mail/"
-  private url_password_update="http://localhost:3000/userpassword/";
-  private url_verify="http://localhost:3000/verifyuser/";
-  private url_resend="http://localhost:3000/resendotp/";
->>>>>>> 8648f830ba1c40aeb2bc503564746c62e8f4c096
+  private urllogin:string="http://tollproject.herokuapp.com/userlogin/";
+  private url:string="http://tollproject.herokuapp.com/userss/";
+  private url_mail="http://tollproject.herokuapp.com/mail/"
+  private url_password_update="http://tollproject.herokuapp.com/userpassword/";
+  private url_verify="http://tollproject.herokuapp.com/verifyuser/";
+  private url_resend="http://tollproject.herokuapp.com/resendotp/";
+  private urltranactionuser="http://tollproject.herokuapp.com/transactionuser/";
+
   constructor(public http: HttpClient) { }
   userlogin(user:user)
   {
@@ -38,7 +32,6 @@ export class UserserviceService {
     return this.http.post(this.url,body,{headers:new HttpHeaders().set('Content-type','application/json')});
   
   }
-<<<<<<< HEAD
 
   updateUser(us:user)
   {
@@ -47,14 +40,21 @@ export class UserserviceService {
     return this.http.put(this.urllogin,body,{headers:new HttpHeaders().set('Content-type','application/json')});
 
   }
+  changePassword(newpass:string,id:any)
+  {
+    alert("URL side called");
+    console.log(this.url+newpass+"/"+id);
+    return this.http.put(this.url+newpass+"/"+id,{headers:new HttpHeaders().set('Content-type','application/json')});
+  }
   getTransactionByUserId(id:any)
   {
     return this.http.get(this.urltranactionuser+id);
   }
   getUserById(id:any)
   {
+    console.log('user_id'+id);
     return this.http.get(this.url+id);
-=======
+  }
   user_Email(user:user_mail){
     const body=JSON.stringify(user);
     return this.http.post(this.url_mail,body,{headers:new HttpHeaders().set('Content-type','application/json')});
@@ -89,6 +89,5 @@ export class UserserviceService {
     console.log("in service");
     const body=JSON.stringify(user);
     return this.http.post(this.url_resend,body,{headers:new HttpHeaders().set('Content-type','application/json')});
->>>>>>> 8648f830ba1c40aeb2bc503564746c62e8f4c096
   }
 }

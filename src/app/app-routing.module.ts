@@ -27,14 +27,14 @@ const routes: Routes = [
   { path: 'payment-details-add', loadChildren: './pages/payment-details-add/payment-details-add.module#PaymentDetailsAddPageModule' },
   { path: 'transection-status', loadChildren: './pages/transection-status/transection-status.module#TransectionStatusPageModule' },
   { path: 'view-payment-method', loadChildren: './pages/view-payment-method/view-payment-method.module#ViewPaymentMethodPageModule' },
-<<<<<<< HEAD
-  { path: 'edit-payment-details', loadChildren: './pages/edit-payment-details/edit-payment-details.module#EditPaymentDetailsPageModule' },  { path: 'edit-profile', loadChildren: './edit-profile/edit-profile.module#EditProfilePageModule' },
-=======
+  { path: 'edit-payment-details', loadChildren: './pages/edit-payment-details/edit-payment-details.module#EditPaymentDetailsPageModule' },
+  { path: 'edit-profile', loadChildren: './edit-profile/edit-profile.module#EditProfilePageModule' },
   { path: 'edit-payment-details', loadChildren: './pages/edit-payment-details/edit-payment-details.module#EditPaymentDetailsPageModule' },
   { path: 'confirm-payment', loadChildren: './pages/confirm-payment/confirm-payment.module#ConfirmPaymentPageModule' },
-  { path: 'add-vehicle-details', loadChildren: './pages/add-vehicle-details/add-vehicle-details.module#AddVehicleDetailsPageModule' },  { path: 'verification-user', loadChildren: './pages/verification-user/verification-user.module#VerificationUserPageModule' },
-  { path: 'forgetpassword', loadChildren: './pages/forgetpassword/forgetpassword.module#ForgetpasswordPageModule' },
->>>>>>> 8648f830ba1c40aeb2bc503564746c62e8f4c096
+  { path: 'add-vehicle-details', loadChildren: './pages/add-vehicle-details/add-vehicle-details.module#AddVehicleDetailsPageModule' },
+  { path: 'verification-user', loadChildren: './pages/verification-user/verification-user.module#VerificationUserPageModule' },
+  { path: 'forgetpassword', loadChildren: './pages/forgetpassword/forgetpassword.module#ForgetpasswordPageModule' },  { path: 'changepassword', loadChildren: './changepassword/changepassword.module#ChangepasswordPageModule' },
+
 
 
 ];

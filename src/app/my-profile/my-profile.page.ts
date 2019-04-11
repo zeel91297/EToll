@@ -1,3 +1,4 @@
+import { ChangepasswordPage } from './../changepassword/changepassword.page';
 import { EditProfilePage } from './../edit-profile/edit-profile.page';
 import { UserserviceService } from './../providers/userDB/userservice.service';
 import { Component, OnInit } from '@angular/core';
@@ -49,9 +50,6 @@ export class MyProfilePage implements OnInit {
   }
   onChangePassword()
   {
-
-  }
-  onSignOut()
-  {
+    this.router.navigate(['/changepassword']);
   }
 }
