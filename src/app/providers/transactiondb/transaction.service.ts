@@ -12,9 +12,9 @@ export class TransactionService {
   //public url="http://localhost:3000/transaction/";
 
   public url='https://tollproject.herokuapp.com/transaction/'
+  public url1='https://tollproject.herokuapp.com/motps/'
   addTransaction(data:any)
   {
-    console.log("data ",data);
     const body = JSON.stringify(data);
     console.log("body ",body);
     return this.http.post(this.url, body, {headers: new HttpHeaders().set('Content-type' , 'application/json')});
@@ -22,5 +22,9 @@ export class TransactionService {
   getTransactionById(id:any)
   {
     return this.http.get(this.url + id);
+  }
+  getOtpOfTollPlaza(id:any)
+  {
+    return this.http.get(this.url1+id);
   }
 }

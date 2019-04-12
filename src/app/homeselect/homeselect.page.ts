@@ -5,6 +5,7 @@ import { Router, NavigationExtras, ActivatedRoute } from "@angular/router";
 import { TollplazaService } from "../../app/providers/tollplazadb/tollplaza.service";
 
 import { Tollplazza } from "../../app/shared/tollplaza_class";
+import { ToastController } from '@ionic/angular';
 
 
 @Component({
@@ -20,7 +21,7 @@ export class HomeselectPage implements OnInit {
   buttonDisabled: boolean = false;
   getId:any;
   final_tollplaza:Tollplazza[]=[];
-  constructor(public router:Router,private activateRoute:ActivatedRoute,public tpdata:TollplazaService) {
+  constructor(public router:Router,private activateRoute:ActivatedRoute,public tpdata:TollplazaService,public toast:ToastController) {
       this.tid=this.activateRoute.snapshot.paramMap.get('myid');
       console.log("this tid = ",this.tid);
 
@@ -63,6 +64,7 @@ onSelect(num)
 }
 
   ngOnInit() {
+    
     this.tpdata.getAllTollPlazaById(this.tid).subscribe((data:any[])=>{
       this.plaza.push(data[0]);
     });

@@ -20,6 +20,7 @@ import {
 } from "@angular/forms";
 
 import { NavigationExtras,Router, ActivatedRoute } from '@angular/router';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: "app-payment-details-add",
@@ -59,7 +60,8 @@ export class PaymentDetailsAddPage implements OnInit {
     public paym: PaymentmethodService,
     public router:Router,
     public activateroute:ActivatedRoute,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    public toast:ToastController
   ) {
     if(this.router.getCurrentNavigation().extras.state){
       this.vno=this.router.getCurrentNavigation().extras.state.prev_vehicle_no;
@@ -107,7 +109,16 @@ export class PaymentDetailsAddPage implements OnInit {
 
   }
   ngOnInit() {}
-  onInsert() {
+ async onInsert() {
+    const tos1 = await this.toast.create({
+      message: "Card Added Successfully",
+      duration: 2000,
+      showCloseButton: true,
+      closeButtonText: "Ok",
+      position: "bottom",
+      translucent: true,
+      animated: true
+    });
     this.mid = parseInt(localStorage.getItem("mid"));
     this.id = parseInt(localStorage.getItem("id"));
     this.pdata
@@ -128,7 +139,7 @@ export class PaymentDetailsAddPage implements OnInit {
       )
       .subscribe(
         (data: PaymentDetais[]) => {
-          console.log(data);
+          tos1.present();
           this.ngOnInit();
         },
         function(err) {
@@ -147,7 +158,7 @@ export class PaymentDetailsAddPage implements OnInit {
         finalplaza:this.final_tollplaza
       }
     };
-    this.router.navigate(["/confirm-payment",{
+    this.router.navigate(["/payment-details",{
       prev_vehicle_type: this.vehicle_type,
           prev_amt: this.amt,
           prev_journey:this.whichj,
