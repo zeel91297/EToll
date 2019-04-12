@@ -23,7 +23,6 @@ export class TollplazaService {
     return this.http.get(this.url + tpid);
   }
   getTollDetails(tpid: any) {
-    console.log(this.url2 + tpid);
     return this.http.get(this.url2 + tpid);
   }
   getConnectedPlaza(id: any) {

@@ -39,18 +39,18 @@ export class HomePage implements OnInit {
   ) {}
 
   async ngOnInit() {
+   
     await this.platform.ready();
     await this.loadMap();
     await this.getallPlaza();
     this.menuController.enable(false);
-  }
 
-  getallPlaza() {
+  }
+ 
+    getallPlaza() {
     this.tpdata.getAllTollPlaza().subscribe(
       (data: any) => {
         this.plaza = data;
-        // console.log(this.plaza);
-        // alert(this.plaza.length);
         for (var i = 0; i < this.plaza.length; i++) {
           this.map
             .addMarker({

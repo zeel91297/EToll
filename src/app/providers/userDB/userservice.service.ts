@@ -38,6 +38,7 @@ export class UserserviceService {
     });
   }
 
+<<<<<<< HEAD
   updateUser(us: user) {
     console.log(us);
     const body = JSON.stringify(us);
@@ -48,16 +49,34 @@ export class UserserviceService {
     alert("URL side called");
     console.log(this.url + newpass + "/" + id);
     return this.http.put(this.url + newpass + "/" + id, { headers: new HttpHeaders().set('Content-type', 'application/json') });
+=======
+  updateUser(us:user)
+  {
+    const body=JSON.stringify(us);
+    return this.http.put(this.urllogin,body,{headers:new HttpHeaders().set('Content-type','application/json')});
+
+  }
+  changePassword(newpass:string,id:any)
+  {
+    return this.http.put(this.url+newpass+"/"+id,{headers:new HttpHeaders().set('Content-type','application/json')});
+>>>>>>> e7aa014f6667187232dfceac086826505aea065c
   }
   getTransactionByUserId(id: any) {
     return this.http.get(this.urltranactionuser + id);
   }
+<<<<<<< HEAD
   getUserById(id: any) {
     return this.http.get(this.url + id);
   }
   user_Email(user: user_mail) {
     const body = JSON.stringify(user);
     return this.http.post(this.url_mail, body, { headers: new HttpHeaders().set('Content-type', 'application/json') });
+=======
+  
+  user_Email(user:user_mail){
+    const body=JSON.stringify(user);
+    return this.http.post(this.url_mail,body,{headers:new HttpHeaders().set('Content-type','application/json')});
+>>>>>>> e7aa014f6667187232dfceac086826505aea065c
   }
   getUserByEmail(email: any) {
     return this.http.get(this.urllogin + email);
@@ -78,17 +97,22 @@ export class UserserviceService {
     return this.http.get(this.url_verify + otp + "/" + email);
   }
   emailsend(user: any) {
-    console.log("in service");
     const body = JSON.stringify(user);
     return this.http.post(this.url, body, {
       headers: new HttpHeaders().set("Content-type", "application/json")
     });
   }
   resend(user: any) {
-    console.log("in service");
     const body = JSON.stringify(user);
     return this.http.post(this.url_resend, body, {
       headers: new HttpHeaders().set("Content-type", "application/json")
     });
   }
+<<<<<<< HEAD
+=======
+  getUserById(id:any)
+  {
+    return this.http.get(this.url+id);
+  }
+>>>>>>> e7aa014f6667187232dfceac086826505aea065c
 }
