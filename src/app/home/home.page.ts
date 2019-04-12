@@ -39,10 +39,10 @@ export class HomePage implements OnInit {
   ) {}
 
   async ngOnInit() {
+    this.menuController.enable(true);
     await this.platform.ready();
     await this.loadMap();
     await this.getallPlaza();
-    this.menuController.enable(false);
   }
 
   getallPlaza() {

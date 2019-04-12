@@ -34,29 +34,10 @@ export class AddVehicleModelPage implements OnInit {
     private _vehicles: VehicledbProvider,
     private formBuilder: FormBuilder,
     private toastController: ToastController
-  ) {}
-
-  validation_messages = {
-    vehicle_no: [
-      { type: "required", message: "Vehicle No is required" },
-      {
-        type: "minlength",
-        message: "Vehicle no is at least 13 characters long."
-      },
-      {
-        type: "maxlength",
-        message: "Vehicle no can not be more than 13 charaters long."
-      }
-    ],
-    vehicle_type_name: [
-      { type: "required", message: "Vehicle Type Name is required" }
-    ]
-  };
-
-  ngOnInit() {
-    this.uid = localStorage.getItem("id");
+  ) {
     this._vehicletype.getAllVehicleType().subscribe(
       (data: any) => {
+        
         this.vehicle_type = data;
         this.add_vehicle_form = new FormGroup({
           vehicle_no: new FormControl(
@@ -77,6 +58,27 @@ export class AddVehicleModelPage implements OnInit {
         console.log("vehicle types loaded");
       }
     );
+  }
+
+  validation_messages = {
+    vehicle_no: [
+      { type: "required", message: "Vehicle No is required" },
+      {
+        type: "minlength",
+        message: "Vehicle no is at least 13 characters long."
+      },
+      {
+        type: "maxlength",
+        message: "Vehicle no can not be more than 13 charaters long."
+      }
+    ],
+    vehicle_type_name: [
+      { type: "required", message: "Vehicle Type Name is required" }
+    ]
+  };
+
+  ngOnInit() {
+    this.uid = localStorage.getItem("id");
 
     this.add_vehicle_form = new FormGroup({
       vehicle_no: new FormControl(
