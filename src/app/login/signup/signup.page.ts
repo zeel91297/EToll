@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, AbstractControl } from '@angular/forms';
 import { user } from "../../shared/user_class";
-
+import { MenuController, ToastController } from '@ionic/angular';
 import { UserserviceService } from "../../providers/userDB/userservice.service";
 import { Md5 } from 'ts-md5/dist/md5';
 import { Router } from '@angular/router';
@@ -24,19 +24,32 @@ export class SignupPage implements OnInit {
   s: string = Math.floor(Math.random() * Math.floor(999999)).toString();
   temp_user: user[] = [];
   private flag = 0;
-  constructor(public userservice: UserserviceService, private MD5: Md5, private router: Router) {
+  constructor(public userservice: UserserviceService, private MD5: Md5, private router: Router,private toast:ToastController) {
 
     /* constructor(public userservice: UserserviceService,private MD5:Md5) { */
 
     this.myform = new FormGroup({
-      name: new FormControl('', [Validators.required, Validators.pattern("[a-zA-Z ]*$")]),
-      password1: new FormControl('', [Validators.required, Validators.pattern("^([A-Za-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$")]),
-      email: new FormControl('', [Validators.required, Validators.pattern(".+\@.+\..+"), Validators.email, this.EmailExsitCustomValidation.bind(this)]),
-      contact1: new FormControl('', [Validators.required, Validators.minLength(10), Validators.pattern("^[0-9]+")])
+      name: new FormControl('',{
+        validators: [Validators.required, Validators.pattern("[a-zA-Z ]*$")],updateOn:'blur'}),
+      password1: new FormControl('',{
+        validators: [Validators.required, Validators.pattern("^([A-Za-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$")],updateOn:'blur'}),
+      email: new FormControl('',{
+        validators: [Validators.required, Validators.pattern(".+\@.+\..+"), Validators.email, this.EmailExsitCustomValidation.bind(this)],updateOn:'blur'}),
+      contact1: new FormControl('', {
+        validators:[Validators.required, Validators.minLength(10), Validators.pattern("^[0-9]+")],updateOn:'blur'})
     });
   }
 
-  onsignup() {
+ async onsignup() {
+  const tos2 = await this.toast.create({
+    message: " We Sent You a OTP Check Your Registered Mail",
+    duration: 5000,
+    position: "bottom",
+    cssClass: "toast_login_fail",
+    translucent: true,
+    animated: true,
+    
+  });
     const md5 = new Md5();
     // const ls=md5.appendStr("hellohellohello").end();
     var hashedPassword = md5.appendStr(this.password1).end();
@@ -44,6 +57,7 @@ export class SignupPage implements OnInit {
       (data: any[]) => {
         console.log("in ts mail");
         localStorage.setItem('mail', this.email);
+        tos2.present();
         this.router.navigate(['/verification-user']);
       },
       function (error) {
@@ -56,6 +70,8 @@ export class SignupPage implements OnInit {
   ngOnInit() {
   }
   EmailExsitCustomValidation(control: AbstractControl): { [s: string]: boolean } {
+    if(control.value!=null){
+
     this.userservice.getUserByEmail(control.value).subscribe((data: user[]) => {
       this.temp_user = data;
       // console.log(this.temp_user);
@@ -74,4 +90,5 @@ export class SignupPage implements OnInit {
     });
     return null;
   }
+}
 }

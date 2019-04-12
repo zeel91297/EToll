@@ -1,3 +1,5 @@
+
+    
 import { Injectable } from '@angular/core';
 import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { user } from "../../shared/user_class";
@@ -96,8 +98,8 @@ export class UserserviceService {
       headers: new HttpHeaders().set("Content-type", "application/json")
     });
   }
-  getUserById(id:any)
-  {
-    return this.http.get(this.url+id);
-  }
+  // getUserById(id:any)                              
+  // {
+  //   return this.http.get(this.url+id);
+  // }
 }
