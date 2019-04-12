@@ -32,7 +32,8 @@ export class LoginPage implements OnInit, OnDestroy {
     });
   }
   ngOnInit() {
-    
+    this.email="";
+    this.password1="";
     this.menuCtrl.enable(false);
   }
 
@@ -55,7 +56,15 @@ export class LoginPage implements OnInit, OnDestroy {
       animated: true,
       
     });
-    
+    const tos2 = await this.toast.create({
+      message: "Email Is Not Verified, We Sent You a OTP Check Your Registered Mail",
+      duration: 5000,
+      position: "bottom",
+      cssClass: "toast_login_fail",
+      translucent: true,
+      animated: true,
+      
+    });
     
     // console.log(this.password1);
     // console.log(this.email);
@@ -78,7 +87,9 @@ export class LoginPage implements OnInit, OnDestroy {
             this.router.navigate(['/home']);
           }else{
             localStorage.setItem('flag','true');
+            localStorage.setItem('mail',this.email);
             console.log('not verifird');
+            tos2.present();
             this.userservice.resend(new user(null,null,null,this.email,null,null,null)).subscribe(
               (data:any[])=>{
                 this.router.navigate(['/verification-user']);

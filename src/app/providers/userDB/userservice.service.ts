@@ -10,12 +10,12 @@ import { HttpClient,HttpHeaders } from '@angular/common/http';
 })
 export class UserserviceService {
   private user:user[]=[];
-  private urllogin:string="http://localhost:3000/userlogin/";
-  private url:string="http://localhost:3000/userss/";
-  private url_mail="https://mailappdemo.herokuapp.com/mail/"
-  private url_password_update="http://localhost:3000/userpassword/";
-  private url_verify="http://localhost:3000/verifyuser/";
-  private url_resend="http://localhost:3000/resendotp/";
+  private urllogin:string="https://tollproject.herokuapp.com/userlogin/";
+  private url:string="https://tollproject.herokuapp.com/userss/";
+  private url_mail="https://tollproject.herokuapp.com/mail/"
+  private url_password_update="https://tollproject.herokuapp.com/userpassword/";
+  private url_verify="https://tollproject.herokuapp.com/verifyuser/";
+  private url_resend="https://tollproject.herokuapp.com/resendotp/";
   constructor(public http: HttpClient) { }
   userlogin(user:user)
   {

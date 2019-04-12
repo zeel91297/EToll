@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, AbstractControl } from '@angular/forms';
 import { user } from "../../shared/user_class";
-
+import { MenuController, ToastController } from '@ionic/angular';
 import { UserserviceService } from "../../providers/userDB/userservice.service";
 import { Md5 } from 'ts-md5/dist/md5';
 import { Router } from '@angular/router';
@@ -24,7 +24,7 @@ export class SignupPage implements OnInit {
   s: string = Math.floor(Math.random() * Math.floor(999999)).toString();
   temp_user: user[] = [];
   private flag = 0;
-  constructor(public userservice: UserserviceService, private MD5: Md5, private router: Router) {
+  constructor(public userservice: UserserviceService, private MD5: Md5, private router: Router,private toast:ToastController) {
 
     /* constructor(public userservice: UserserviceService,private MD5:Md5) { */
 
@@ -36,7 +36,16 @@ export class SignupPage implements OnInit {
     });
   }
 
-  onsignup() {
+ async onsignup() {
+  const tos2 = await this.toast.create({
+    message: " We Sent You a OTP Check Your Registered Mail",
+    duration: 5000,
+    position: "bottom",
+    cssClass: "toast_login_fail",
+    translucent: true,
+    animated: true,
+    
+  });
     const md5 = new Md5();
     // const ls=md5.appendStr("hellohellohello").end();
     var hashedPassword = md5.appendStr(this.password1).end();
@@ -44,6 +53,7 @@ export class SignupPage implements OnInit {
       (data: any[]) => {
         console.log("in ts mail");
         localStorage.setItem('mail', this.email);
+        tos2.present();
         this.router.navigate(['/verification-user']);
       },
       function (error) {
