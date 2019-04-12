@@ -29,16 +29,6 @@ export class AppComponent implements OnInit {
       url: "/home",
       icon: "home"
     },
-    /* {
-      title: 'List',
-      url: '/list',
-      icon: 'list'
-    }, */
-    /* {
-      title: 'Login',
-      url: '/login',
-      icon: 'log-in'
-    }, */
     {
       title: "My Vehicles",
       url: "/my-vehicles",
@@ -50,7 +40,7 @@ export class AppComponent implements OnInit {
       icon: "pricetags"
     },
     {
-      title: "Payment Options",
+      title: "My Saved Cards",
       url: "/payment-options",
       icon: "wallet"
     },
@@ -61,7 +51,7 @@ export class AppComponent implements OnInit {
     },
     {
       title: "Sign Out",
-      url: "",
+      url: "/logout",
       icon: "power"
     }
   ];
@@ -79,7 +69,6 @@ export class AppComponent implements OnInit {
     this.initializeApp();
     this.backButtonEnable();
     this.perm.checkGPSPermission();
-    /* this.router.navigate(['']); */
   }
 
   ngOnInit() {
@@ -155,5 +144,10 @@ export class AppComponent implements OnInit {
         }
       });
     });
+  }
+
+  onLogout() {
+    localStorage.clear();
+    this.router.navigate(["/login"]);
   }
 }

@@ -8,16 +8,17 @@
 </ion-header>
 
 <ion-content>
-  <ion-card>
+  <ion-card *ngFor="let item of user_transaction">
     <ion-card-header>
-      <ion-card-title>Ahmedabad - Surat</ion-card-title>
-      <ion-card-subtitle>{{today | date:'mediumDate'}}</ion-card-subtitle>
+      <ion-card-title>{{item.city}}</ion-card-title>
+      <ion-card-subtitle>{{item.transaction_date}}</ion-card-subtitle>
     </ion-card-header>
 
     <ion-card-content>
-      <ion-label>Total Amount Paid: {{700 | currency:'INR'}}</ion-label><br>
-      <ion-label>Vehicle No: GJ01-EF3708</ion-label><br>
-      <ion-label>Single Journey</ion-label><br>
+      <ion-label>Total Amount Paid: {{item.amount | currency:'INR'}}</ion-label><br>
+      <ion-label>Vehicle No: {{item.vehicle_no}}</ion-label><br>
+      <ion-label *ngIf="item.isreturn==0">Single Journey</ion-label><br>
+      <ion-label *ngIf="item.isreturn==1">Return Journey</ion-label><br>
       <ion-button expand="full">Mail Receipt <ion-icon name="send" slot="end"></ion-icon>
       </ion-button>
     </ion-card-content>

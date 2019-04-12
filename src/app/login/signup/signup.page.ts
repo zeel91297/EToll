@@ -69,7 +69,7 @@ export class SignupPage implements OnInit {
     this.userservice.getUserByEmail(control.value).subscribe((data: user[]) => {
       this.temp_user = data;
       // console.log(this.temp_user);
-      if (this.temp_user.length !== 0) {
+      if (this.temp_user.length !== 0 && this.myform.get('email').touched)  {
         this.myform.get('email').setErrors({ 'EmailAlreadyExsits': true });
         this.flag = 1;
       }

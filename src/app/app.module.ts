@@ -49,6 +49,10 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { BackgroundGeolocation } from '@ionic-native/background-geolocation/ngx';
 import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 import { Md5 } from 'ts-md5';
+import { GoogleMaps } from '@ionic-native/google-maps/ngx';
+
+
+
 //ends here
 
 @NgModule({
@@ -80,7 +84,8 @@ import { Md5 } from 'ts-md5';
     Geolocation,
     BackgroundGeolocation,
     LocalNotifications,
-    Md5
+    Md5,
+    GoogleMaps
   ],
   bootstrap: [AppComponent]
 })

@@ -1,24 +1,5 @@
 <ion-app>
     <ion-split-pane>
-        <!-- <ion-menu>
-      <ion-header>
-        <ion-toolbar>
-          <ion-title>Menu</ion-title>
-        </ion-toolbar>
-      </ion-header>
-      <ion-content>
-        <ion-list>
-          <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages" >
-            <ion-item [routerDirection]="'root'" [routerLink]="[p.url]">
-              <ion-icon slot="start" [name]="p.icon"></ion-icon>
-              <ion-label>
-                {{p.title}}
-              </ion-label>
-            </ion-item>
-          </ion-menu-toggle>
-        </ion-list>
-      </ion-content>
-    </ion-menu> -->
         <ion-menu>
             <ion-header>
                 <ion-toolbar>
@@ -27,13 +8,67 @@
             </ion-header>
             <ion-content>
                 <ion-list>
-                    <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages">
-                        <!-- <app-menu-item [link]="p"></app-menu-item> -->
-                        <app-menu-item [link]="p"></app-menu-item>
+                    <!-- *ngFor="let p of appPages" -->
+                    <ion-menu-toggle auto-hide="false">
+                        <ion-item [routerDirection]="'root'" [routerLink]="['/home']">
+                            <ion-icon slot="start" name="home"></ion-icon>
+                            <ion-label>
+                                Home
+                            </ion-label>
+                        </ion-item>
+
+                        <ion-item [routerDirection]="'root'" [routerLink]="['/my-vehicles']">
+                            <ion-icon slot="start" name="car"></ion-icon>
+                            <ion-label>
+                                My Vehicles
+                            </ion-label>
+                        </ion-item>
+
+                        <ion-item [routerDirection]="'root'" [routerLink]="['/past-payments']">
+                            <ion-icon slot="start" name="pricetags"></ion-icon>
+                            <ion-label>
+                                Past Payments
+                            </ion-label>
+                        </ion-item>
+
+                        <ion-item [routerDirection]="'root'" [routerLink]="['/payment-options']">
+                            <ion-icon slot="start" name="wallet"></ion-icon>
+                            <ion-label>
+                                Payment Options
+                            </ion-label>
+                        </ion-item>
+
+                        <ion-item [routerDirection]="'root'" [routerLink]="['/my-profile']">
+                            <ion-icon slot="start" name="Person"></ion-icon>
+                            <ion-label>
+                                My Profile
+                            </ion-label>
+                        </ion-item>
+
+                        <ion-item (click)="onLogout()">
+                            <ion-icon slot="start" name="power"></ion-icon>
+                            <ion-label>
+                                Sign Out
+                            </ion-label>
+                        </ion-item>
                     </ion-menu-toggle>
                 </ion-list>
             </ion-content>
         </ion-menu>
+        <!-- <ion-menu>
+            <ion-header>
+                <ion-toolbar>
+                    <ion-title>Menu</ion-title>
+                </ion-toolbar>
+            </ion-header>
+            <ion-content>
+                <ion-list>
+                    <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages">
+                        <app-menu-item [link]="p"></app-menu-item>
+                    </ion-menu-toggle>
+                </ion-list>
+            </ion-content>
+        </ion-menu> -->
         <ion-router-outlet main></ion-router-outlet>
     </ion-split-pane>
 </ion-app>

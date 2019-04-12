@@ -1,5 +1,5 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { NgModule } from "@angular/core";
+import { Routes, RouterModule } from "@angular/router";
 
 const routes: Routes = [
   {
@@ -28,14 +28,43 @@ const routes: Routes = [
   { path: 'transection-status', loadChildren: './pages/transection-status/transection-status.module#TransectionStatusPageModule' },
   { path: 'view-payment-method', loadChildren: './pages/view-payment-method/view-payment-method.module#ViewPaymentMethodPageModule' },
   { path: 'edit-payment-details', loadChildren: './pages/edit-payment-details/edit-payment-details.module#EditPaymentDetailsPageModule' },
+  { path: 'edit-profile', loadChildren: './edit-profile/edit-profile.module#EditProfilePageModule' },
   { path: 'confirm-payment', loadChildren: './pages/confirm-payment/confirm-payment.module#ConfirmPaymentPageModule' },
-  { path: 'add-vehicle-details', loadChildren: './pages/add-vehicle-details/add-vehicle-details.module#AddVehicleDetailsPageModule' },  { path: 'verification-user', loadChildren: './pages/verification-user/verification-user.module#VerificationUserPageModule' },
+  { path: 'add-vehicle-details', loadChildren: './pages/add-vehicle-details/add-vehicle-details.module#AddVehicleDetailsPageModule' },
+  { path: 'verification-user', loadChildren: './pages/verification-user/verification-user.module#VerificationUserPageModule' },
   { path: 'forgetpassword', loadChildren: './pages/forgetpassword/forgetpassword.module#ForgetpasswordPageModule' },
+  { path: 'changepassword', loadChildren: './changepassword/changepassword.module#ChangepasswordPageModule' },
 
+
+  {
+    path: "transaction-failed",
+    loadChildren:
+      "./pages/transaction-failed/transaction-failed.module#TransactionFailedPageModule"
+  },
+  {
+    path: "homeselect/:myid",
+    loadChildren: "./homeselect/homeselect.module#HomeselectPageModule"
+  },
+  {
+    path: "varify-rout",
+    loadChildren: "./varify-rout/varify-rout.module#VarifyRoutPageModule"
+  },
+  {
+    path: "verification-user",
+    loadChildren:
+      "./pages/verification-user/verification-user.module#VerificationUserPageModule"
+  },
+  {
+    path: "forgetpassword",
+    loadChildren:
+      "./pages/forgetpassword/forgetpassword.module#ForgetpasswordPageModule"
+  }
+   
+  
+ 
 
 ];
-  
-//./payment-options/payment-options.module#PaymentOptionsPageModule
+
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]

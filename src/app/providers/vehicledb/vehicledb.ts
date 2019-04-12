@@ -6,15 +6,15 @@ import { vehicle } from '../classes/classVehicle';
 
 @Injectable()
 export class VehicledbProvider {
-  public url = 'http://localhost:3000/vehicles/';
-  public url2 = 'http://localhost:3000/vehicle_user/';
-  public url1 = 'http://localhost:3000/vehiclebyid/'
+  // public url = 'http://localhost:3000/vehicles/';
+  // public url2 = 'http://localhost:3000/vehicle_user/';
+  // public url1 = 'http://localhost:3000/vehiclebyid/'
 
+  public url = ' https://tollproject.herokuapp.com/vehicles/';
+  public url2 = ' https://tollproject.herokuapp.com/vehicle_user/';
+  public url1 = ' https://tollproject.herokuapp.com/vehiclebyid/'
   vcle: vehicle[] = [];
-  constructor(public http: HttpClient) {
-
-  }
-  
+  constructor(public http: HttpClient) {  }
   getVehicleByno(vno: string) {
       return this.http.get(this.url + vno);
   }
