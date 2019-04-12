@@ -49,8 +49,6 @@ export class HomePage implements OnInit {
     this.tpdata.getAllTollPlaza().subscribe(
       (data: any) => {
         this.plaza = data;
-        // console.log(this.plaza);
-        // alert(this.plaza.length);
         for (var i = 0; i < this.plaza.length; i++) {
           this.map
             .addMarker({

@@ -28,13 +28,13 @@
             </ion-item>
             <br>
 
-            <div *ngIf="myform.get('email').hasError('required') && myform.get('email').touched">
+            <div *ngIf="myform.get('email').hasError('required') && myform.get('email').touched" style="color:red;">
                 Email Can Not Be Empty
             </div>
-            <div *ngIf="myform.get('email').hasError('email')">
+            <div *ngIf="myform.get('email').hasError('email')" style="color:red;">
                 Please enter a valid email.
             </div>
-            <div *ngIf="myform.get('email').hasError('EmailAlreadyExsits')">
+            <div *ngIf="myform.get('email').hasError('EmailAlreadyExsits')" style="color:red;">
                 Email Already Exist.
             </div>
             <ion-item>
@@ -44,10 +44,10 @@
             <br>
             <div *ngIf="!myform.controls.password1.valid &&
       myform.controls.password1.dirty" style="color:red;">
-                Please Enter a Valid Password
-                <br>Minmum 6 Charactor
-                <br>One Special Charactor
-                <br>One Digit
+                
+                -> Minmum 6 Charactor
+                <br>->One Special Charactor
+                <br>->One Digit
 
             </div>
             <ion-item>
