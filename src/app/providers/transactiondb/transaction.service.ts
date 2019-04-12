@@ -16,7 +16,6 @@ export class TransactionService {
   addTransaction(data:any)
   {
     const body = JSON.stringify(data);
-    console.log("body ",body);
     return this.http.post(this.url, body, {headers: new HttpHeaders().set('Content-type' , 'application/json')});
   }
   getTransactionById(id:any)

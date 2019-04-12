@@ -47,7 +47,6 @@ export class PaymentMethodPage implements OnInit {
         this.amounts=this.router.getCurrentNavigation().extras.state.amounts;
         this.final_tollplaza=this.router.getCurrentNavigation().extras.state.finalplaza;
       }
-      console.log("this.tollplaza  from select_toll_plaza, ",this.final_tollplaza);
    });
   }
 //Get All Payment Method
@@ -60,7 +59,6 @@ export class PaymentMethodPage implements OnInit {
         console.log(err);
       },
       () => {
-        console.log("complete");
       }
     );
   }

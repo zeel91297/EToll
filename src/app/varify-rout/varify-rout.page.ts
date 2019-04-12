@@ -48,7 +48,6 @@ export class VarifyRoutPage implements OnInit {
     });
     //this.tid.push(this.tpid);
     this.tid=[this.tollpid,...this.tid];
-    console.log("this.tid ", this.tid);
   }
 
   async ngOnInit() {
@@ -62,7 +61,6 @@ export class VarifyRoutPage implements OnInit {
   async putBlueMarkers(){
     this.final_tollplaza.forEach(element => {
       this.polyarr.push({lat:element.latitude,lng:element.longitude});
-        console.log("element ", element);
         this.map
           .addMarker({
             icon: "blue",
@@ -85,7 +83,6 @@ export class VarifyRoutPage implements OnInit {
   }
 
   setLineMap() {
-    console.log("Inside Line map ");
   }
   loadMap() {
     let mapOptions: GoogleMapOptions = {
@@ -109,7 +106,6 @@ export class VarifyRoutPage implements OnInit {
        finalplaza:this.final_tollplaza
       }
     };
-    console.log("from state",this.tid);
     this.router.navigate(["/select-toll-plaza",{
      
     }],navigationExtras);

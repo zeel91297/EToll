@@ -1,5 +1,10 @@
 import { Component, OnInit } from "@angular/core";
-import { MenuController, Platform, AlertController,NavController } from "@ionic/angular";
+import {
+  MenuController,
+  Platform,
+  AlertController,
+  NavController
+} from "@ionic/angular";
 import { Router } from "@angular/router";
 import {
   GoogleMaps,
@@ -20,16 +25,17 @@ import { Tollplazza } from "../shared/tollplaza_class";
 export class HomePage implements OnInit {
   [x: string]: any;
   plaza: Tollplazza[] = [];
-  markers:any[]=[];
+  markers: any[] = [];
   map: GoogleMap;
   prev_tid: number;
-  id:number;
+  id: number;
   constructor(
     private platform: Platform,
     public tpdata: TollplazaService,
     public router: Router,
     public alertController: AlertController,
-    public navctrl:NavController
+    public navctrl: NavController,
+    public menuController: MenuController
   ) {}
 
   async ngOnInit() {
@@ -45,20 +51,21 @@ export class HomePage implements OnInit {
     this.tpdata.getAllTollPlaza().subscribe(
       (data: any) => {
         this.plaza = data;
-        // console.log(this.plaza);
-        // alert(this.plaza.length);
         for (var i = 0; i < this.plaza.length; i++) {
           this.map
             .addMarker({
               icon: "red",
               position: {
                 lat: parseFloat(this.plaza[i].latitude),
-                lng: parseFloat(this.plaza[i].longitude),
+                lng: parseFloat(this.plaza[i].longitude)
               },
               title:
-              this.plaza[i].toll_name + " , " + this.plaza[i].highway_name + " , " +this.plaza[i].toll_plaza_id,
+                this.plaza[i].toll_name +
+                " , " +
+                this.plaza[i].highway_name +
+                " , " +
+                this.plaza[i].toll_plaza_id,
               disableAutoPan: true
-
             })
             .then(this.onMarkerAdded);
         }
@@ -84,21 +91,25 @@ export class HomePage implements OnInit {
         tilt: 30
       }
     };
-    this.map=GoogleMaps.create('map_canvas',mapOptions);
+    this.map = GoogleMaps.create("map_canvas", mapOptions);
   }
   async onMarkerAdded(marker: Marker) {
-     await marker
+    await marker
       .addEventListener(GoogleMapsEvent.MARKER_CLICK)
       .subscribe(() => {
-        var arr=marker.getTitle().split(",");
-        if(confirm(
-          "Do you want to continue " + arr[0] +" "+arr[1] + " with this toll?"
-        ))
-        {
-          var pathstring='/homeselect/'+arr[2];
-          window.location.pathname=pathstring;
-        }
-        else{
+        var arr = marker.getTitle().split(",");
+        if (
+          confirm(
+            "Do you want to continue " +
+              arr[0] +
+              " " +
+              arr[1] +
+              " with this toll?"
+          )
+        ) {
+          var pathstring = "/homeselect/" + arr[2];
+          window.location.pathname = pathstring;
+        } else {
           console.log("user doesn`t want ");
         }
       });

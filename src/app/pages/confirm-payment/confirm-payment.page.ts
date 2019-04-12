@@ -77,12 +77,9 @@ export class ConfirmPaymentPage implements OnInit {
   ) {
     if (this.router.getCurrentNavigation().extras.state) {
       this.vno = this.router.getCurrentNavigation().extras.state.prev_vehicle_no;
-      console.log("inside confirm-payment this.router.getCurrentNavigation().extras.state.prev_vehicle_no ",this.router.getCurrentNavigation().extras.state.prev_vehicle_no);
       this.amounts = this.router.getCurrentNavigation().extras.state.amounts;
-      console.log("inside confirm-payment this.router.getCurrentNavigation().extras.state.prev_vehicle_no ",this.router.getCurrentNavigation().extras.state.amounts);
     }
     this.activateroute.params.subscribe((data: any) => {
-      console.log(data);
       this.vehicle_type = data.prev_vehicle_type;
       this.amt = data.prev_amt;
       this.whichj = data.prev_journey;
@@ -107,7 +104,6 @@ export class ConfirmPaymentPage implements OnInit {
   ngOnInit() {
     this.tdata.getOtpOfTollPlaza(this.final_tollplaza.length).subscribe((data:any[])=>{
       this.otps=data;
-      console.log("plaza wise otp",this.otps);
     },
     function(err)
     {
@@ -115,7 +111,6 @@ export class ConfirmPaymentPage implements OnInit {
     },
     function()
     {
-      console.log("complete");
     });
     this.vtdata.getVehicleById(this.vehicle_type).subscribe(
       (data: any[]) => {
@@ -125,7 +120,6 @@ export class ConfirmPaymentPage implements OnInit {
         console.log(err);
       },
       function() {
-        console.log("complete");
       }
     );
 
@@ -138,7 +132,6 @@ export class ConfirmPaymentPage implements OnInit {
         console.log(error);
       },
       function() {
-        console.log("complete");
       }
     );
     this.payd.getPaymentDetailById(this.pid).subscribe(
@@ -149,7 +142,6 @@ export class ConfirmPaymentPage implements OnInit {
         console.log(err);
       },
       function() {
-        console.log("Complete");
       }
     );
   }
@@ -214,7 +206,6 @@ export class ConfirmPaymentPage implements OnInit {
         console.log(err);
       },
       function() {
-        console.log("complete");
       }
     );
     this.num = Math.floor(0 + Math.random() * 100);
@@ -234,7 +225,6 @@ export class ConfirmPaymentPage implements OnInit {
             console.log(err);
           },
           function() {
-            console.log("Complete");
           }
         );
       this.router.navigate(["/transection-status"]);
@@ -279,7 +269,6 @@ export class ConfirmPaymentPage implements OnInit {
             console.log(err);
           },
           function() {
-            console.log("Complete");
           }
         );
         iters++;

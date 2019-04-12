@@ -1,7 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 
 import { PaymentdetailsService } from "../../providers/paymentdetailsdb/paymentdetails.service";
-
 import { PaymentDetais } from "../../shared/paymentdetails";
 
 import { PaymentMethod } from "../../shared/paymentmethod_class";
@@ -78,12 +77,12 @@ export class PaymentDetailsPage implements OnInit {
     this.payd.getAllPaymentDetailsByUser(this.id).subscribe(
       (data: any[]) => {
         this.paydetail = data;
+        this.ngOnInit();
       },
       function(error) {
         console.log(error);
       },
       function() {
-        console.log("complete");
       }
     );
   }

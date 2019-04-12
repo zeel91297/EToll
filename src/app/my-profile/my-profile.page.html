@@ -3,10 +3,29 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>my-profile</ion-title>
+    <ion-title>Welcome,{{us.user_name}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
-
+    <img src="../../assets/profile_pic.PNG" style="position:relative;left: 37%;top:7%; border-radius: 20px;height: 20%;width: 30%">
+  <br><br><br><br>
+  <ion-text color="medium-shade" style="font-family: Arial;font-kerning: normal;">My Details:</ion-text><br><br>
+  <ion-label style="position:relative;left:10%;font-family:Times New Roman;font-weight: bold;font-style: italic;font-size: 20px;horizontal:center;">
+    <ion-icon name="person"></ion-icon>
+    :&nbsp;{{us.user_name}}
+  </ion-label>
+  <br><br>
+  <ion-label style="position:relative;left:10%;font-family:Times New Roman;font-style: italic;font-size: 20px;horizontal:center;">
+      <ion-icon name="call"></ion-icon>
+      : &nbsp;{{us.contact_no}}
+    </ion-label>
+    <br><br>
+    <ion-label style="position:relative;left:10%;font-family:Times New Roman;font-style: italic;font-size: 20px;horizontal:center;">
+      <ion-icon name="mail"></ion-icon>
+      : &nbsp;{{us.user_email}}
+    </ion-label><br>
+    <ion-button expand="block" (click)="onEditProfile()" style="position: absolute;bottom: 15%;left:1%;width: 97%" color="tertiary"><ion-icon name="person"></ion-icon>Edit Profile</ion-button>
+    <ion-button expand="block" (click)="onChangePassword()" color="warning" style="position: absolute;bottom: 5%;left:1%;width: 97%"><ion-icon name="lock"></ion-icon>Change Password</ion-button>
+  
 </ion-content>

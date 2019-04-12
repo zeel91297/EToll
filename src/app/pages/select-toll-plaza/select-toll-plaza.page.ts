@@ -175,7 +175,6 @@ export class SelectTollPlazaPage implements OnInit {
         } else if (this.vehicle === "six_wheeler" && this.whichJ === "return") {
           this.amt = this.final_tollplaza[i].six_wheeler_return;
         } else {
-          console.log("Error");
         }
         this.amounts[i] = this.amt;
         this.totalAmount = this.amt + this.totalAmount;

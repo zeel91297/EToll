@@ -26,18 +26,24 @@ export class LoginPage implements OnInit, OnDestroy {
     private md5: Md5
   ) {
     this.loginform = new FormGroup({
-      password1: new FormControl("", [
+      password1: new FormControl("", {
+        validators:[
         Validators.required,
-        Validators.minLength(6)
-      ]),
-      email: new FormControl("", [
+       
+        Validators.minLength(6),
+      ]  
+      ,updateOn: 'blur'}),
+      email: new FormControl("", {
+        validators:[
         Validators.required,
         Validators.pattern(".+@.+..+"),
         Validators.email
-      ])
+      ],updateOn:'blur'})
     });
   }
   ngOnInit() {
+    this.email = "";
+    this.password1 = "";
     this.menuCtrl.enable(false);
   }
 
@@ -58,48 +64,68 @@ export class LoginPage implements OnInit, OnDestroy {
       translucent: true,
       animated: true
     });
+    const tos2 = await this.toast.create({
+      message: "Email Is Not Verified, We Sent You a OTP Check Your Registered Mail",
+      duration: 5000,
+      position: "bottom",
+      cssClass: "toast_login_fail",
+      translucent: true,
+      animated: true,
+
+    });
+
+    // console.log(this.password1);
+    // console.log(this.email);
+    // const ls=md5.appendStr("hellohellohello").end();
     const md5 = new Md5();
     var hashedPassword = md5.appendStr(this.password1).end();
-    this.userservice
-      .userlogin(
-        new user(null, "", hashedPassword.toString(), this.email, "", null, 0)
-      )
-      .subscribe(
-        (data: user[]) => {
-          if (data.length > 0) {
-            if (data[0].verify == 1) {
-              this.id = data[0].user_id;
-              localStorage.setItem("id", this.id);
-              localStorage.setItem("name", data[0].user_name);
-              tos.present();
-              console.log("verifird");
-              this.router.navigate(["/home"]);
-            } else {
-              localStorage.setItem("flag", "true");
-              console.log("not verifird");
-              this.userservice
-                .resend(
-                  new user(null, null, null, this.email, null, null, null)
-                )
-                .subscribe(
-                  (data: any[]) => {
-                    this.router.navigate(["/verification-user"]);
-                  },
-                  function(err) {
-                    console.log(err);
-                  },
-                  function() {}
-                );
-            }
-          } else {
-            console.log("");
-            tos1.present();
+
+
+    this.userservice.userlogin(new user(null, '', hashedPassword.toString(), this.email, '', null, 0)).subscribe(
+      (data: user[]) => {
+        if (data.length > 0) {
+          if (data[0].verify == 1) {
+
+            this.id = data[0].user_id;
+            localStorage.setItem('id', this.id);
+            localStorage.setItem('name', data[0].user_name);
+
+            tos.present();
+            console.log('verifird');
+            this.router.navigate(['/home']);
           }
-        },
-        function(error) {},
-        function() {}
-      );
+          else {
+            localStorage.setItem('flag', 'true');
+            localStorage.setItem('mail', this.email);
+            console.log('not verifird');
+            tos2.present();
+            this.userservice.resend(new user(null, null, null, this.email, null, null, null)).subscribe(
+              (data: any[]) => {
+                this.router.navigate(['/verification-user']);
+              },
+              function (err) {
+                console.log(err);
+              },
+              function () {
+
+              }
+            );
+          }
+        } else {
+          console.log("");
+          tos1.present();
+        }
+      },
+      function (error) { },
+      function () { }
+    );
   }
+
+
+
+
+
+
   forgetpassword() {
     this.router.navigate(["/forgetpassword"]);
   }
