@@ -55,11 +55,11 @@ export class UserserviceService {
   {
     return this.http.get(this.urltranactionuser+id);
   }
-  getUserById(id:any)
-  {
-    console.log('user_id'+id);
-    return this.http.get(this.url+id);
-  }
+  // getUserById(id:any)
+  // {
+  //   console.log('user_id'+id);
+  //   return this.http.get(this.url+id);
+  // }
   user_Email(user:user_mail){
     const body=JSON.stringify(user);
     return this.http.post(this.url_mail,body,{headers:new HttpHeaders().set('Content-type','application/json')});
