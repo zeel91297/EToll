@@ -98,7 +98,7 @@ export class UserserviceService {
       headers: new HttpHeaders().set("Content-type", "application/json")
     });
   }
-  // getUserById(id:any)
+  // getUserById(id:any)                              
   // {
   //   return this.http.get(this.url+id);
   // }

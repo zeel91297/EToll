@@ -29,10 +29,14 @@ export class SignupPage implements OnInit {
     /* constructor(public userservice: UserserviceService,private MD5:Md5) { */
 
     this.myform = new FormGroup({
-      name: new FormControl('', [Validators.required, Validators.pattern("[a-zA-Z ]*$")]),
-      password1: new FormControl('', [Validators.required, Validators.pattern("^([A-Za-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$")]),
-      email: new FormControl('', [Validators.required, Validators.pattern(".+\@.+\..+"), Validators.email, this.EmailExsitCustomValidation.bind(this)]),
-      contact1: new FormControl('', [Validators.required, Validators.minLength(10), Validators.pattern("^[0-9]+")])
+      name: new FormControl('',{
+        validators: [Validators.required, Validators.pattern("[a-zA-Z ]*$")],updateOn:'blur'}),
+      password1: new FormControl('',{
+        validators: [Validators.required, Validators.pattern("^([A-Za-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$")],updateOn:'blur'}),
+      email: new FormControl('',{
+        validators: [Validators.required, Validators.pattern(".+\@.+\..+"), Validators.email, this.EmailExsitCustomValidation.bind(this)],updateOn:'blur'}),
+      contact1: new FormControl('', {
+        validators:[Validators.required, Validators.minLength(10), Validators.pattern("^[0-9]+")],updateOn:'blur'})
     });
   }
 
@@ -66,6 +70,8 @@ export class SignupPage implements OnInit {
   ngOnInit() {
   }
   EmailExsitCustomValidation(control: AbstractControl): { [s: string]: boolean } {
+    if(control.value!=null){
+
     this.userservice.getUserByEmail(control.value).subscribe((data: user[]) => {
       this.temp_user = data;
       // console.log(this.temp_user);
@@ -84,4 +90,5 @@ export class SignupPage implements OnInit {
     });
     return null;
   }
+}
 }

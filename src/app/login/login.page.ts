@@ -26,15 +26,19 @@ export class LoginPage implements OnInit, OnDestroy {
     private md5: Md5
   ) {
     this.loginform = new FormGroup({
-      password1: new FormControl("", [
+      password1: new FormControl("", {
+        validators:[
         Validators.required,
-        Validators.minLength(6)
-      ]),
-      email: new FormControl("", [
+       
+        Validators.minLength(6),
+      ]  
+      ,updateOn: 'blur'}),
+      email: new FormControl("", {
+        validators:[
         Validators.required,
         Validators.pattern(".+@.+..+"),
         Validators.email
-      ])
+      ],updateOn:'blur'})
     });
   }
   ngOnInit() {
