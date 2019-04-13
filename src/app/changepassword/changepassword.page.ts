@@ -48,7 +48,6 @@ export class ChangepasswordPage implements OnInit {
     console.log(this.oldpass + " " + this.newpass + " " + this.confpass);
     this.us.user_password=this.md5.appendStr(this.oldpass).end().toString();
     console.log(this.md5.appendStr(this.oldpass).end().toString());
-    console.log('j');
     console.log(this.us);
     this.data.userlogin(this.us).subscribe(
       (data: any) => {

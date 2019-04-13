@@ -89,7 +89,7 @@ export class AddVehicleDetailsPage implements OnInit {
         {
           name: "new_vehicle_no",
           type: "text",
-          placeholder: "Enter New Vehicle No"
+          placeholder: "Vehicle No e.g. GJ-01-XX-1111"
         }
       ],
       buttons: [
