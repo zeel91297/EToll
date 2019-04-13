@@ -63,7 +63,7 @@ export class LoginPage implements OnInit, OnDestroy {
     const md5=new Md5();
     var hashedPassword=md5.appendStr(this.password1).end();
     
-  
+    console.log(hashedPassword.toString());
     this.userservice.userlogin(new user(null,'', hashedPassword.toString(), this.email,'',null,0)).subscribe(
       (data:user[]) => {
         if (data.length > 0) {
