@@ -89,6 +89,8 @@ export class LoginPage implements OnInit, OnDestroy {
             this.id = data[0].user_id;
             localStorage.setItem('id', this.id);
             localStorage.setItem('name', data[0].user_name);
+            /* let storage=new Storage();
+            storage.set('user_name',data[0].user_name); */
 
             tos.present();
             console.log('verifird');
