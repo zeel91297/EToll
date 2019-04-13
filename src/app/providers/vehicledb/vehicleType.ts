@@ -8,7 +8,7 @@ export class vehicleTypeProvider {
   
   //public url = 'https://localhost:3000/vehicle_type/';
 
-  public url:'https://tollproject.herokuapp.com/vehicle_type/';
+  public url='https://tollproject.herokuapp.com/vehicle_type/';
 
 
   vclet: vehicleType[] = [];

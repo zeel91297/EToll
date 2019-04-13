@@ -19,14 +19,12 @@ export class VehicledbProvider {
       return this.http.get(this.url + vno);
   }
   getAllVehicle() {
-      console.log('welcome to provider');
     return this.http.get(this.url);
   }
   getVehicleByUser(uid: number) {
     return this.http.get(this.url2 + uid);
   }
   addVehicle(vcle: any) {
-    console.log(vcle);
     const body = JSON.stringify(vcle);
     return this.http.post(this.url, body, {headers: new HttpHeaders().set('Content-type' , 'application/json')});
   }

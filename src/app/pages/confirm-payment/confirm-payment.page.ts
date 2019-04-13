@@ -2,35 +2,21 @@ import { Component, OnInit } from "@angular/core";
 import { ToastController, IonImg } from "@ionic/angular";
 import { Router } from "@angular/router";
 import { ActivatedRoute } from "@angular/router";
-
 import { NavigationExtras } from "@angular/router";
-
 import { PaymentdetailsService } from "../../providers/paymentdetailsdb/paymentdetails.service";
-
 import { PaymentDetais } from "../../shared/paymentdetails";
-
 import { PaymentMethod } from "../../shared/paymentmethod_class";
-
 import { PaymentmethodService } from "../../providers/paymentmethoddb/paymentmethod.service";
-
 import { TollplazaService } from "../../providers/tollplazadb/tollplaza.service";
-
 import { VehicledbProvider } from "../../providers/vehicledb/vehicledb";
-
 import { vehicleTypeProvider } from "../../providers/vehicledb/vehicleType";
 import { Tollplazza } from "../../shared/tollplaza_class";
 import { vehicleType } from "../../providers/classes/classVehicleType";
-
 import { TransactionClass } from "../../shared/transaction";
-
 import { TransactionService } from "../../providers/transactiondb/transaction.service";
-
 import { SendMailService } from "../../providers/sendMaildb/send-mail.service";
-
 import { sendMail } from "../../shared/sendMail";
-
 import { UserserviceService } from "../../providers/userDB/userservice.service";
-
 import { user } from "../../shared/user_class";
 import { custom_class } from 'src/app/shared/custom_representational_class';
 
@@ -71,11 +57,11 @@ export class ConfirmPaymentPage implements OnInit {
   user: user[] = [];
   vname: string = "";
   pic:string='';
-  val: number;
   name:string='';
   final_tollplaza:Tollplazza[]=[];
   buttonDisabled: boolean = false;
   final_arr_transaction:custom_class[]=[];
+  otps:number[]=[];
   constructor(
     public toast: ToastController,
     public router: Router,
@@ -91,12 +77,9 @@ export class ConfirmPaymentPage implements OnInit {
   ) {
     if (this.router.getCurrentNavigation().extras.state) {
       this.vno = this.router.getCurrentNavigation().extras.state.prev_vehicle_no;
-      console.log("inside confirm-payment this.router.getCurrentNavigation().extras.state.prev_vehicle_no ",this.router.getCurrentNavigation().extras.state.prev_vehicle_no);
       this.amounts = this.router.getCurrentNavigation().extras.state.amounts;
-      console.log("inside confirm-payment this.router.getCurrentNavigation().extras.state.prev_vehicle_no ",this.router.getCurrentNavigation().extras.state.amounts);
     }
     this.activateroute.params.subscribe((data: any) => {
-      console.log(data);
       this.vehicle_type = data.prev_vehicle_type;
       this.amt = data.prev_amt;
       this.whichj = data.prev_journey;
@@ -109,18 +92,26 @@ export class ConfirmPaymentPage implements OnInit {
         this.final_tollplaza=this.router.getCurrentNavigation().extras.state.finalplaza;
         var i = 0;
       }
-      console.log("this.tollplaza  from select_toll_plaza, ",this.final_tollplaza);
     });
       let iter=0;
       for(iter=0;iter<this.final_tollplaza.length;iter++){
         this.final_arr_transaction[iter]=new custom_class(
           iter+1,this.final_tollplaza[iter].highway_name,this.final_tollplaza[iter].city,
-          this.final_tollplaza[iter].emergency_number,this.amounts[iter],0,this.final_tollplaza[iter].toll_name
+          this.final_tollplaza[iter].emergency_number,this.amounts[iter],this.otps[iter],this.final_tollplaza[iter].toll_name
         );
       }
   }
   ngOnInit() {
-    alert(this.pid);
+    this.tdata.getOtpOfTollPlaza(this.final_tollplaza.length).subscribe((data:any[])=>{
+      this.otps=data;
+    },
+    function(err)
+    {
+      console.log(err);
+    },
+    function()
+    {
+    });
     this.vtdata.getVehicleById(this.vehicle_type).subscribe(
       (data: any[]) => {
         this.vehicletype = data;
@@ -129,7 +120,6 @@ export class ConfirmPaymentPage implements OnInit {
         console.log(err);
       },
       function() {
-        console.log("complete");
       }
     );
 
@@ -137,13 +127,11 @@ export class ConfirmPaymentPage implements OnInit {
     this.payd.getAllPaymentDetailsByUser(this.id).subscribe(
       (data: any[]) => {
         this.paydetail = data;
-        console.log(data);
       },
       function(error) {
         console.log(error);
       },
       function() {
-        console.log("complete");
       }
     );
     this.payd.getPaymentDetailById(this.pid).subscribe(
@@ -154,12 +142,9 @@ export class ConfirmPaymentPage implements OnInit {
         console.log(err);
       },
       function() {
-        console.log("Complete");
       }
     );
   }
-  
-
   onRadioChange(p_id) {
     this.payment_type = p_id;
   }
@@ -221,7 +206,6 @@ export class ConfirmPaymentPage implements OnInit {
         console.log(err);
       },
       function() {
-        console.log("complete");
       }
     );
     this.num = Math.floor(0 + Math.random() * 100);
@@ -241,7 +225,6 @@ export class ConfirmPaymentPage implements OnInit {
             console.log(err);
           },
           function() {
-            console.log("Complete");
           }
         );
       this.router.navigate(["/transection-status"]);
@@ -250,8 +233,7 @@ export class ConfirmPaymentPage implements OnInit {
       tos1.present();
       this.router.navigate(["/transaction-failed"]);
     }
-    var i = 0;
-
+    let iters = 0;
     this.final_tollplaza.forEach(element => {
       var isreturn;
       if (this.whichj == "return") {
@@ -260,8 +242,6 @@ export class ConfirmPaymentPage implements OnInit {
         isreturn = 0;
       }
       var amount = 0;
-       this.val = Math.floor(1000 + Math.random() * 900000);
-       console.log(this.val);
       this.tdata
         .addTransaction(
           new TransactionClass(
@@ -273,10 +253,10 @@ export class ConfirmPaymentPage implements OnInit {
             this.getdates(),
             this.gettimes(),
             status,
-            this.amounts[i++],
+            this.amounts[iters],
             isreturn,
             1,
-            this.val,
+            this.otps[iters],
             "",
             "",
             "",
@@ -284,14 +264,14 @@ export class ConfirmPaymentPage implements OnInit {
           )
         )
         .subscribe(
-          (data: TransactionClass) => {},
+          (data: TransactionClass[]) => {},
           function(err) {
             console.log(err);
           },
           function() {
-            console.log("Complete");
           }
         );
+        iters++;
     });
   }
   inputBoxIfwrite()

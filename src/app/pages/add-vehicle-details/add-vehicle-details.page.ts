@@ -89,7 +89,7 @@ export class AddVehicleDetailsPage implements OnInit {
         {
           name: "new_vehicle_no",
           type: "text",
-          placeholder: "Enter New Vehicle No"
+          placeholder: "Vehicle No e.g. GJ-01-XX-1111"
         }
       ],
       buttons: [
@@ -105,7 +105,6 @@ export class AddVehicleDetailsPage implements OnInit {
         {
           text: "Cancel",
           handler: data => {
-            console.log(data);
           },
           role: "cancel"
         }
@@ -131,20 +130,15 @@ export class AddVehicleDetailsPage implements OnInit {
         if (this.vehicle.length == 0) {
           tos.present();
         }
-        console.log(this.vehicle);
       },
       function(err) {
         console.log(err);
       },
       function() {
-        console.log("Complete");
       }
     );
   }
   async onAdd(vehicle_no: any) {
-    // console.log("afjds;lf",this.presentAlert().then((data)=>{
-    //   console.log("data " + data);
-    // }));
     this.vno = vehicle_no;
     const tos = await this.toast.create({
       message: "Vehicle Added Successfully",
@@ -178,7 +172,6 @@ export class AddVehicleDetailsPage implements OnInit {
           console.log(err);
         },
         function() {
-          console.log("Compelte");
         }
       );
   }
