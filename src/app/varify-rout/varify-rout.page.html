@@ -1,0 +1,18 @@
+<ion-header>
+  <ion-toolbar>
+      <ion-buttons slot="start">
+          <ion-back-button  defaultHref="homeselect"  ></ion-back-button>
+        </ion-buttons>
+    <ion-title>Verify-Route</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+    <div id="map_canvas"></div>
+
+    <ion-button
+    style="position:fixed;width:100%;bottom:0;left:0"
+    (click)="getDetailsForward()"
+    >Continue</ion-button
+  >
+  </ion-content>

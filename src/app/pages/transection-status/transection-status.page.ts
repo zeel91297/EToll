@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { ToastController } from '@ionic/angular';
+
 @Component({
   selector: 'app-transection-status',
   templateUrl: './transection-status.page.html',
@@ -7,9 +9,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TransectionStatusPage implements OnInit {
   a = 0;
-  constructor() { }
+  constructor(public toast:ToastController) { }
 
-  ngOnInit() {
+ async ngOnInit() {
+    
   }
   onclick()
   {

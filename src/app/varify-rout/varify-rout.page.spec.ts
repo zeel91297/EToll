@@ -1,22 +1,22 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PaymentOptionsPage } from './payment-options.page';
+import { VarifyRoutPage } from './varify-rout.page';
 
-describe('PaymentOptionsPage', () => {
-  let component: PaymentOptionsPage;
-  let fixture: ComponentFixture<PaymentOptionsPage>;
+describe('VarifyRoutPage', () => {
+  let component: VarifyRoutPage;
+  let fixture: ComponentFixture<VarifyRoutPage>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PaymentOptionsPage ],
+      declarations: [ VarifyRoutPage ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PaymentOptionsPage);
+    fixture = TestBed.createComponent(VarifyRoutPage);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

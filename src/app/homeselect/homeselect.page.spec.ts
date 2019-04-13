@@ -1,22 +1,22 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MenuItemPage } from './menu-item.page';
+import { HomeselectPage } from './homeselect.page';
 
-describe('MenuItemPage', () => {
-  let component: MenuItemPage;
-  let fixture: ComponentFixture<MenuItemPage>;
+describe('HomeselectPage', () => {
+  let component: HomeselectPage;
+  let fixture: ComponentFixture<HomeselectPage>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MenuItemPage ],
+      declarations: [ HomeselectPage ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(MenuItemPage);
+    fixture = TestBed.createComponent(HomeselectPage);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

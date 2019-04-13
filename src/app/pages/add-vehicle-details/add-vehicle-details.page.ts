@@ -27,7 +27,9 @@ export class AddVehicleDetailsPage implements OnInit {
   amt: any;
   whichj: any;
   tollPlazas: Tollplazza[] = [];
-  shouldDisabled:boolean=true;
+  final_tollplaza: Tollplazza[] = [];
+  amounts: number[] = [];
+  shouldDisabled: boolean = true;
   tmp_vno: any;
   constructor(
     public router: Router,
@@ -38,72 +40,26 @@ export class AddVehicleDetailsPage implements OnInit {
     public alertController: AlertController
   ) {
     this.activateroute.params.subscribe((data: any) => {
-      console.log(data);
       this.vehicle_type = data.prev_vehicle_type;
       this.amt = data.prev_amt;
       this.whichj = data.prev_journey;
-      // this.tollPlazas=data["totalPlaza"];
-      // console.log("hello ",this.tollPlazas);
       if (this.router.getCurrentNavigation().extras.state) {
         this.tollPlazas = this.router.getCurrentNavigation().extras.state.user;
+        this.amounts = this.router.getCurrentNavigation().extras.state.amounts;
+        this.final_tollplaza = this.router.getCurrentNavigation().extras.state.finalplaza;
       }
-      console.log("HELLO  ", this.tollPlazas);
-      alert(this.amt);
-      alert(this.whichj);
-      alert(this.vehicle_type);
-      //  for (let index = 0; index < this.tollPlazas.length; index++) {
-      // const element = array[index];
-      // }
     });
   }
-  async onAdd1() {
-    this.presentAlert();
-  }
-  change() {
-    this.shouldDisabled=true;
-    this.vno = this.vehicleno;
-  }
-  async presentAlert() {
-    this.shouldDisabled=false;
-    const alert = await this.alertController.create({
-      header: "Add New Vehicle",
-      inputs: [
-        {
-          name: "new_vehicle_no",
-          type: "text",
-          placeholder: "Enter New Vehicle No"
-        }
-      ],
-      buttons: [
-        {
-          text: "Add",
-          handler: data => {
-            if (data != "") {
-              this.onAdd(data.new_vehicle_no);
-              this.tmp_vno=data.new_vehicle_no;
-            }
-          }
-        },
-        {
-          text: "Cancel",
-          handler: data => {
-            console.log(data);
-          },
-          role: "cancel"
-        }
-      ]
-    });
-    return await alert.present();
-  }
+  //send all details on next page
   getVehicleNo() {
-    console.log("in");
     let navigationExtras: NavigationExtras = {
       state: {
         prev_vehicle_no: this.vno,
-        user: this.tollPlazas
+        user: this.tollPlazas,
+        amounts: this.amounts,
+        finalplaza: this.final_tollplaza
       }
     };
-    console.log(navigationExtras);
     this.router.navigate(
       [
         "/payment-method",
@@ -116,11 +72,47 @@ export class AddVehicleDetailsPage implements OnInit {
       navigationExtras
     );
   }
-  async ngOnInit() {
-    //   this.tollPlazas.forEach((element) => {
-    //     console.log(element.highway_name);
-    // });
 
+  async onAdd1() {
+    this.presentAlert();
+  }
+  //Give Vehicle No
+  change() {
+    this.shouldDisabled = true;
+    this.vno = this.vehicleno;
+  }
+  async presentAlert() {
+    this.shouldDisabled = false;
+    const alert = await this.alertController.create({
+      header: "Add New Vehicle",
+      inputs: [
+        {
+          name: "new_vehicle_no",
+          type: "text",
+          placeholder: "Vehicle No e.g. GJ-01-XX-1111"
+        }
+      ],
+      buttons: [
+        {
+          text: "Add",
+          handler: data => {
+            if (data != "") {
+              this.onAdd(data.new_vehicle_no);
+              this.tmp_vno = data.new_vehicle_no;
+            }
+          }
+        },
+        {
+          text: "Cancel",
+          handler: data => {
+          },
+          role: "cancel"
+        }
+      ]
+    });
+    return await alert.present();
+  }
+  async ngOnInit() {
     const tos = await this.toast.create({
       message: "There is no vehicle number of this type so please Add Vehicle",
       duration: 5000,
@@ -138,20 +130,15 @@ export class AddVehicleDetailsPage implements OnInit {
         if (this.vehicle.length == 0) {
           tos.present();
         }
-        console.log(this.vehicle);
       },
       function(err) {
         console.log(err);
       },
       function() {
-        console.log("Complete");
       }
     );
   }
   async onAdd(vehicle_no: any) {
-    // console.log("afjds;lf",this.presentAlert().then((data)=>{
-    //   console.log("data " + data);
-    // }));
     this.vno = vehicle_no;
     const tos = await this.toast.create({
       message: "Vehicle Added Successfully",
@@ -185,7 +172,6 @@ export class AddVehicleDetailsPage implements OnInit {
           console.log(err);
         },
         function() {
-          console.log("Compelte");
         }
       );
   }

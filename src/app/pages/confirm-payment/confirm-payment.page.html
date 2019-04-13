@@ -21,42 +21,100 @@
         </tr>
     </table>
 
-    <br /><br />
-    <table style="border: 1px solid black">
-        <tr>
-            <td>
-                <ion-label>
-                    <b> Vehicle No :- {{ vno }}</b>
-                </ion-label>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <ion-label>
-                    <b> Jounrey Type :- {{ whichj }}</b>
-                </ion-label>
-                <br />
-                <ion-label *ngFor="let item of vehicletype" style="float:left">
-                    <b> Vehicle :- {{ item.vehicle_type_name }}</b>
-                </ion-label>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <ol>
-                    <li *ngFor="let item of tollPlazas">{{ item.highway_name }}</li>
-                </ol>
-                <!-- <ion-label>
-          {{ item.highway_name }}
-        </ion-label> -->
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <ion-label style="float:right">
-                    <b> Total Amount :- {{ amt | currency: "INR" }}</b>
-                </ion-label>
-            </td>
-        </tr>
-    </table>
+  <br /><br />
+  <table style="border: 1px solid black; float:left; ">
+    <tr>
+      <td>
+        <ion-label>
+          <b> Vehicle No :- {{ vno }}</b>
+        </ion-label>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <ion-label>
+          <b> Jounrey Type :- {{ whichj }}</b>
+        </ion-label>
+        <br />
+        <ion-label *ngFor="let item of vehicletype" style="float:left">
+          <b> Vehicle :- {{ item.vehicle_type_name }}</b>
+        </ion-label>
+      </td>
+    </tr>
+  </table>
+  <table border="2px">
+    <tr><th>Sr.No </th><th>Highway Name</th><th>City Name</th><th>Emergency No</th><th>Amount</th><th>Toll Name</th></tr>
+    <tr *ngFor="let item of final_arr_transaction">
+      <td>
+        {{ item.SrNo }}
+      </td>
+      <td>
+        {{ item.highway_name }}
+      </td>
+      <td>
+        {{ item.city }}
+      </td>
+      <td>
+        {{ item.emergency_no }}
+      </td>
+      <td>
+        {{ item.amount }}
+      </td>
+      <td>
+        {{ item.toll_name }}
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <ion-label style="float:right">
+          <b> Total Amount :- </b>
+        </ion-label>
+      </td>
+      <td>
+        <ion-label>
+          <b>{{ amt | currency: "INR" }}</b>
+        </ion-label>
+      </td>
+    </tr>
+  </table>
+
+  <table>
+    <ion-list *ngFor="let item of paydata">
+      <div class="card list">
+        <div class="item item-divider">
+          <h3><b>Payment Detail</b></h3>
+        </div>
+        <div class="item item-divider">
+          <h6><b> Card No </b> :- {{ item.card_no }}</h6>
+        </div>
+        <div class="item item-divider">
+          <h6><b> Method Name </b> :- {{ item.method_name }}</h6>
+        </div>
+        <div class="item item-divider">
+          <h6><b> Card Name </b> :- {{ item.card_name }}</h6>
+        </div>
+        <div>
+          <ion-item>
+            <ion-input
+              type="password"
+              pattern="[0-9]{3}"
+              placeholder="Enter CVV"
+              title="Only three Digit allow"
+              (ionBlur)="inputBoxIfwrite()"
+            >
+            </ion-input>
+
+           <img src="../../../assets/icon/cvv.jpg" alt="" width=20%>
+          </ion-item>
+        </div>
+      </div>
+    </ion-list>
+  </table>
+  <ion-button
+    [disabled]="!buttonDisabled"
+    expand="block"
+    style="width:100%;  margin-bottom: -20px"
+    (click)="transaction()"
+    >Confirm</ion-button
+  >
 </ion-content>

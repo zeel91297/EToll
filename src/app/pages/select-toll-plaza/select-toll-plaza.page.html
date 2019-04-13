@@ -8,6 +8,7 @@
 </ion-header>
 
 <ion-content>
+ 
     <form [formGroup]="select_toll_plaza" (ngSubmit)="onVehicle()">
         <ion-item>
             <ion-label>Total Amount to be paid: </ion-label>
@@ -55,6 +56,7 @@
                         </ion-item>
                     </td>
 
+   
                     <td>
                         <ion-item>
                             <i class="fas fa-truck" size="large" style="font-size:24px;"></i>
@@ -80,12 +82,6 @@
                 </tr>
             </ion-radio-group>
         </table>
-
-        <ion-item>
-            <ion-label>Select Toll Plaza</ion-label>
-            <ionic-selectable formControlName="toll_list" [(ngModel)]="port" [isMultiple]="true" [items]="tp" itemValueField="toll_plaza_id" itemTextField="toll_name" [canSearch]="true" (onChange)="portChange($event)" (ionSelect)="plazaSelect()">
-            </ionic-selectable>
-        </ion-item>
     </form>
     <ion-button expand="block" [disabled]="!select_toll_plaza.valid" (click)="onVehicle()">Next
     </ion-button>
