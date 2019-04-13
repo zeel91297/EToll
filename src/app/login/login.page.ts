@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from "@angular/core";
-import { MenuController, ToastController } from "@ionic/angular";
+import { MenuController, ToastController,LoadingController } from "@ionic/angular";
 import { Router } from "@angular/router";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { user } from "../shared/user_class";
@@ -23,7 +23,8 @@ export class LoginPage implements OnInit, OnDestroy {
     private router: Router,
     private userservice: UserserviceService,
     private toast: ToastController,
-    private md5: Md5
+    private md5: Md5,
+    private loadingController:LoadingController
   ) {
     this.loginform = new FormGroup({
       password1: new FormControl("", {
@@ -73,6 +74,11 @@ export class LoginPage implements OnInit, OnDestroy {
       animated: true,
 
     });
+    const loading = await this.loadingController.create({
+      message: 'Redirecting ...',
+      showBackdrop: true,
+      id: 'login'
+    });
 
     // console.log(this.password1);
     // console.log(this.email);
@@ -98,9 +104,11 @@ export class LoginPage implements OnInit, OnDestroy {
             localStorage.setItem('flag', 'true');
             localStorage.setItem('mail', this.email);
             console.log('not verifird');
+            loading.present();
             tos2.present();
             this.userservice.resend(new user(null, null, null, this.email, null, null, null)).subscribe(
               (data: any[]) => {
+                loading.dismiss();
                 this.router.navigate(['/verification-user']);
               },
               function (err) {

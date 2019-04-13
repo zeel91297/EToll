@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, AbstractControl } from '@angular/forms';
 import { user } from "../../shared/user_class";
-import { MenuController, ToastController } from '@ionic/angular';
+import { MenuController, ToastController,LoadingController } from '@ionic/angular';
 import { UserserviceService } from "../../providers/userDB/userservice.service";
 import { Md5 } from 'ts-md5/dist/md5';
 import { Router } from '@angular/router';
+import { logging } from 'protractor';
 
 
 
@@ -24,7 +25,7 @@ export class SignupPage implements OnInit {
   s: string = Math.floor(Math.random() * Math.floor(999999)).toString();
   temp_user: user[] = [];
   private flag = 0;
-  constructor(public userservice: UserserviceService, private MD5: Md5, private router: Router,private toast:ToastController) {
+  constructor(public userservice: UserserviceService, private MD5: Md5, private router: Router,private toast:ToastController,private loadingController:LoadingController) {
 
     /* constructor(public userservice: UserserviceService,private MD5:Md5) { */
 
@@ -50,18 +51,36 @@ export class SignupPage implements OnInit {
     animated: true,
     
   });
+  const tos1 = await this.toast.create({
+    message: "EMail is Not Valid",
+    duration: 5000,
+    position: "bottom",
+    cssClass: "toast_login_fail",
+    translucent: true,
+    animated: true,
+    
+  });
+  const loading = await this.loadingController.create({
+    message: 'Redirecting ...',
+    showBackdrop: true,
+    id: 'login'
+  });
     const md5 = new Md5();
     // const ls=md5.appendStr("hellohellohello").end();
     var hashedPassword = md5.appendStr(this.password1).end();
+    loading.present();
     this.userservice.emailsend(new user(null, this.name, hashedPassword.toString(), this.email, this.contact1, null, 0)).subscribe(
       (data: any[]) => {
         console.log("in ts mail");
         localStorage.setItem('mail', this.email);
+        loading.dismiss();
         tos2.present();
         this.router.navigate(['/verification-user']);
       },
       function (error) {
+        loading.dismiss();
         console.log("emial id not valid");
+        tos1.present();
       },
     );
   }
