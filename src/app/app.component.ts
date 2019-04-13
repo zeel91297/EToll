@@ -67,7 +67,7 @@ export class AppComponent implements OnInit {
     private perm: PermissionsService
   ) {
     this.initializeApp();
-    this.backButtonEnable();
+    // this.backButtonEnable();
     this.perm.checkGPSPermission();
   }
 
@@ -92,7 +92,8 @@ export class AppComponent implements OnInit {
 
   initializeApp() {
     this.platform.ready().then(() => {
-      this.statusBar.styleDefault();
+      // this.statusBar.styleDefault();
+      this.statusBar.show();
       this.splashScreen.hide();
     });
   }
