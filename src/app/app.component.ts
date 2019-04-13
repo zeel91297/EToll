@@ -36,11 +36,7 @@ export class AppComponent implements OnInit {
     this.perm.checkGPSPermission();
   }
 
-  ngOnInit() {
-    /* this.storage.get('user_name').then(val => {
-      this.user_name = val;
-    }); */
-  }
+  ngOnInit() {}
 
   initializeApp() {
     this.platform.ready().then(() => {
