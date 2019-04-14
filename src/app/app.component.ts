@@ -42,7 +42,7 @@ export class AppComponent implements OnInit {
     this.platform.ready().then(() => {
       this.statusBar.show();
       this.splashScreen.hide();
-      this.resumeApp();
+      //this.resumeApp();
     });
   }
 
@@ -65,17 +65,17 @@ export class AppComponent implements OnInit {
     this.navCtrl.navigateRoot(["/login"]);
   }
 
-  resumeApp() {
-    let id = localStorage.getItem("id");
-    console.log(id);
-    if (localStorage.getItem("id") != null) {
-      this.navCtrl.navigateRoot(["/home"]);
-      // this.platform.resume;
-    } else {
-      this.navCtrl.navigateRoot(["/login"]);
-    }
-    // tslint:disable-next-line:no-unused-expression
-  }
+  // resumeApp() {
+  //   let id = localStorage.getItem("id");
+  //   console.log(id);
+  //   if (localStorage.getItem("id") != null) {
+  //     this.navCtrl.navigateRoot(["/home"]);
+  //     // this.platform.resume;
+  //   } else {
+  //     this.navCtrl.navigateRoot(["/login"]);
+  //   }
+  //   // tslint:disable-next-line:no-unused-expression
+  // }
 
   async presentConfirm() {
     const alert = await this.alertCtrl.create({

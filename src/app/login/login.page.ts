@@ -48,6 +48,11 @@ export class LoginPage implements OnInit, OnDestroy {
     });
   }
   ngOnInit() {
+    let id = localStorage.getItem("id");
+    if (localStorage.getItem("id") != null) {
+      this.navCtrl.navigateRoot(["/home"]);
+      // this.platform.resume;
+    }
     this.email = "";
     this.password1 = "";
     this.menuCtrl.enable(false);

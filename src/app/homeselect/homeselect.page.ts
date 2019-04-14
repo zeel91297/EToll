@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-
 import { Router, NavigationExtras, ActivatedRoute } from "@angular/router";
-
 import { TollplazaService } from "../../app/providers/tollplazadb/tollplaza.service";
-
 import { Tollplazza } from "../../app/shared/tollplaza_class";
 import { ToastController } from '@ionic/angular';
 

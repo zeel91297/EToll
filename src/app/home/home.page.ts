@@ -126,6 +126,7 @@ export class HomePage implements OnInit {
           data.forEach(element => {
             this.toll_ids.push(element.toll_id);
           });
+          console.log("in home page ",this.toll_ids);
           let navigationExt:NavigationExtras={
               state:{
                 toll_ids:this.toll_ids
