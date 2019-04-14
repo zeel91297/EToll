@@ -70,11 +70,11 @@ export class AppComponent implements OnInit {
     console.log(id);
     if (localStorage.getItem("id") != null) {
       this.navCtrl.navigateRoot(["/home"]);
+      // this.platform.resume;
     } else {
       this.navCtrl.navigateRoot(["/login"]);
     }
     // tslint:disable-next-line:no-unused-expression
-    this.platform.resume;
   }
 
   async presentConfirm() {
