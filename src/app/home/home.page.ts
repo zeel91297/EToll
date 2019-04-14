@@ -5,7 +5,7 @@ import {
   AlertController,
   NavController
 } from "@ionic/angular";
-import { Router } from "@angular/router";
+import { Router, NavigationExtras } from "@angular/router";
 import {
   GoogleMaps,
   GoogleMap,
@@ -46,6 +46,7 @@ export class HomePage implements OnInit {
   destinationCity: PairCities; */
   cities: Cities[];
   city: Cities;
+  toll_ids: number[] = [];
   constructor(
     private platform: Platform,
     public tpdata: TollplazaService,
@@ -62,7 +63,7 @@ export class HomePage implements OnInit {
       err => {
         console.log(err);
       },
-      () => {}
+      () => { }
     );
 
     this.cities = [
@@ -116,14 +117,30 @@ export class HomePage implements OnInit {
   }
 
   onTollButton() {
+
+    this.toll_ids=[];
     this.citiesData.getTollsBetweenCities(this.city1, this.city2).subscribe(
-      (data: any) => {
+      (data: any[]) => {
         console.log(data);
+        if (data.length > 0) {
+          data.forEach(element => {
+            this.toll_ids.push(element.toll_id);
+          });
+          let navigationExt:NavigationExtras={
+              state:{
+                toll_ids:this.toll_ids
+              }
+          };
+          this.router.navigate(['/homeselect/1'],navigationExt);
+        }
+        else{
+          alert("No TollPlazas in this route");
+        }
       },
       err => {
         console.log(err);
       },
-      () => {}
+      () => { }
     );
   }
 
@@ -150,10 +167,10 @@ export class HomePage implements OnInit {
             .then(this.onMarkerAdded);
         }
       },
-      function(err) {
+      function (err) {
         console.log(err);
       },
-      function() {
+      function () {
         console.log("Complete");
       }
     );
@@ -181,10 +198,10 @@ export class HomePage implements OnInit {
         if (
           confirm(
             "Do you want to continue " +
-              arr[0] +
-              " " +
-              arr[1] +
-              " with this toll?"
+            arr[0] +
+            " " +
+            arr[1] +
+            " with this toll?"
           )
         ) {
           var pathstring = "/homeselect/" + arr[2];
