@@ -2,7 +2,8 @@ import { Component, OnInit, OnDestroy } from "@angular/core";
 import {
   MenuController,
   ToastController,
-  LoadingController
+  LoadingController,
+  NavController
 } from "@ionic/angular";
 import { Router } from "@angular/router";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
@@ -28,7 +29,8 @@ export class LoginPage implements OnInit, OnDestroy {
     private userservice: UserserviceService,
     private toast: ToastController,
     private md5: Md5,
-    private loadingController: LoadingController
+    private loadingController: LoadingController,
+    private navCtrl: NavController
   ) {
     this.loginform = new FormGroup({
       password1: new FormControl("", {
@@ -101,6 +103,7 @@ export class LoginPage implements OnInit, OnDestroy {
               tos.present();
               console.log("verifird");
               this.router.navigate(["/home"]);
+              this.navCtrl.navigateRoot(["/home"]);
             } else {
               localStorage.setItem("flag", "true");
               localStorage.setItem("mail", this.email);

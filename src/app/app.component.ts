@@ -42,6 +42,7 @@ export class AppComponent implements OnInit {
     this.platform.ready().then(() => {
       this.statusBar.show();
       this.splashScreen.hide();
+      this.resumeApp();
     });
   }
 
@@ -62,6 +63,18 @@ export class AppComponent implements OnInit {
   onLogout() {
     localStorage.clear();
     this.navCtrl.navigateRoot(["/login"]);
+  }
+
+  resumeApp() {
+    let id = localStorage.getItem("id");
+    console.log(id);
+    if (localStorage.getItem("id") != null) {
+      this.navCtrl.navigateRoot(["/home"]);
+    } else {
+      this.navCtrl.navigateRoot(["/login"]);
+    }
+    // tslint:disable-next-line:no-unused-expression
+    this.platform.resume;
   }
 
   async presentConfirm() {

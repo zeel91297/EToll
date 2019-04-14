@@ -6,41 +6,42 @@
         <ion-title>
             Select Toll Gate
         </ion-title>
+        <!-- <ion-segment [(ngModel)]="segme" (ionChange)="segmentChanged($event)">
+            <ion-segment-button value="map">
+                <ion-label>Map</ion-label>
+            </ion-segment-button>
+            <ion-segment-button value="cities">
+                <ion-label>Select Cities</ion-label>
+            </ion-segment-button>
+        </ion-segment> -->
     </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
-    <ion-segment [(ngModel)]="segme" (ionChange)="segmentChanged($event)">
-        <ion-segment-button value="map">
-            <ion-label>Map</ion-label>
-        </ion-segment-button>
-        <ion-segment-button value="cities">
-            <ion-label>Select Cities</ion-label>
-        </ion-segment-button>
-    </ion-segment>
+    <ion-item>
+        <ion-label>Source City</ion-label>
+        <ionic-selectable [(ngModel)]="sourceCity" [isMultiple]="false" [items]="cities" itemValueField="city1" itemTextField="city1" [canSearch]="true" (onChange)="cityChangeSource($event)">
+        </ionic-selectable>
+    </ion-item>
 
-    <div [ngSwitch]="segme">
+    <ion-item>
+        <ion-label>Destination City</ion-label>
+        <ionic-selectable [(ngModel)]="destinationCity" [isMultiple]="false" [items]="cities" itemValueField="city1" itemTextField="city1" [canSearch]="true" (onChange)="cityChangeDest($event)">
+        </ionic-selectable>
+    </ion-item>
+
+    <ion-button [disabled]="flagBut" (click)="onTollButton()" expand="full">
+        Get Tolls List
+    </ion-button>
+    <div id="map_canvas"></div>
+    <!-- <div [ngSwitch]="segme">
         <div *ngSwitchCase="'map'">
             <div id="map_canvas"></div>
         </div>
         <div *ngSwitchCase="'cities'">
 
-            <ion-item>
-                <ion-label>Source City</ion-label>
-                <ionic-selectable [(ngModel)]="sourceCity" [isMultiple]="false" [items]="cities" itemValueField="city1" itemTextField="city1" [canSearch]="true" (onChange)="cityChangeSource($event)">
-                </ionic-selectable>
-            </ion-item>
-
-            <ion-item>
-                <ion-label>Destination City</ion-label>
-                <ionic-selectable [(ngModel)]="destinationCity" [isMultiple]="false" [items]="cities" itemValueField="city1" itemTextField="city1" [canSearch]="true" (onChange)="cityChangeDest($event)">
-                </ionic-selectable>
-            </ion-item>
-
-            <ion-button [disabled]="flagBut" (click)="onTollButton()" expand="full">
-                Get Tolls List
-            </ion-button>
+            
         </div>
-    </div>
+    </div> -->
 
 </ion-content>
