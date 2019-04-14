@@ -49,6 +49,7 @@ import { BackgroundGeolocation } from "@ionic-native/background-geolocation/ngx"
 import { LocalNotifications } from "@ionic-native/local-notifications/ngx";
 import { Md5 } from "ts-md5";
 import { GoogleMaps } from "@ionic-native/google-maps/ngx";
+import { CitiesDbService } from './providers/citiesDB/cities-db.service';
 
 //ends here
 
@@ -73,6 +74,7 @@ import { GoogleMaps } from "@ionic-native/google-maps/ngx";
     VehicledbProvider,
     vehicleTypeProvider,
     PaymentmethodService,
+    CitiesDbService,
     /*
     Background Geolocation
     */

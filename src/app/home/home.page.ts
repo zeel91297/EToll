@@ -17,6 +17,10 @@ import {
 } from "@ionic-native/google-maps/ngx";
 import { TollplazaService } from "../providers/tollplazadb/tollplaza.service";
 import { Tollplazza } from "../shared/tollplaza_class";
+import { IonicSelectableModule } from "ionic-selectable";
+import { PairCities, Cities } from "../shared/Pair_cities";
+import { CitiesDbService } from "../providers/citiesDB/cities-db.service";
+
 @Component({
   selector: "app-home",
   templateUrl: "home.page.html",
@@ -29,20 +33,98 @@ export class HomePage implements OnInit {
   map: GoogleMap;
   prev_tid: number;
   id: number;
+
+  segme = "map";
+  sourceCity: Cities;
+  destinationCity: Cities;
+  city1: string;
+  city2: string;
+  flagBut: boolean = true;
+
+  /* cities: PairCities[];
+  sourceCity: PairCities;
+  destinationCity: PairCities; */
+  cities: Cities[];
+  city: Cities;
   constructor(
     private platform: Platform,
     public tpdata: TollplazaService,
     public router: Router,
     public alertController: AlertController,
     public navctrl: NavController,
-    public menuController: MenuController
-  ) {}
+    public menuController: MenuController,
+    public citiesData: CitiesDbService
+  ) {
+    this.citiesData.getAllCities().subscribe(
+      (data: any) => {
+        this.cities = data;
+      },
+      err => {
+        console.log(err);
+      },
+      () => {}
+    );
+
+    this.cities = [
+      /* { pair_id: 1, city1: "Kutch", city2: "Banaskantha" },
+      { pair_id: 40, city1: "Kutch", city2: "Dwarka" },
+      { pair_id: 41, city1: "Kutch", city2: "Jamnagar" },
+      { pair_id: 42, city1: "Kutch", city2: "Morbi" },
+      { pair_id: 43, city1: "Kutch", city2: "Patan" } */
+    ];
+  }
 
   async ngOnInit() {
     this.menuController.enable(true);
     await this.platform.ready();
     await this.loadMap();
     await this.getallPlaza();
+  }
+
+  segmentChanged(ev: any) {
+    /* console.log("Segment changed", ev); */
+  }
+
+  cityChangeSource(event) {
+    console.log("city:", event.value);
+    this.city1 = event.value.city1;
+    console.log(this.city1);
+    if (this.city1 === this.city2) {
+      alert("Source and Destination couldn't be same!");
+      this.city1 = "";
+      this.sourceCity = null;
+      console.log(this.city1);
+      this.flagBut = true;
+    } else {
+      this.flagBut = false;
+    }
+    /* console.log(this.sourceCity + " " + this.destinationCity); */
+  }
+
+  cityChangeDest(event) {
+    console.log("city:", event.value);
+    this.city2 = event.value.city1;
+    if (this.city1 === this.city2) {
+      alert("Source and Destination couldn't be same!");
+      this.city2 = "";
+      this.destinationCity = null;
+      console.log(this.city2);
+      this.flagBut = true;
+    } else {
+      this.flagBut = false;
+    }
+  }
+
+  onTollButton() {
+    this.citiesData.getTollsBetweenCities(this.city1, this.city2).subscribe(
+      (data: any) => {
+        console.log(data);
+      },
+      err => {
+        console.log(err);
+      },
+      () => {}
+    );
   }
 
   getallPlaza() {
