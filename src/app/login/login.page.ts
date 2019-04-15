@@ -131,7 +131,6 @@ export class LoginPage implements OnInit, OnDestroy {
                 );
             }
           } else {
-            console.log("");
             tos1.present();
           }
         },

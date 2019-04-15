@@ -12,7 +12,7 @@ import {
   MarkerCluster,
   Polyline
 } from "@ionic-native/google-maps/ngx";
-import { Platform } from "@ionic/angular";
+import { Platform, MenuController } from "@ionic/angular";
 
 @Component({
   selector: "app-varify-rout",
@@ -27,27 +27,29 @@ export class VarifyRoutPage implements OnInit {
   tollplaza: Tollplazza[] = [];
   lat: number;
   long: number;
-  polyarr:any[]=[];
+  polyarr: any[] = [];
   // arr :any[]=[];
   highwayname: any;
   city: any;
   ctr: number = 0;
-  final_tollplaza:Tollplazza[]=[];
+  final_tollplaza: Tollplazza[] = [];
   constructor(
     public activateroute: ActivatedRoute,
     public router: Router,
     private platform: Platform,
-    public tpdata: TollplazaService
+    public tpdata: TollplazaService,
+    public menuCtrl: MenuController
   ) {
+    this.menuCtrl.enable(false);
     this.activateroute.params.subscribe((data: any) => {
       this.tollpid = data.prev_tid;
       if (this.router.getCurrentNavigation().extras.state) {
         this.tid = this.router.getCurrentNavigation().extras.state.plazaids;
-        this.final_tollplaza=this.router.getCurrentNavigation().extras.state.finalplaza;
+        this.final_tollplaza = this.router.getCurrentNavigation().extras.state.finalplaza;
       }
     });
     //this.tid.push(this.tpid);
-    this.tid=[this.tollpid,...this.tid];
+    this.tid = [this.tollpid, ...this.tid];
   }
 
   async ngOnInit() {
@@ -58,20 +60,20 @@ export class VarifyRoutPage implements OnInit {
     // var obj;
     // this.getMarkersAnother(0, obj, arr);
   }
-  async putBlueMarkers(){
+  async putBlueMarkers() {
     this.final_tollplaza.forEach(element => {
-      this.polyarr.push({lat:element.latitude,lng:element.longitude});
-        this.map
-          .addMarker({
-            icon: "blue",
-            position: {
-              lat: parseFloat(element.latitude),
-              lng: parseFloat(element.longitude)
-            },
-            title: element.highway_name + " , " + element.city,
-            disableAutoPan: true
-          })
-          .then(this.onMarkerAdded);
+      this.polyarr.push({ lat: element.latitude, lng: element.longitude });
+      this.map
+        .addMarker({
+          icon: "blue",
+          position: {
+            lat: parseFloat(element.latitude),
+            lng: parseFloat(element.longitude)
+          },
+          title: element.highway_name + " , " + element.city,
+          disableAutoPan: true
+        })
+        .then(this.onMarkerAdded);
     });
   }
   async onMarkerAdded(marker: Marker) {
@@ -82,8 +84,7 @@ export class VarifyRoutPage implements OnInit {
       });
   }
 
-  setLineMap() {
-  }
+  setLineMap() {}
   loadMap() {
     let mapOptions: GoogleMapOptions = {
       camera: {
@@ -98,16 +99,13 @@ export class VarifyRoutPage implements OnInit {
     this.map = GoogleMaps.create("map_canvas", mapOptions);
   }
 
-  getDetailsForward()
-  {
-    let navigationExtras:NavigationExtras={
-      state:{
-       plazaids:this.tid,
-       finalplaza:this.final_tollplaza
+  getDetailsForward() {
+    let navigationExtras: NavigationExtras = {
+      state: {
+        plazaids: this.tid,
+        finalplaza: this.final_tollplaza
       }
     };
-    this.router.navigate(["/select-toll-plaza",{
-     
-    }],navigationExtras);
+    this.router.navigate(["/select-toll-plaza", {}], navigationExtras);
   }
 }
