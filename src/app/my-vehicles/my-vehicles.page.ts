@@ -49,8 +49,10 @@ export class MyVehiclesPage implements OnInit {
       (data: vehicle[]) => {
         this.vehicles = data;
         this.vehiclesDup = data;
-        if (vehicle.length == 0) {
+        if (this.vehicles[0] == undefined) {
           this.showList = true;
+        } else {
+          this.showList = false;
         }
       },
       err => {
@@ -80,14 +82,23 @@ export class MyVehiclesPage implements OnInit {
       componentProps: { value: 123 }
     });
 
-    model.onDidDismiss().then((val: any) => {
+    /* model.onDidDismiss().then((val: any) => {
       if (val !== null) {
         this.ngOnInit();
-        /* console.log(val.data); */
-      }
+        console.log(val.data);
+      } 
+    });
+      */
+
+    model.onDidDismiss().then(() => {
+      this.ngOnInit();
     });
 
     await model.present();
+  }
+
+  ionViewWillEnter() {
+    this.ngOnInit();
   }
 
   getItems(ev) {
