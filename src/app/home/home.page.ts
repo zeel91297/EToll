@@ -20,6 +20,7 @@ import { Tollplazza } from "../shared/tollplaza_class";
 import { IonicSelectableModule } from "ionic-selectable";
 import { PairCities, Cities } from "../shared/Pair_cities";
 import { CitiesDbService } from "../providers/citiesDB/cities-db.service";
+import { TitleCasePipe } from '@angular/common';
 
 @Component({
   selector: "app-home",
@@ -48,6 +49,7 @@ export class HomePage implements OnInit {
   city: Cities;
   toll_ids: number[] = [];
   constructor(
+    private titlecasePipe:TitleCasePipe,
     private platform: Platform,
     public tpdata: TollplazaService,
     public router: Router,
@@ -59,6 +61,9 @@ export class HomePage implements OnInit {
     this.citiesData.getAllCities().subscribe(
       (data: any) => {
         this.cities = data;
+        this.cities.forEach(element => {
+          element.city1=this.titlecasePipe.transform(element.city1);
+        });
       },
       err => {
         console.log(err);
