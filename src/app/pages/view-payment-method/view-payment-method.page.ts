@@ -34,22 +34,25 @@ export class ViewPaymentMethodPage implements OnInit {
     // console.log("this executed");
   }
 
-  async ngOnInit() {
+  ngOnInit() {
     this.uid = localStorage.getItem("id");
 
     this.user_payment_method_db.getAllPaymentByUid(this.uid).subscribe(
       (data: paymentMethodsUser[]) => {
         this.payment_methods = data;
         this.visited = true;
-        if (this.payment_methods.length == 0) {
+        console.log(data);
+        console.log(this.payment_methods[0]);
+        if (this.payment_methods[0] == undefined) {
           this.showList = true;
+        } else {
+          this.showList = false;
         }
       },
       err => {
         console.log(err);
       },
-      () => {
-      }
+      () => {}
     );
   }
 
