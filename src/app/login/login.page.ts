@@ -32,6 +32,11 @@ export class LoginPage implements OnInit, OnDestroy {
     private loadingController: LoadingController,
     private navCtrl: NavController
   ) {
+    localStorage.getItem("id");
+    if (localStorage.getItem("id") != null) {
+      this.navCtrl.navigateRoot(["/home"]);
+      // this.platform.resume;
+    }
     this.loginform = new FormGroup({
       password1: new FormControl("", {
         validators: [Validators.required, Validators.minLength(6)],
@@ -48,11 +53,7 @@ export class LoginPage implements OnInit, OnDestroy {
     });
   }
   ngOnInit() {
-    let id = localStorage.getItem("id");
-    if (localStorage.getItem("id") != null) {
-      this.navCtrl.navigateRoot(["/home"]);
-      // this.platform.resume;
-    }
+    
     this.email = "";
     this.password1 = "";
     this.menuCtrl.enable(false);
