@@ -15,7 +15,11 @@ export class TransactionClass{
         public method_name:string,
         public vehicle_type_name:string,
         public user_name:string,
-        public isPassed:number
+        public isPassed:number,
+        public city:string,
+        public highway_name:string,
+        public emergency_number:string,
+        public toll_name:string
     ){}
 }
 

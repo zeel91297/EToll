@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-transaction-failed',
@@ -7,9 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TransactionFailedPage implements OnInit {
 
-  constructor() { }
+  constructor(public router:Router) { }
 
   ngOnInit() {
   }
+  backClick()
+  {
+    this.router.navigate(['/home']);
+  } 
 
 }

@@ -42,6 +42,7 @@
       </td>
     </tr>
   </table>
+  
   <table id="a">
     <tr><th>Sr.No </th><th>Highway Name</th><th>City Name</th><th>Emergency No</th><th>Toll Name</th><th>Amount</th></tr>
     <tr *ngFor="let item of final_arr_transaction">
@@ -55,7 +56,7 @@
         {{ item.city }}
       </td>
       <td>
-        {{ item.emergency_no }}
+        {{ item.emergency_number }}
       </td>
      
       <td>
@@ -79,7 +80,7 @@
     </tr>
   </table>
 
-  <table>
+  <table> 
     <ion-list *ngFor="let item of paydata">
       <div class="card list">
         <div class="item item-divider">

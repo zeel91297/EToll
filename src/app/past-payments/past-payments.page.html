@@ -5,21 +5,27 @@
     </ion-buttons>
     <ion-title>Past Payments</ion-title>
   </ion-toolbar>
-</ion-header>
+  </ion-header>
 
 <ion-content>
+    <ion-searchbar  showCancelButton placeholder="Search City" (ionInput)="getItems($event)">
+      </ion-searchbar>
   <ion-card *ngFor="let item of user_transaction">
     <ion-card-header>
       <ion-card-title>{{item.city}}</ion-card-title>
-      <ion-card-subtitle>{{item.transaction_date}}</ion-card-subtitle>
+      <ion-card-subtitle>{{item.highway_name}}</ion-card-subtitle>
+      <ion-card-subtitle>{{item.toll_name}}</ion-card-subtitle>
+      <ion-card-subtitle>{{item.transaction_date | date: "mediumDate"}} | {{item.transaction_time}}</ion-card-subtitle>
     </ion-card-header>
 
     <ion-card-content>
       <ion-label>Total Amount Paid: {{item.amount | currency:'INR'}}</ion-label><br>
       <ion-label>Vehicle No: {{item.vehicle_no}}</ion-label><br>
-      <ion-label *ngIf="item.isreturn==0">Single Journey</ion-label><br>
+      <ion-label *ngIf="item.isreturn==0">Single Journey</ion-label>
       <ion-label *ngIf="item.isreturn==1">Return Journey</ion-label><br>
-      <ion-button expand="full">Mail Receipt <ion-icon name="send" slot="end"></ion-icon>
+      <ion-label *ngIf="item.status==0" style="color:red; font-family:Trebuchet MS, Helvetica, sans-serif"> <b>Transaction Failed</b></ion-label>
+      <ion-label *ngIf="item.status==1" style="color:green;font-family:Trebuchet MS, Helvetica, sans-serif"><b>Transaction Successfull</b></ion-label><br>
+      <ion-button expand="full"[disabled]="item.status==0"  (click)="mailReceipt(item.transaction_id)" >Mail Receipt <ion-icon name="send" slot="end"></ion-icon>
       </ion-button>
     </ion-card-content>
   </ion-card>
