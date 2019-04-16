@@ -37,7 +37,6 @@ export class AddVehicleModelPage implements OnInit {
   ) {
     this._vehicletype.getAllVehicleType().subscribe(
       (data: any) => {
-
         this.vehicle_type = data;
         this.add_vehicle_form = new FormGroup({
           vehicle_no: new FormControl(
@@ -54,9 +53,7 @@ export class AddVehicleModelPage implements OnInit {
       err => {
         console.log(err);
       },
-      () => {
-        console.log("vehicle types loaded");
-      }
+      () => {}
     );
   }
 
@@ -100,7 +97,7 @@ export class AddVehicleModelPage implements OnInit {
     const toast = await this.toastController.create({
       message: "New Vehicle added successfully",
       showCloseButton: true,
-      position: "top",
+      position: "bottom",
       closeButtonText: "Done"
     });
     this._vehicles

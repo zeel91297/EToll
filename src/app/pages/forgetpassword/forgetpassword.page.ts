@@ -1,7 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { UserserviceService } from "../../providers/userDB/userservice.service";
 import { user } from "../../shared/user_class";
-import { user_mail } from "../../shared/user_mail";
+import { async } from '@angular/core/testing';
+import { convertToR3QueryMetadata } from '@angular/core/src/render3/jit/directive';
 import { Router } from "@angular/router";
 import { Md5 } from "ts-md5";
 import { ToastController, LoadingController } from "@ionic/angular";
@@ -16,19 +17,27 @@ import {
   templateUrl: "./forgetpassword.page.html",
   styleUrls: ["./forgetpassword.page.scss"]
 })
+
+
 export class ForgetpasswordPage implements OnInit {
-  email: string = "";
-  forgetForm: FormGroup;
-  s: string = Math.floor(Math.random() * Math.floor(999999)).toString();
-  constructor(
-    public userservice: UserserviceService,
+  email: string;
+  user_input: string;
+  value1: boolean = false;
+  pass: string;
+  pass1: string;
+  value2: boolean = true;
+  value3: boolean = false;
+  myform: FormGroup;
+  myform1:FormGroup;
+  constructor(public userservice: UserserviceService,
     private md5: Md5,
     public router: Router,
     public toast: ToastController,
     private formBuilder: FormBuilder,
     private loadingController: LoadingController
   ) {
-    this.forgetForm = new FormGroup({
+    this.myform = new FormGroup({
+      
       email: new FormControl("", {
         validators: [
           Validators.required,
@@ -37,12 +46,35 @@ export class ForgetpasswordPage implements OnInit {
         ]
       })
     });
+    this.myform1=new FormGroup({
+      pass: new FormControl('', {
+        validators: [Validators.required, Validators.pattern("^([A-Za-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$")]
+      }),
+      pass1: new FormControl('', {
+        validators: [Validators.required, Validators.pattern("^([A-Za-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$")], updateOn: 'blur'
+      }),
+      
+    });
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+  }
   async send() {
+    var string = '0123456789abcdefghijklmnopqrtuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    var len = string.length;
+    var otpp = '';
+    for (let i = 0; i < 4; i++) {
+      otpp += string[Math.floor(Math.random() * len)];
+    }
+
+    const loading = await this.loadingController.create({
+      message: "Sending Mail",
+      spinner: "bubbles"
+    });
+    loading.present();
+
     const t1 = await this.toast.create({
-      message: "Password Send To Registered Mail",
+      message: "OTP send",
       duration: 5000,
       position: "bottom",
       cssClass: "toast_mail",
@@ -57,43 +89,89 @@ export class ForgetpasswordPage implements OnInit {
       translucent: true,
       animated: true
     });
+
     const md5 = new Md5();
 
-    const loading = await this.loadingController.create({
-      message: "Sending Mail",
-      spinner: "bubbles"
-    });
-    loading.present();
-    var hashedPassword = md5.appendStr(this.s).end();
+
     this.userservice.getUserByEmail(this.email).subscribe(
       (data: user[]) => {
-        this.userservice
-          .user_update_password(this.email, { user_password: hashedPassword })
-          .subscribe(
-            (data: any) => {
-              this.userservice
-                .user_Email(
-                  new user_mail("Your new password", this.email, this.s)
-                )
-                .subscribe(
-                  (data: any) => {
-                    this.router.navigate(["/login"]);
-                    t1.present();
-                  },
-                  function(err) {},
-                  () => {
-                    loading.dismiss();
-                  }
-                );
-            },
-            function(err) {},
-            function() {}
-          );
-      },
-      function(err) {
-        t2.present();
-      },
-      function() {}
+        this.userservice.resend(new user(null, null, null, this.email, null, null, null)).subscribe(
+          (data: any) => {
+
+            t1.present();
+            this.value1 = true;
+            loading.dismiss();
+          },
+          function (err) {
+
+          },
+          function () {
+
+          }
+        );
+
+      });
+
+  }
+  async  submit1() {
+    var t5 = await this.toast.create({
+      message: "OTP is not Valid",
+      duration: 5000,
+      position: "bottom",
+      cssClass: "toast_login",
+      translucent: true,
+      animated: true
+
+    }
     );
+    this.userservice.user_verify(this.user_input, this.email).subscribe(
+      (data: { result: string }) => {
+        if (data.result == "true") {
+          this.value1 = false;
+          this.value2 = false;
+          this.value3 = true;
+          console.log(data.result);
+        }
+        else {
+          t5.present();
+        }
+      }
+    );
+  }
+  async change() {
+    const t3 = await this.toast.create({
+      message: "Password Changed successfully",
+      duration: 5000,
+      position: "bottom",
+      cssClass: "toast_login",
+      translucent: true,
+      animated: true
+    });
+    const t4 = await this.toast.create({
+      message: "password and conform password is not same",
+      duration: 5000,
+      position: "bottom",
+      cssClass: "toast_login",
+      translucent: true,
+      animated: true
+    });
+    if (this.pass === this.pass1) {
+      var hashedPassword = this.md5.appendStr(this.pass1).end().toString();
+      this.userservice.changePassword(hashedPassword, this.email).subscribe(
+        (data: any[]) => {
+          t3.present();
+          this.router.navigate(['/login']);
+        },
+        function (err) {
+
+        },
+        function () {
+
+        }
+      );
+    }
+    else {
+      t4.present();
+    }
   }
 }

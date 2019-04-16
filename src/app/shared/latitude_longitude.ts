@@ -1,7 +1,7 @@
 export class lat_lon{
     constructor(
-        public latitude:number,
-        public longitude:number
+        public latitude:string,
+        public longitude:string
     ){
         
     }

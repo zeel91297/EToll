@@ -1,3 +1,4 @@
+import { BackgroundMode } from '@ionic-native/background-mode/ngx';
 /*
   Background GeoLocaiton Tracking Plugins installation
 1.Permissions
@@ -50,6 +51,7 @@ import { LocalNotifications } from "@ionic-native/local-notifications/ngx";
 import { Md5 } from "ts-md5";
 import { GoogleMaps } from "@ionic-native/google-maps/ngx";
 import { CitiesDbService } from './providers/citiesDB/cities-db.service';
+import { Network } from '@ionic-native/network/ngx';
 
 //ends here
 
@@ -84,7 +86,9 @@ import { CitiesDbService } from './providers/citiesDB/cities-db.service';
     BackgroundGeolocation,
     LocalNotifications,
     Md5,
-    GoogleMaps
+    GoogleMaps,
+    BackgroundMode,
+    Network
   ],
   bootstrap: [AppComponent]
 })

@@ -91,6 +91,8 @@
         <variable name="API_KEY_FOR_ANDROID" value="AIzaSyBNQVQPeg0gARKCWhsMpiXKedFvj5XdQX8" />
         <variable name="API_KEY_FOR_IOS" value="AIzaSyBNQVQPeg0gARKCWhsMpiXKedFvj5XdQX8" />
     </plugin>
+    <plugin name="cordova-plugin-background-mode" spec="0.7.2" />
+    <plugin name="cordova-plugin-network-information" spec="2.0.1" />
     <engine name="android" spec="7.1.4" />
     <engine name="browser" spec="5.0.4" />
 </widget>

@@ -1,5 +1,5 @@
 import { NgModule } from "@angular/core";
-import { CommonModule } from "@angular/common";
+import { CommonModule, TitleCasePipe } from "@angular/common";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { IonicModule } from "@ionic/angular";
 import { RouterModule, Routes } from "@angular/router";
@@ -8,6 +8,7 @@ import { IonicSelectableModule } from "ionic-selectable";
 import { HomePage } from "./home.page";
 
 @NgModule({
+  providers:[ TitleCasePipe ],
   imports: [
     CommonModule,
     FormsModule,
