@@ -83,20 +83,16 @@ export class AppComponent implements OnInit {
       this.backgroundGeoLocation.configure(config)
         .then(() => {
           this.backgroundGeoLocation.on(BackgroundGeolocationEvents.location).subscribe((location: BackgroundGeolocationResponse) => {
-            console.log(location);
           });
         });
       this.backgroundGeoLocation.start();
       setInterval(() => {
-        console.log("inside setInterval ");
         let position: BackgroundGeolocationResponse;
         this.backgroundGeoLocation.getCurrentLocation().then((res: BackgroundGeolocationResponse) => {
           position = res;
-          console.log("inside getCurrentLocation", position);
           this.http.get(this.url_nearby_tolls+position.latitude+"/"+position.longitude).subscribe((data: lat_lon[]) => {
             if (data.length > 0) {
               if (this.backgroundMode.isEnabled()) {
-                console.log("user is nearby", data);
                 var tod = new Date(new Date().getTime());
                 this.localNotifications.schedule({
                   text: "We found that you are nearby any toll please pay toll by our application.",

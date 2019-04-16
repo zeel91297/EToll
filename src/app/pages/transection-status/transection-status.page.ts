@@ -14,8 +14,8 @@ export class TransectionStatusPage implements OnInit {
  async ngOnInit() {
 
   }
-  backClick()
-  {
-    this.router.navigate(['/home']);
-  }
+  // backClick()
+  // {
+  //   this.router.navigate(['/home']);
+  // }
 }

@@ -9,11 +9,12 @@ export class SendMailService {
 
   constructor(public http:HttpClient) { }
 
-  public url="https://mailappdemo.herokuapp.com/mail/";
+  public url="https://tollproject.herokuapp.com/mail/";
 
   sendEmail(data:any)
   {
     const body = JSON.stringify(data);
+    console.log("body ",body);
     return this.http.post(this.url, body, {headers: new HttpHeaders().set('Content-type' , 'application/json')});
  
   }

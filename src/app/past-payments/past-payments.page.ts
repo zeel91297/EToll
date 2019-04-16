@@ -45,6 +45,7 @@ subject:string='';
 buttonDisabled: boolean = false;
 trasaction:TransactionClass[]=[];
 alltransaction:TransactionClass[]=[];
+date:any;
 
   ngOnInit() {
     this.menuController.enable(true);
@@ -121,12 +122,15 @@ alltransaction:TransactionClass[]=[];
       this.tpname=this.trasaction[0].toll_name;
       this.amt=this.trasaction[0].amount;
       this.otp=this.trasaction[0].otp;
+      this.date=this.trasaction[0].transaction_date;
+      console.log(this.date);
       var Srno=1;
     this.subject="Transaction Receipt";
     this.text= "<b>Respected Sir/Madam,"+this.name+"</b><br><b>Your Receipt is here...</b><br/>"+
     "<table border=2px solid>"+
     "<tr>"+
     "<th>Sr.no</th>"+
+    "<th>Date</th>"+
     "<th>Highway Name</th>"+
     "<th>City</th>"+
     "<th>Emergency Number</th>"+
@@ -134,7 +138,7 @@ alltransaction:TransactionClass[]=[];
     "<th>Amount</th>"+
     "<th>Otp</th>"+
     "</tr>"
-    this.text=this.text+"<tr><td>"+Srno+"</td><td>"+this.hname+"</td><td>"+this.city+"</td><td>"+this.emno+"</td><td>"+this.tpname+"</td><td>"+this.amt+"</td><td>"+this.otp+"</td></tr>";
+    this.text=this.text+"<tr><td>"+Srno+"</td><td>"+this.date+"</td><td>"+this.hname+"</td><td>"+this.city+"</td><td>"+this.emno+"</td><td>"+this.tpname+"</td><td>"+this.amt+"</td><td>"+this.otp+"</td></tr>";
     this.send.sendEmail(new sendMail(this.subject,this.receive,this.text)).subscribe((data:any[])=>{
         tos1.present();
       },

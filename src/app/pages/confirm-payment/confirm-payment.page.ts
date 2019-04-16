@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { ToastController, IonImg } from "@ionic/angular";
 import { Router } from "@angular/router";
+import { NavigationExtras } from "@angular/router";
 import { ActivatedRoute } from "@angular/router";
 import { PaymentdetailsService } from "../../providers/paymentdetailsdb/paymentdetails.service";
 import { PaymentDetais } from "../../shared/paymentdetails";
@@ -89,9 +90,6 @@ export class ConfirmPaymentPage implements OnInit {
         this.final_tollplaza = this.router.getCurrentNavigation().extras.state.finalplaza;
         var i = 0;
       }
-      console.log(this.amounts + " amounts");
-      console.log(this.final_tollplaza);
-      console.log(this.amt);
     });
     var iter = 0;
     for (iter = 0; iter < this.final_tollplaza.length; iter++) {
@@ -104,14 +102,12 @@ export class ConfirmPaymentPage implements OnInit {
         this.otps[iter],
         this.final_tollplaza[iter].toll_name
       );
-      console.log(this.final_arr_transaction);
     }
   }
   ngOnInit() {
     this.tdata.getOtpOfTollPlaza(this.final_tollplaza.length).subscribe(
       (data: any[]) => {
         this.otps = data;
-        console.log(data);
       },
       function(err) {
         console.log(err);
@@ -136,15 +132,11 @@ export class ConfirmPaymentPage implements OnInit {
       function(error) {
         console.log(error);
       },
-      function() {
-
-      }
+      function() {}
     );
     this.payd.getPaymentDetailById(this.pid).subscribe(
       (data: any[]) => {
         this.paydata = data;
-        console.log("paydata");
-        console.log(this.paydata);
       },
       function(err) {
         console.log(err);
@@ -208,113 +200,115 @@ export class ConfirmPaymentPage implements OnInit {
         this.user = data;
         this.recevier = data[0].user_email;
         this.name = data[0].user_name;
+        console.log("receiver ", this.recevier);
+        this.num = Math.floor(0 + Math.random() * 100);
+        console.log(this.num);
+        var iter = 0;
+        var status: number = 0;
+        if (this.num % 2 == 0) {
+          status = 1;
+          tos.present();
+          this.subject = "Transaction Status";
+          this.text =
+            "<b>Transaction Successfull Receipt is below</b>" +
+            "<br/><b>Respected Sir/Madam,   " +
+            this.name +
+            "</b><br>" +
+            "<table border=2px solid>" +
+            "<tr>" +
+            "<th>Sr.no</th>" +
+            "<th>Highway Name</th>" +
+            "<th>City</th>" +
+            "<th>Emergency Number</th>" +
+            "<th>Toll Name</th>" +
+            "<th>Amount</th>" +
+            "<th>Otp</th>" +
+            "</tr>";
+          this.final_arr_transaction.forEach(element => {
+            this.text =
+              this.text +
+              "<tr><td>" +
+              element.SrNo +
+              "</td><td>" +
+              element.highway_name +
+              "</td><td>" +
+              element.city +
+              "</td><td>" +
+              element.emergency_number +
+              "</td><td>" +
+              element.toll_name +
+              "</td><td>" +
+              element.amount +
+              "</td><td>" +
+              this.otps[iter] +
+              "</td></tr>";
+            iter++;
+          });
+          this.send
+            .sendEmail(new sendMail(this.subject, this.recevier, this.text))
+            .subscribe(
+              (data: any[]) => {
+                console.log("mail", data);
+              },
+              function(err) {
+                console.log(err);
+              },
+              function() {}
+            );
+          this.router.navigate(["/transection-status"]);
+        } else {
+          status = 0;
+          tos1.present();
+          this.router.navigate(["/transaction-failed"]);
+        }
+        let iters = 0;
+        this.final_tollplaza.forEach(element => {
+          var isreturn;
+          if (this.whichj == "return") {
+            isreturn = 1;
+          } else {
+            isreturn = 0;
+          }
+          var amount = 0;
+          this.tdata
+            .addTransaction(
+              new TransactionClass(
+                null,
+                this.id,
+                this.pid,
+                this.vno,
+                parseInt(element.toll_plaza_id),
+                this.getdates(),
+                this.gettimes(),
+                status,
+                this.amounts[iters],
+                isreturn,
+                1,
+                this.otps[iters],
+                "",
+                "",
+                "",
+                0,
+                "",
+                "",
+                "",
+                ""
+              )
+            )
+            .subscribe(
+              (data: TransactionClass[]) => {},
+              function(err) {
+                console.log(err);
+              },
+              function() {}
+            );
+          iters++;
+        });
       },
       function(err) {
         console.log(err);
       },
       function() {}
     );
-    this.num = Math.floor(0 + Math.random() * 100);
-    var iter = 0;
-    var status: number = 0;
-    if (this.num % 2 == 0) {
-      status = 1;
-      tos.present();
-      this.subject = "Transaction Status";
-      this.text =
-        "<b>Transaction Successfull Receipt is below</b>" +
-        "<br/><b>Respected Sir/Madam,   " +
-        this.name +
-        "</b><br>" +
-        "<table border=2px solid>" +
-        "<tr>" +
-        "<th>Sr.no</th>" +
-        "<th>Highway Name</th>" +
-        "<th>City</th>" +
-        "<th>Emergency Number</th>" +
-        "<th>Toll Name</th>" +
-        "<th>Amount</th>" +
-        "<th>Otp</th>" +
-        "</tr>";
-      console.log(this.final_arr_transaction);
-      this.final_arr_transaction.forEach(element => {
-        this.text =
-          this.text +
-          "<tr><td>" +
-          element.SrNo +
-          "</td><td>" +
-          element.highway_name +
-          "</td><td>" +
-          element.city +
-          "</td><td>" +
-          element.emergency_number +
-          "</td><td>" +
-          element.toll_name +
-          "</td><td>" +
-          element.amount[iter] +
-          "</td><td>" +
-          this.otps[iter] +
-          "</td></tr>";
-        iter++;
-      });
-      this.send
-        .sendEmail(new sendMail(this.subject, this.recevier, this.text))
-        .subscribe(
-          (data: any[]) => {},
-          function(err) {
-            console.log(err);
-          },
-          function() {
-          }
-        );
-      this.router.navigate(["/transection-status"]);
-    } else {
-      status = 0;
-      tos1.present();
-      this.router.navigate(["/transaction-failed"]);
-    }
-    let iters = 0;
-    this.final_tollplaza.forEach(element => {
-      var isreturn;
-      if (this.whichj == "return") {
-        isreturn = 1;
-      } else {
-        isreturn = 0;
-      }
-      var amount = 0;
-      this.tdata
-        .addTransaction(
-          new TransactionClass(
-            null,
-            this.id,
-            this.pid,
-            this.vno,
-            parseInt(element.toll_plaza_id),
-            this.getdates(),
-            this.gettimes(),
-            status,
-            this.amounts[iters],
-            isreturn,
-            1,
-            this.otps[iters],
-            "",
-            "",
-            "",
-            0,
-            "",
-            "",
-            "",
-            ""
-          )
-        )
-        .subscribe(
-          (data: TransactionClass[]) => {},
-          function(err) {
-            console.log(err);
-          },
-          function() {}
-        );
-      iters++;
-    });
   }
 }

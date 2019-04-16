@@ -76,8 +76,8 @@ export class PaymentDetailsPage implements OnInit {
     this.mid = parseInt(localStorage.getItem("mid"));
     this.payd.getAllPaymentDetailsByUser(this.id).subscribe(
       (data: any[]) => {
+        console.log("inside getAllPaymentdetailsbyuser");
         this.paydetail = data;
-        this.ngOnInit();
       },
       function(error) {
         console.log(error);
