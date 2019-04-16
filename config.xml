@@ -27,18 +27,18 @@
         <icon density="xhdpi" src="./src/assets/logoEToll.png" />
         <icon density="xxhdpi" src="./src/assets/logoEToll.png" />
         <icon density="xxxhdpi" src="./src/assets/logoEToll.png" />
-        <splash density="land-ldpi" src="./src/assets/logoEToll.png" />
-        <splash density="land-mdpi" src="./src/assets/logoEToll.png" />
-        <splash density="land-hdpi" src="./src/assets/logoEToll.png" />
-        <splash density="land-xhdpi" src="./src/assets/logoEToll.png" />
-        <splash density="land-xxhdpi" src="./src/assets/logoEToll.png" />
-        <splash density="land-xxxhdpi" src="./src/assets/logoEToll.png" />
-        <splash density="port-ldpi" src="./src/assets/logoEToll.png" />
-        <splash density="port-mdpi" src="./src/assets/logoEToll.png" />
-        <splash density="port-hdpi" src="./src/assets/logoEToll.png" />
-        <splash density="port-xhdpi" src="./src/assets/logoEToll.png" />
-        <splash density="port-xxhdpi" src="./src/assets/logoEToll.png" />
-        <splash density="port-xxxhdpi" src="./src/assets/logoEToll.png" />
+        <splash density="land-ldpi" src="./src/assets/Picture.jpg" />
+        <splash density="land-mdpi" src="./src/assets/Picture.jpg" />
+        <splash density="land-hdpi" src="./src/assets/Picture.jpg" />
+        <splash density="land-xhdpi" src="./src/assets/Picture.jpg" />
+        <splash density="land-xxhdpi" src="./src/assets/Picture.jpg" />
+        <splash density="land-xxxhdpi" src="./src/assets/Picture.jpg" />
+        <splash density="port-ldpi" src="./src/assets/Picture.jpg" />
+        <splash density="port-mdpi" src="./src/assets/Picture.jpg" />
+        <splash density="port-hdpi" src="./src/assets/Picture.jpg" />
+        <splash density="port-xhdpi" src="./src/assets/Picture.jpg" />
+        <splash density="port-xxhdpi" src="./src/assets/Picture.jpg" />
+        <splash density="port-xxxhdpi" src="./src/assets/Picture.jpg" />
     </platform>
     <platform name="ios">
         <allow-intent href="itms:*" />

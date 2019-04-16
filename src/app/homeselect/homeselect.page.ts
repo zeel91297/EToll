@@ -14,7 +14,7 @@ export class HomeselectPage implements OnInit {
   plaza: Tollplazza[] = [];
   id: number;
   plazaid: number[] = [];
-  buttonDisabled: boolean = false;
+  buttonDisabled: boolean = true;
   getId: any;
   final_tollplaza: Tollplazza[] = [];
   isComeFromSourceAndDestinationSegment: boolean = false;
@@ -35,6 +35,7 @@ export class HomeselectPage implements OnInit {
     }
     this.plaza = [];
   }
+  
   onClick() {
     this.final_tollplaza = [];
     // this.final_tollplaza.push()
@@ -67,7 +68,10 @@ export class HomeselectPage implements OnInit {
     var index = this.plazaid.indexOf(num);
     if (index > -1) this.plazaid.splice(index, 1);
     else this.plazaid.push(num);
+    if(this.plazaid.length<1)
     this.buttonDisabled = true;
+    else
+    this.buttonDisabled=false;
   }
 
   ngOnInit() {
@@ -83,10 +87,10 @@ export class HomeselectPage implements OnInit {
             this.plaza.push(element);
           });
         },
-        function(err) {
+        function (err) {
           console.log(err);
         },
-        function() {}
+        function () { }
       );
     } else {
       this.toll_ids.forEach(element => {

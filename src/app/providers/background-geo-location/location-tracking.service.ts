@@ -37,7 +37,7 @@ export class LocationTrackingService {
       desiredAccuracy: 100,
       stationaryRadius: 1,
       distanceFilter: 1,
-      debug: true, //  enable this hear sounds for background-geolocation life-cycle.
+      debug: false, //  enable this hear sounds for background-geolocation life-cycle.
       stopOnTerminate: false, // enable this to clear background location settings when the app terminates
       notificationTitle: "EToll-GPS Based Toll Collection System",
       notificationText: "This will notify you whenever toll is nearby.",

@@ -26,7 +26,7 @@ export class PermissionsService {
           }
         },
         err => {
-          alert(err);
+          // alert(err);
         }
       );
     });
@@ -45,7 +45,7 @@ export class PermissionsService {
             },
             error => {
               //Show alert if user click on 'No Thanks'
-              alert('requestPermission Error requesting location permissions ' + error)
+              // alert('requestPermission Error requesting location permissions ' + error)
             }
           );
       }
@@ -58,7 +58,7 @@ export class PermissionsService {
         // this.getLocationCoordinates()
         this.locationTracking.startTracking();
       },
-      error => alert('Error requesting location permissions ' + JSON.stringify(error))
+      // error => alert('Error requesting location permissions ' + JSON.stringify(error))
     );
   }
   stopTracking(){
