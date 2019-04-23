@@ -71,7 +71,8 @@ export class PaymentDetailsPage implements OnInit {
     });
   }
   //Get Payment Details By User
-  ngOnInit() {
+
+  getCardDetails() {
     this.id = parseInt(localStorage.getItem("id"));
     this.mid = parseInt(localStorage.getItem("mid"));
     this.payd.getAllPaymentDetailsByUser(this.id).subscribe(
@@ -82,9 +83,16 @@ export class PaymentDetailsPage implements OnInit {
       function(error) {
         console.log(error);
       },
-      function() {
-      }
+      function() {}
     );
+  }
+  ngOnInit() {
+    this.getCardDetails();
+  }
+
+  ionViewWillEnter() {
+    console.log("inside ion");
+    this.ngOnInit();
   }
 
   getVehicleNo() {

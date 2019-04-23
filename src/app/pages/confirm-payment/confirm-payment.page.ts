@@ -19,6 +19,12 @@ import { sendMail } from "../../shared/sendMail";
 import { UserserviceService } from "../../providers/userDB/userservice.service";
 import { user } from "../../shared/user_class";
 import { custom_class } from "src/app/shared/custom_representational_class";
+import {
+  FormGroup,
+  FormControl,
+  Validators,
+  AbstractControl
+} from "@angular/forms";
 
 @Component({
   selector: "app-confirm-payment",
@@ -26,6 +32,7 @@ import { custom_class } from "src/app/shared/custom_representational_class";
   styleUrls: ["./confirm-payment.page.scss"]
 })
 export class ConfirmPaymentPage implements OnInit {
+  myform:FormGroup;
   myDate = new Date().toTimeString();
   ctime = new Date().toDateString();
   amt: any;
@@ -60,6 +67,8 @@ export class ConfirmPaymentPage implements OnInit {
   buttonDisabled: boolean = false;
   final_arr_transaction: custom_class[] = [];
   otps: number[] = [];
+  cvv_no: number;
+  cvv_flag: boolean = true;
   constructor(
     public toast: ToastController,
     public router: Router,
@@ -73,6 +82,16 @@ export class ConfirmPaymentPage implements OnInit {
     public send: SendMailService,
     public udata: UserserviceService
   ) {
+    this.myform=new FormGroup({
+      cvv_no:new FormControl("",{
+        validators:[
+          Validators.required,
+          Validators.minLength(3),
+          Validators.maxLength(3),
+          Validators.pattern("^[0-9]+")
+        ]
+      })
+    });
     if (this.router.getCurrentNavigation().extras.state) {
       this.vno = this.router.getCurrentNavigation().extras.state.prev_vehicle_no;
       this.amounts = this.router.getCurrentNavigation().extras.state.amounts;

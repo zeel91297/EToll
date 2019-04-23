@@ -53,7 +53,6 @@ export class LoginPage implements OnInit, OnDestroy {
     });
   }
   ngOnInit() {
-    
     this.email = "";
     this.password1 = "";
     this.menuCtrl.enable(false);
@@ -93,6 +92,7 @@ export class LoginPage implements OnInit, OnDestroy {
 
     const md5 = new Md5();
     var hashedPassword = md5.appendStr(this.password1).end();
+    loading.present();
 
     this.userservice
       .userlogin(
@@ -114,7 +114,7 @@ export class LoginPage implements OnInit, OnDestroy {
               localStorage.setItem("flag", "true");
               localStorage.setItem("mail", this.email);
               console.log("not verifird");
-              loading.present();
+              //loading.present();
               tos2.present();
               this.userservice
                 .resend(
@@ -122,13 +122,14 @@ export class LoginPage implements OnInit, OnDestroy {
                 )
                 .subscribe(
                   (data: any[]) => {
-                    loading.dismiss();
                     this.router.navigate(["/verification-user"]);
                   },
                   function(err) {
                     console.log(err);
                   },
-                  function() {}
+                  function() {
+                    loading.dismiss();
+                  }
                 );
             }
           } else {
@@ -136,7 +137,9 @@ export class LoginPage implements OnInit, OnDestroy {
           }
         },
         function(error) {},
-        function() {}
+        function() {
+          loading.dismiss();
+        }
       );
   }
 

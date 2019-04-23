@@ -89,7 +89,7 @@ export class AddVehicleDetailsPage implements OnInit {
         {
           name: "new_vehicle_no",
           type: "text",
-          placeholder: "Vehicle No e.g. GJ-01-XX-1111"
+          placeholder: "Vehicle No e.g.GJ-01-XX-1111"
         }
       ],
       buttons: [
@@ -104,8 +104,7 @@ export class AddVehicleDetailsPage implements OnInit {
         },
         {
           text: "Cancel",
-          handler: data => {
-          },
+          handler: data => {},
           role: "cancel"
         }
       ]
@@ -134,44 +133,61 @@ export class AddVehicleDetailsPage implements OnInit {
       function(err) {
         console.log(err);
       },
-      function() {
-      }
+      function() {}
     );
   }
   async onAdd(vehicle_no: any) {
-    this.vno = vehicle_no;
-    const tos = await this.toast.create({
-      message: "Vehicle Added Successfully",
-      duration: 5000,
-      showCloseButton: true,
-      closeButtonText: "Ok",
-      position: "bottom",
-      translucent: true,
-      animated: true
-    });
-    const tos1 = await this.toast.create({
-      message: "Vehicle Number can not be Empty",
-      duration: 3000,
-      showCloseButton: true,
-      closeButtonText: "Ok",
-      position: "bottom",
-      translucent: true,
-      animated: true
-    });
-    this.uid = localStorage.getItem("id");
-    this.vdata
-      .addVehicle(new VehicleClass(this.vno, this.vehicle_type, this.uid))
-      .subscribe(
-        (data: any[]) => {
-          tos.present();
-          this.vno = "";
-          this.ngOnInit();
-        },
-        function(err) {
-          console.log(err);
-        },
-        function() {
-        }
-      );
+    if (vehicle_no != "" && vehicle_no.length == 13) {
+      this.vno = vehicle_no;
+      const tos = await this.toast.create({
+        message: "Vehicle Added Successfully",
+        duration: 5000,
+        showCloseButton: true,
+        closeButtonText: "Ok",
+        position: "bottom",
+        translucent: true,
+        animated: true
+      });
+      const tos1 = await this.toast.create({
+        message: "Vehicle Number can not be Empty",
+        duration: 3000,
+        showCloseButton: true,
+        closeButtonText: "Ok",
+        position: "bottom",
+        translucent: true,
+        animated: true
+      });
+      this.uid = localStorage.getItem("id");
+      this.vdata
+        .addVehicle(new VehicleClass(this.vno, this.vehicle_type, this.uid))
+        .subscribe(
+          (data: any[]) => {
+            tos.present();
+            this.vno = "";
+            this.ngOnInit();
+          },
+          function(err) {
+            console.log(err);
+          },
+          function() {}
+        );
+    } else {
+      let empty_Str = "";
+      if (vehicle_no == "") {
+        empty_Str = "Please Enter Vehicle Number";
+      } else {
+        empty_Str = "Please enter valid vehicle number";
+      }
+      const tos1 = await this.toast.create({
+        message: empty_Str,
+        duration: 3000,
+        showCloseButton: true,
+        closeButtonText: "Ok",
+        position: "bottom",
+        translucent: true,
+        animated: true
+      });
+      tos1.present();
+    }
   }
 }

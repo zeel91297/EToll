@@ -68,7 +68,7 @@
                 </ion-item>
                 <div class="validation-errors" *ngIf="!payment_form.get('expiry_y').valid && payment_form.get('expiry_y').touched ">
                     <div *ngIf="payment_form.get('expiry_y').hasError('required')">
-                        <ion-icon name="information-circle-outline"></ion-icon>Expiry Month is must.</div>
+                        <ion-icon name="information-circle-outline"></ion-icon>Expiry Year is must.</div>
                     <div *ngIf="payment_form.get('expiry_y').hasError('min')">
                         <ion-icon name="information-circle-outline"></ion-icon>Expiry Year must between 19 to 25</div>
                     <div *ngIf="payment_form.get('expiry_y').hasError('max')">
@@ -93,12 +93,12 @@
                 <ion-icon name="information-circle-outline"></ion-icon>CVV is must contain only digits.</div>
         </div>
 
-        
-        
-      
 
 
-        
-        <ion-button  [disabled]="!payment_form.valid" style="position:fixed;width:100%;bottom:0;left:0"  (click)="onInsert()">Next</ion-button>
+
+
+
+
+        <ion-button [disabled]="!payment_form.valid" style="position:fixed;width:100%;bottom:0;left:0" (click)="onInsert()">Next</ion-button>
     </form>
 </ion-content>

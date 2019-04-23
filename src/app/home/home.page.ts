@@ -20,7 +20,7 @@ import { Tollplazza } from "../shared/tollplaza_class";
 import { IonicSelectableModule } from "ionic-selectable";
 import { PairCities, Cities } from "../shared/Pair_cities";
 import { CitiesDbService } from "../providers/citiesDB/cities-db.service";
-import { TitleCasePipe } from '@angular/common';
+import { TitleCasePipe } from "@angular/common";
 
 @Component({
   selector: "app-home",
@@ -49,7 +49,7 @@ export class HomePage implements OnInit {
   city: Cities;
   toll_ids: number[] = [];
   constructor(
-    private titlecasePipe:TitleCasePipe,
+    private titlecasePipe: TitleCasePipe,
     private platform: Platform,
     public tpdata: TollplazaService,
     public router: Router,
@@ -62,13 +62,13 @@ export class HomePage implements OnInit {
       (data: any) => {
         this.cities = data;
         this.cities.forEach(element => {
-          element.city1=this.titlecasePipe.transform(element.city1);
+          element.city1 = this.titlecasePipe.transform(element.city1);
         });
       },
       err => {
         console.log(err);
       },
-      () => { }
+      () => {}
     );
 
     this.cities = [
@@ -92,14 +92,11 @@ export class HomePage implements OnInit {
   }
 
   cityChangeSource(event) {
-    console.log("city:", event.value);
     this.city1 = event.value.city1;
-    console.log(this.city1);
     if (this.city1 === this.city2) {
       alert("Source and Destination couldn't be same!");
       this.city1 = "";
       this.sourceCity = null;
-      console.log(this.city1);
       this.flagBut = true;
     } else {
       this.flagBut = false;
@@ -108,13 +105,11 @@ export class HomePage implements OnInit {
   }
 
   cityChangeDest(event) {
-    console.log("city:", event.value);
     this.city2 = event.value.city1;
     if (this.city1 === this.city2) {
       alert("Source and Destination couldn't be same!");
       this.city2 = "";
       this.destinationCity = null;
-      console.log(this.city2);
       this.flagBut = true;
     } else {
       this.flagBut = false;
@@ -122,31 +117,28 @@ export class HomePage implements OnInit {
   }
 
   onTollButton() {
-
-    this.toll_ids=[];
+    this.toll_ids = [];
     this.citiesData.getTollsBetweenCities(this.city1, this.city2).subscribe(
       (data: any[]) => {
-        console.log(data);
         if (data.length > 0) {
           data.forEach(element => {
             this.toll_ids.push(element.toll_id);
           });
-          console.log("in home page ",this.toll_ids);
-          let navigationExt:NavigationExtras={
-              state:{
-                toll_ids:this.toll_ids
-              }
+          //console.log("in home page ",this.toll_ids);
+          let navigationExt: NavigationExtras = {
+            state: {
+              toll_ids: this.toll_ids
+            }
           };
-          this.router.navigate(['/homeselect/1'],navigationExt);
-        }
-        else{
+          this.router.navigate(["/homeselect/1"], navigationExt);
+        } else {
           alert("No TollPlazas in this route");
         }
       },
       err => {
         console.log(err);
       },
-      () => { }
+      () => {}
     );
   }
 
@@ -173,12 +165,10 @@ export class HomePage implements OnInit {
             .then(this.onMarkerAdded);
         }
       },
-      function (err) {
+      function(err) {
         console.log(err);
       },
-      function () {
-        console.log("Complete");
-      }
+      function() {}
     );
   }
 
@@ -204,10 +194,10 @@ export class HomePage implements OnInit {
         if (
           confirm(
             "Do you want to continue " +
-            arr[0] +
-            " " +
-            arr[1] +
-            " with this toll?"
+              arr[0] +
+              " " +
+              arr[1] +
+              " with this toll?"
           )
         ) {
           var pathstring = "/homeselect/" + arr[2];

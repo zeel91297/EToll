@@ -46,13 +46,11 @@ export class ForgetpasswordPage implements OnInit {
         ]
       })
     });
-    this.myform1=new FormGroup({
-      pass: new FormControl('', {
-        validators: [Validators.required, Validators.pattern("^([A-Za-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$")]
-      }),
-      pass1: new FormControl('', {
-        validators: [Validators.required, Validators.pattern("^([A-Za-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$")], updateOn: 'blur'
-      }),
+    this.myform1 = new FormGroup({
+      pass: new FormControl("", {
+        validators: [Validators.required, Validators.pattern("^([A-Za-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$")], updateOn:"blur"}),
+      pass1: new FormControl('',{
+        validators: [Validators.required, Validators.pattern("^([A-Za-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$")], updateOn: "blur"}),
       
     });
   }
@@ -143,7 +141,7 @@ export class ForgetpasswordPage implements OnInit {
       message: "Password Changed successfully",
       duration: 5000,
       position: "bottom",
-      cssClass: "toast_login",
+      cssClass: "toast_mail",
       translucent: true,
       animated: true
     });
