@@ -67,47 +67,47 @@ export class AppComponent implements OnInit {
       this.splashScreen.hide();
       this.backgroundMode.enable();
       this.perm.checkGPSPermission();
-      const config: BackgroundGeolocationConfig = {
-        desiredAccuracy: 100,
-        stationaryRadius: 1,
-        distanceFilter: 1,
-        debug: false, //  enable this hear sounds for background-geolocation life-cycle.
-        stopOnTerminate: false, // enable this to clear background location settings when the app terminates
-        notificationTitle: "EToll-GPS Based Toll Collection System",
-        notificationText: "This will notify you whenever toll is nearby.",
-        url: this.url_nearby_tolls,
-        syncUrl: this.url_nearby_tolls,
-        syncThreshold: 2 + "",
-        maxLocations: 1,
-        pauseLocationUpdates: false
-      };
-      this.backgroundGeoLocation.configure(config)
-        .then(() => {
-          this.backgroundGeoLocation.on(BackgroundGeolocationEvents.location).subscribe((location: BackgroundGeolocationResponse) => {
-          });
-        });
-      this.backgroundGeoLocation.start();
-      setInterval(() => {
-        let position: BackgroundGeolocationResponse;
-        this.backgroundGeoLocation.getCurrentLocation().then((res: BackgroundGeolocationResponse) => {
-          position = res;
-          this.http.get(this.url_nearby_tolls+position.latitude+"/"+position.longitude).subscribe((data: lat_lon[]) => {
-            if (data.length > 0) {
-              if (this.backgroundMode.isEnabled()) {
-                var tod = new Date(new Date().getTime());
-                this.localNotifications.schedule({
-                  text: "We found that you are nearby any toll please pay toll by our application.",
-                  trigger: { at: tod },
-                  sound: 'file://assets/sounds/Rooster.mp3',
-                  data: { secret: "key" },
-                  id: this.notId
-                });
-                this.notId++;
-              }
-            }
-          });
-        });
-      }, 10000);
+      // const config: BackgroundGeolocationConfig = {
+      //   desiredAccuracy: 100,
+      //   stationaryRadius: 1,
+      //   distanceFilter: 1,
+      //   debug: false, //  enable this hear sounds for background-geolocation life-cycle.
+      //   stopOnTerminate: false, // enable this to clear background location settings when the app terminates
+      //   notificationTitle: "EToll-GPS Based Toll Collection System",
+      //   notificationText: "This will notify you whenever toll is nearby.",
+      //   url: this.url_nearby_tolls,
+      //   syncUrl: this.url_nearby_tolls,
+      //   syncThreshold: 2 + "",
+      //   maxLocations: 1,
+      //   pauseLocationUpdates: false
+      // };
+      // this.backgroundGeoLocation.configure(config)
+      //   .then(() => {
+      //     this.backgroundGeoLocation.on(BackgroundGeolocationEvents.location).subscribe((location: BackgroundGeolocationResponse) => {
+      //     });
+      //   });
+      // this.backgroundGeoLocation.start();
+      // setInterval(() => {
+      //   let position: BackgroundGeolocationResponse;
+      //   this.backgroundGeoLocation.getCurrentLocation().then((res: BackgroundGeolocationResponse) => {
+      //     position = res;
+      //     this.http.get(this.url_nearby_tolls+position.latitude+"/"+position.longitude).subscribe((data: lat_lon[]) => {
+      //       if (data.length > 0) {
+      //         if (this.backgroundMode.isEnabled()) {
+      //           var tod = new Date(new Date().getTime());
+      //           this.localNotifications.schedule({
+      //             text: "We found that you are nearby any toll please pay toll by our application.",
+      //             trigger: { at: tod },
+      //             sound: 'file://assets/sounds/Rooster.mp3',
+      //             data: { secret: "key" },
+      //             id: this.notId
+      //           });
+      //           this.notId++;
+      //         }
+      //       }
+      //     });
+      //   });
+      // }, 10000);
       document.addEventListener("offline", () => {
         alert("Internet is off.Please connect to Internet.");
       }, false);

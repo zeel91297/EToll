@@ -101,37 +101,37 @@ export class LoginPage implements OnInit, OnDestroy {
       .subscribe(
         (data: user[]) => {
           if (data.length > 0) {
-            if (data[0].verify == 1) {
+            // if (data[0].verify == 1) {
               this.id = data[0].user_id;
               localStorage.setItem("id", this.id);
               localStorage.setItem("name", data[0].user_name);
 
               tos.present();
-              console.log("verifird");
+              // console.log("verifird");
               this.router.navigate(["/home"]);
               this.navCtrl.navigateRoot(["/home"]);
-            } else {
-              localStorage.setItem("flag", "true");
-              localStorage.setItem("mail", this.email);
-              console.log("not verifird");
-              //loading.present();
-              tos2.present();
-              this.userservice
-                .resend(
-                  new user(null, null, null, this.email, null, null, null)
-                )
-                .subscribe(
-                  (data: any[]) => {
-                    this.router.navigate(["/verification-user"]);
-                  },
-                  function(err) {
-                    console.log(err);
-                  },
-                  function() {
-                    loading.dismiss();
-                  }
-                );
-            }
+            // } else {
+            //   localStorage.setItem("flag", "true");
+            //   localStorage.setItem("mail", this.email);
+            //   console.log("not verifird");
+            //   //loading.present();
+            //   tos2.present();
+            //   this.userservice
+            //     .resend(
+            //       new user(null, null, null, this.email, null, null, null)
+            //     )
+            //     .subscribe(
+            //       (data: any[]) => {
+            //         this.router.navigate(["/verification-user"]);
+            //       },
+            //       function(err) {
+            //         console.log(err);
+            //       },
+            //       function() {
+            //         loading.dismiss();
+            //       }
+            //     );
+            // }
           } else {
             tos1.present();
           }

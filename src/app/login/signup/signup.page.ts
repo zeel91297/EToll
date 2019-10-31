@@ -113,8 +113,9 @@ export class SignupPage implements OnInit {
         (data: any[]) => {
           localStorage.setItem("mail", this.email);
           loading.dismiss();
-          tos2.present();
-          this.router.navigate(["/verification-user"]);
+          // tos2.present();
+          this.router.navigate(["/login"]);
+          // this.router.navigate(["/verification-user"]);
         },
         function(error) {
           loading.dismiss();
