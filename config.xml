@@ -87,10 +87,8 @@
     <plugin name="cordova-plugin-geolocation" spec="4.0.1" />
     <plugin name="cordova-plugin-mauron85-background-geolocation" spec="3.0.0-alpha.50" />
     <plugin name="cordova-plugin-local-notification" spec="0.9.0-beta.2" />
-    <plugin name="cordova-plugin-googlemaps" spec="2.5.3">
-        <variable name="API_KEY_FOR_ANDROID" value="AIzaSyBNQVQPeg0gARKCWhsMpiXKedFvj5XdQX8" />
-        <variable name="API_KEY_FOR_IOS" value="AIzaSyBNQVQPeg0gARKCWhsMpiXKedFvj5XdQX8" />
-    </plugin>
+    <preference name="GOOGLE_MAPS_ANDROID_API_KEY" value="AIzaSyBNQVQPeg0gARKCWhsMpiXKedFvj5XdQX8" />
+    <preference name="GOOGLE_MAPS_IOS_API_KEY" value="AIzaSyBNQVQPeg0gARKCWhsMpiXKedFvj5XdQX8" />
     <plugin name="cordova-plugin-background-mode" spec="0.7.2" />
     <plugin name="cordova-plugin-network-information" spec="2.0.1" />
     <engine name="android" spec="7.1.4" />
